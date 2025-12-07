@@ -29,7 +29,7 @@ const projectsData = [
     },
     {
         id: 3,
-        image: './adminPNG.png',
+        image: './adminPNG.PNG',
         name: 'Taksroide – Advanced Company Management System',
         smallDescription: 'A comprehensive logistics and shipping management platform.',
         description: 'A full management platform designed for a logistics/shipping company. Includes all major modules found in Mai-Salon, with more detailed and industry-specific features such as shipment & delivery management, purchase and vendor system, basket/warehouse handling, HR, accounting, permissions, invoices, and reports. It also has an inventory tracking & expenses system, along with employee performance and task tracking. Built to centralize operations, improve workflow efficiency, and offer clear dashboards for all company departments.',
