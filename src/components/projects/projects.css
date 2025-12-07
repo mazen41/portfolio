@@ -1,339 +1,290 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+/* --- THEME STYLES --- */
 .dark .projects-container .selected-project {
-  background: #020a13 !important;
+    background: #0b1120 !important;
+    border-left: 1px solid #1e2d42;
 }
+
 .dark .projects-container .selected-project .links a {
-  color: #CCCCCC !important;
+    color: #a0aec0 !important;
 }
-.dark .projects-container .projects .project .popup .technologies ul li {
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 26px;
-  padding: 13px;
-  margin-top: -14px;
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  color: white !important;
-  background: #333 !important;
+
+.dark .projects-container .projects-grid .project-card .popup .technologies ul li {
+    color: white !important;
+    background: #2d3748 !important;
 }
 
 ::selection {
-  background-color: #CCCCCC;
-  /* Background color when text is selected */
-  color: #ffff;
-  /* Text color when text is selected */
+    background-color: #cccccc;
+    color: #ffffff;
 }
 
-.projects .projects-container {
-  padding-right: 70px;
-  padding-left: 85px;
-  display: flex;
-  flex-direction: column;
-  margin-top: -35px;
-  padding-left: 200px;
-  margin-top: 80px;
-  padding-right: 165px;
+/* --- MAIN PAGE STYLES --- */
+.projects-page .projects-container {
+    padding: 80px 100px 50px 200px;
+    display: flex;
+    flex-direction: column;
+    transition: padding 0.3s ease-in-out;
 }
-.projects .projects-container .overlay {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  background: #3333 !important;
-  top: 0;
-  left: 0;
-  z-index: 99;
+
+.projects-page .projects-container .overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    top: 0;
+    left: 0;
+    z-index: 99;
+    cursor: pointer;
 }
-.projects .projects-container .selected-project.active {
-  transform: translate(0);
+
+.projects-page .projects-container .title h2 {
+    font-weight: 900;
+    font-size: 2.8rem;
+    font-family: 'Blorado', sans-serif;
+    text-rendering: geometricprecision;
+    margin-bottom: 40px;
 }
-.projects .projects-container .selected-project {
-  position: fixed;
-  right: 0;
-  background: #fff;
-  height: 100%;
-  top: 0;
-  z-index: 500;
-  padding: 20px;
-  overflow-y: scroll;
-  transition: 0.6s;
-  transform: translateX(1000px);
-  width: min-content;
+
+.projects-page .projects-container .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 35px;
 }
-.projects .projects-container .selected-project .back {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+.projects-page .projects-container .projects-grid .project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 25px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
-.projects .projects-container .selected-project .back p {
-  cursor: pointer;
+
+.projects-page .projects-container .projects-grid .project-card .image-container img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 25px;
+    transition: transform 0.6s ease, opacity 0.6s ease;
 }
-.projects .projects-container .selected-project .back span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #000;
-  border-radius: 50%;
-  padding: 8px;
-  background: #ebe6e0;
-  cursor: pointer;
+
+.projects-page .projects-container .projects-grid .project-card .image-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 10%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 1;
+    border-radius: 25px;
 }
-.projects .projects-container .selected-project .first {
-  display: flex;
-  flex-direction: column;
-  margin-top: 60px;
+
+.projects-page .projects-container .projects-grid .project-card:hover .image-container::before {
+    opacity: 1;
 }
-.projects .projects-container .selected-project .first .image img {
-  max-width: 450px;
-  border-radius: 25px;
+
+.projects-page .projects-container .projects-grid .project-card:hover .image-container img {
+    transform: scale(1.05);
 }
-.projects .projects-container .selected-project .first .name h3 {
-  font-weight: 500;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: 30px;
+
+.projects-page .projects-container .projects-grid .project-card .popup {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    z-index: 2;
+    transform: translateY(100%);
+    transition: transform 0.4s ease-out;
 }
-.projects .projects-container .selected-project .first .name p {
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  margin-top: -12px;
-  padding-bottom: 18px;
-  margin-left: 4px;
+
+.projects-page .projects-container .projects-grid .project-card .popup.active {
+    transform: translateY(0);
 }
-.projects .projects-container .selected-project .second {
-  display: flex;
-  flex-direction: column;
+
+.projects-page .projects-container .projects-grid .project-card .popup .technologies ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin-top: 5px;
 }
-.projects .projects-container .selected-project .second .about {
-  display: flex;
-  flex-direction: column;
+
+.projects-page .projects-container .projects-grid .project-card .popup .technologies ul li {
+    font-size: 13px;
+    background: #efe9e4;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-weight: 500;
+    font-family: "Rubik", sans-serif;
+    color: #000;
 }
-.projects .projects-container .selected-project .second .about h4,
-.projects .projects-container .selected-project .second .about p {
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
+
+.projects-page .projects-container .projects-grid .project-card .popup .name h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: "Rubik", sans-serif;
+    margin: 0 0 5px;
 }
-.projects .projects-container .selected-project .second .about p {
-  max-width: 580px;
-  line-height: 1.5;
-  opacity: 0.8;
-  margin-top: -25px;
+
+.projects-page .projects-container .projects-grid .project-card .popup .description p {
+    font-family: "Rubik", sans-serif;
+    margin: 0;
+    font-size: 0.9rem;
 }
-.projects .projects-container .selected-project .second .about h4 {
-  font-size: 30px;
+
+/* --- SELECTED PROJECT PANEL --- */
+.projects-page .projects-container .selected-project {
+    position: fixed;
+    right: 0;
+    top: 0;
+    background: #fff;
+    height: 100%;
+    z-index: 500;
+    padding: 30px 40px;
+    overflow-y: auto;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateX(100%);
+    width: 100%;
+    max-width: 650px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
 }
-.projects .projects-container .selected-project .second .tech p {
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: 30px;
+
+.projects-page .projects-container .selected-project.active {
+    transform: translateX(0);
 }
-.projects .projects-container .selected-project .second .tech ul {
-  list-style-type: none;
-  display: flex;
-  gap: 15px;
-  margin-left: -40px;
-  align-items: center;
+
+.projects-page .projects-container .selected-project .back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 30px;
 }
-.projects .projects-container .selected-project .second .tech ul li {
-  font-size: 14px;
-  background: #efe9e4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 7px;
-  padding: 13px;
-  margin-top: -14px;
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  color: #000;
-  padding-left: 15px;
-  padding-right: 20px;
+
+.projects-page .projects-container .selected-project .back span {
+    background: hsl(33, 22%, 90%);
+    border-radius: 50%;
+    padding: 8px;
+    display: grid;
+    place-items: center;
 }
-.projects .projects-container .selected-project .links {
-  display: flex;
-  flex-direction: column;
+
+.projects-page .projects-container .selected-project h3,
+.projects-page .projects-container .selected-project h4 {
+    font-family: "Rubik", sans-serif;
+    font-weight: 600;
 }
-.projects .projects-container .selected-project .links .backend {
-  padding-bottom: 45px;
-  padding-top: 15px;
+
+.projects-page .projects-container .selected-project p {
+    font-family: "Rubik", sans-serif;
+    line-height: 1.6;
+    opacity: 0.8;
 }
-.projects .projects-container .selected-project .links a {
-  text-decoration: none;
-  font-weight: bold;
-  color: #000;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: 18px;
-  margin-top: -5px;
+
+.projects-page .projects-container .selected-project .first {
+    margin-bottom: 30px;
 }
-.projects .projects-container .selected-project .links h2 {
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: 30px;
+
+.projects-page .projects-container .selected-project .first .name h3 {
+    font-size: 2rem;
 }
-.projects .projects-container .selected-project .links .front,
-.projects .projects-container .selected-project .links .backend {
-  display: flex;
-  flex-direction: column;
-  margin-top: -15px;
+
+.projects-page .projects-container .selected-project .first .name p {
+    margin-top: -10px;
 }
-.projects .projects-container .selected-project .links .front p,
-.projects .projects-container .selected-project .links .backend p {
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: 20px;
+
+.projects-page .projects-container .selected-project .first .image img {
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 20px;
 }
-.projects .projects-container .title h2 {
-  font-weight: 900;
-  font-size: 2.5rem;
-  font-family: Blorado, sans-serif;
-  text-rendering: geometricprecision;
+
+.projects-page .projects-container .selected-project .second .about h4,
+.projects-page .projects-container .selected-project .second .tech h4 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
 }
-.projects .projects-container .projects {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
+.projects-page .projects-container .selected-project .second .tech ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 0;
 }
-.projects .projects-container .projects .project {
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 20px;
+
+.projects-page .projects-container .selected-project .second .tech ul li {
+    font-size: 14px;
+    background: #efe9e4;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-weight: 500;
 }
-.projects .projects-container .projects .project .image {
-  position: relative;
-  cursor: pointer;
+
+.projects-page .projects-container .selected-project .links {
+    margin-top: 30px;
 }
-.projects .projects-container .projects .project .image img {
-  width: 100%;
-  height: 300px;
-  border-radius: 25px;
-  opacity: 1;
-  transition: 0.6s;
+
+.projects-page .projects-container .selected-project .links h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-family: "Rubik", sans-serif;
 }
-.projects .projects-container .projects .project .image::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.1) 10%, rgba(0, 0, 0, 0.78) 80%);
-  opacity: 0;
-  transition: opacity 0.6s;
-  z-index: 1;
-  border-radius: 25px;
-  width: 100%;
-  height: 99%;
+
+.projects-page .projects-container .selected-project .links a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+    font-size: 1rem;
+    word-break: break-all;
 }
-.projects .projects-container .projects .project:hover .image::before {
-  opacity: 1;
+
+.projects-page .projects-container .selected-project .links a:hover {
+    text-decoration: underline;
 }
-.projects .projects-container .projects .project .popup.active {
-  transform: translateY(0);
+
+.projects-page .projects-container .selected-project .links .front,
+.projects-page .projects-container .selected-project .links .backend {
+    margin-top: 15px;
 }
-.projects .projects-container .projects .project .popup {
-  position: absolute;
-  bottom: 25px;
-  left: 20px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  transform: translateY(170px);
-  transition: 0.4s;
-  z-index: 99;
+
+.projects-page .projects-container .selected-project .links .front p,
+.projects-page .projects-container .selected-project .links .backend p {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
 }
-.projects .projects-container .projects .project .popup .technologies ul {
-  list-style-type: none;
-  display: flex;
-  gap: 15px;
-  margin-left: -40px;
-}
-.projects .projects-container .projects .project .popup .technologies ul li {
-  font-size: 14px;
-  background: #efe9e4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 26px;
-  padding: 13px;
-  margin-top: -14px;
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  color: #000;
-}
-.projects .projects-container .projects .project .popup .name h4 {
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: 27px;
-}
-.projects .projects-container .projects .project .popup .description p {
-  font-weight: 400;
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  margin-top: -13px;
+
+/* --- RESPONSIVE STYLES --- */
+@media (max-width: 1200px) {
+    .projects-page .projects-container {
+        padding-left: 100px;
+        padding-right: 50px;
+    }
 }
 
 @media (max-width: 855px) {
-  .projects .projects-container {
-    padding-left: 30px;
-  }
+    .projects-page .projects-container {
+        padding: 50px 30px;
+    }
 }
+
 @media (max-width: 650px) {
-  .projects .projects-container .projects .project .image::before {
-    opacity: 1;
-  }
+    .projects-page .projects-container .projects-grid .project-card .image-container::before {
+        opacity: 1;
+    }
 
-  .projects .projects-container .projects .project .popup {
-    transform: translate(0);
-  }
+    .projects-page .projects-container .projects-grid .project-card .popup {
+        transform: translateY(0);
+    }
 
-  .projects .projects-container .projects .project .image img {
-    max-width: 450px;
-    min-width: 300px;
-    width: fit-content;
-    height: fit-content;
-  }
-
-  .projects .projects-container .projects .project {
-    overflow: visible;
-  }
-}
-@media (max-width: 505px) {
-  .projects .projects-container .projects .project .image img {
-    max-width: 375px;
-  }
-}
-@media (max-width: 510px) {
-  .projects .projects-container .selected-project .first .image img {
-    max-width: 360px;
-    border-radius: 25px;
-  }
-}
-@media (max-width: 415px) {
-  .projects .projects-container .selected-project .first .image img {
-    max-width: 325px;
-    border-radius: 25px;
-  }
-}
+    .projects-page .projects-container .selected-project {
+        max-width: 100%;
+        padding: 20px;
+    }
+}```
