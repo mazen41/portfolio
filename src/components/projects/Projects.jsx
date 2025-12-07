@@ -215,4 +215,4 @@ const Project = ({ project, onProjectClick }) => {
     );
 };
 
-export default Projects;
+export default Projects;  
