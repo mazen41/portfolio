@@ -8,7 +8,7 @@ import { useTheme } from '../../Them';
 const projectsData = [
     {
         id: 1,
-        image: './qartjiPNG.png',
+        image: './qartjiPNG.PNG',
         name: 'Qartaji – Multi-Language E-Commerce Platform',
         smallDescription: 'A scalable and feature-rich e-commerce solution.',
         description: 'A full e-commerce website supporting Arabic and French, built to handle a wide range of products with a smooth shopping experience. Includes a powerful admin dashboard, product and order management, customer accounts, and an integrated email notification system. Features an advanced AI-powered search engine, filters, discount system, responsive UI, and secure checkout workflow. Designed for scalability, fast performance, and easy daily operation.',
@@ -19,7 +19,7 @@ const projectsData = [
     },
     {
         id: 2,
-        image: './maiPNG.png',
+        image: './maiPNG.PNG',
         name: 'Mai-Salon – Complete Beauty Salon Management System',
         smallDescription: 'End-to-end salon management with a modern touch.',
         description: 'A full solution for a beauty salon including a modern landing page, online booking system, and a complete admin dashboard. The dashboard includes a POS system, client management & communication, invoice generation, permissions & roles, HR & staff performance system, reports & statistics, inventory management, an accounting center, campaigns & marketing tools, and general settings. It also features a dedicated specialist dashboard for staff to manage the entire salon workflow end-to-end with real-time insights and a clean interface.',
@@ -39,7 +39,7 @@ const projectsData = [
     },
     {
         id: 4,
-        image: './Meedapay.png',
+        image: './MeedaPayPNG.PNG',
         name: 'Meedapay – Online Payment Gateway',
         smallDescription: 'A secure and modern bilingual payment processing platform.',
         description: 'A bilingual Arabic/English payment gateway platform for processing service-based payments. The system includes API integration with the client’s payment provider, secure checkout and payment processing, and an order & customer management dashboard. It features a clean, modern UI inspired by MyFatoorah, with support for handling service listings, client requests, and automated notifications. The content was prepared with the client, and the platform was built with a flexible structure to allow for future scaling.',
