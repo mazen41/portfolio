@@ -7,37 +7,6 @@ import { useTheme } from '../../Them';
 
 const projectsData = [
     {
-        id: 1,
-        image: './qartjiPNG.PNG',
-        name: 'Qartaji – Multi-Language E-Commerce Platform',
-        smallDescription: 'A scalable and feature-rich e-commerce solution.',
-        description: 'A full e-commerce website supporting Arabic and French, built to handle a wide range of products with a smooth shopping experience. Includes a powerful admin dashboard, product and order management, customer accounts, and an integrated email notification system. Features an advanced AI-powered search engine, filters, discount system, responsive UI, and secure checkout workflow. Designed for scalability, fast performance, and easy daily operation.',
-        liveLink: 'https://qartaji.net/', // Add your live link here
-        gitFrontendLink: '', // Add your frontend GitHub link here
-        gitBackendLink: '', // Add your backend GitHub link here
-        technology: ['React', 'Node.js', 'Express', 'MongoDB', 'Redux'],
-    },
-    {
-        id: 2,
-        image: './maiPNG.PNG',
-        name: 'Mai-Salon – Complete Beauty Salon Management System',
-        smallDescription: 'End-to-end salon management with a modern touch.',
-        description: 'A full solution for a beauty salon including a modern landing page, online booking system, and a complete admin dashboard. The dashboard includes a POS system, client management & communication, invoice generation, permissions & roles, HR & staff performance system, reports & statistics, inventory management, an accounting center, campaigns & marketing tools, and general settings. It also features a dedicated specialist dashboard for staff to manage the entire salon workflow end-to-end with real-time insights and a clean interface.',
-        liveLink: 'shop.mai-salon.com',
-        gitFrontendLink: '#',
-        technology: ['Vue.js', 'Laravel', 'PHP', 'MySQL', 'Inertia.js'],
-    },
-    {
-        id: 3,
-        image: './adminPNG.PNG',
-        name: 'Taksroide – Advanced Company Management System',
-        smallDescription: 'A comprehensive logistics and shipping management platform.',
-        description: 'A full management platform designed for a logistics/shipping company. Includes all major modules found in Mai-Salon, with more detailed and industry-specific features such as shipment & delivery management, purchase and vendor system, basket/warehouse handling, HR, accounting, permissions, invoices, and reports. It also has an inventory tracking & expenses system, along with employee performance and task tracking. Built to centralize operations, improve workflow efficiency, and offer clear dashboards for all company departments.',
-        liveLink: 'taksoride.com',
-        gitFrontendLink: '#',
-        technology: ['Angular', 'Spring Boot', 'Java', 'PostgreSQL', 'AWS'],
-    },
-    {
         id: 4,
         image: './MeedaPayPNG.PNG',
         name: 'Meedapay – Online Payment Gateway',
