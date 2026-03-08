@@ -113,6 +113,35 @@ const projectsData = [
 }
 ];
 
+// Define Project component BEFORE Projects component
+const Project = ({ project, onProjectClick }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+        <div
+            className="project-card"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={() => onProjectClick(project)}
+        >
+            <div className="image-container">
+                <img src={project.image} alt={project.name} />
+            </div>
+            <div className={`popup ${isHovered ? 'active' : ''}`}>
+                <div className="name"><h4>{project.name}</h4></div>
+                <div className="description"><p>{project.smallDescription}</p></div>
+                <div className="technologies">
+                    <ul>
+                        {project.technology?.map((tech) => (
+                            <li key={tech}>{tech}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const Projects = () => {
     const { theme } = useTheme();
     const [selectedProject, setSelectedProject] = useState(null);
@@ -206,32 +235,4 @@ const Projects = () => {
     );
 };
 
-const Project = ({ project, onProjectClick }) => {
-    const [isHovered, setIsHovered] = useState(false);
-
-    return (
-        <div
-            className="project-card"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onClick={() => onProjectClick(project)}
-        >
-            <div className="image-container">
-                <img src={project.image} alt={project.name} />
-            </div>
-            <div className={`popup ${isHovered ? 'active' : ''}`}>
-                <div className="name"><h4>{project.name}</h4></div>
-                <div className="description"><p>{project.smallDescription}</p></div>
-                <div className="technologies">
-                    <ul>
-                        {project.technology?.map((tech) => (
-                            <li key={tech}>{tech}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default Projects;  
+export default Projects;
