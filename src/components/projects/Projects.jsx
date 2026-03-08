@@ -60,7 +60,57 @@ const projectsData = [
         gitFrontendLink: 'https://github.com/mazen41/Dashboard.git',
         technology: ['React', 'SCSS'],
     },
-
+{
+    id: 9,
+    image: './reliant_ptaas.png',
+    name: 'Reliant KSA – Penetration Testing Platform',
+    smallDescription: 'A professional penetration testing as a service (PTaaS) platform.',
+    description: 'Reliant KSA is a full PTaaS (Penetration Testing as a Service) platform designed for cybersecurity teams and organizations to manage security assessments efficiently. The system allows companies to register vulnerability programs, manage security findings, track remediation status, and collaborate with security researchers. It includes a modern dashboard for managing reports, severity classifications, program scopes, and activity feeds. The backend is built with Laravel providing a secure REST API, while the frontend uses Next.js for a fast and scalable interface. The platform also integrates authentication, audit logs, and structured vulnerability reporting workflows.',
+    liveLink: 'https://reliant-ksa.com',
+    gitFrontendLink: '#',
+    gitBackendLink: '#',
+    technology: ['Next.js', 'Laravel', 'PHP', 'MySQL', 'REST API'],
+},
+{
+    id: 10,
+    image: './bugbounty_platform.png',
+    name: 'Bug Bounty Management System',
+    smallDescription: 'Manage vulnerability reports and security programs.',
+    description: 'A bug bounty style platform allowing organizations to manage vulnerability submissions from ethical hackers. The platform includes researcher profiles, program scopes, vulnerability submission workflows, severity scoring, and a triage dashboard for security teams. Built with a scalable architecture and designed to support multiple security programs simultaneously.',
+    liveLink: '#',
+    gitFrontendLink: '#',
+    technology: ['React', 'Node.js', 'Express', 'MongoDB'],
+},
+{
+    id: 11,
+    image: './task_manager.png',
+    name: 'Team Task & Project Manager',
+    smallDescription: 'Organize team workflows and project tasks.',
+    description: 'A collaborative task and project management application designed for teams to track work progress, assign tasks, and monitor productivity. The system includes Kanban boards, role-based permissions, project timelines, activity logs, and notifications. Designed with a responsive UI for both desktop and mobile usage.',
+    liveLink: '#',
+    gitFrontendLink: '#',
+    technology: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL'],
+},
+{
+    id: 12,
+    image: './analytics_dashboard.png',
+    name: 'Business Analytics Dashboard',
+    smallDescription: 'Real-time insights and data visualization.',
+    description: 'An advanced analytics dashboard designed to help businesses visualize key metrics and performance indicators. It integrates multiple data sources and presents them through interactive charts, reports, and filtering tools. The dashboard supports role-based access and exportable reports.',
+    liveLink: '#',
+    gitFrontendLink: '#',
+    technology: ['React', 'Chart.js', 'Node.js', 'MySQL'],
+},
+{
+    id: 13,
+    image: './ai_support_platform.png',
+    name: 'AI Customer Support Platform',
+    smallDescription: 'Automated customer assistance with AI.',
+    description: 'A modern customer support platform integrating AI-based responses and automated ticket handling. Users can interact with the system through a chatbot interface while support teams manage escalated tickets through an admin dashboard. Designed to improve response times and streamline support operations.',
+    liveLink: '#',
+    gitFrontendLink: '#',
+    technology: ['Next.js', 'OpenAI API', 'Node.js', 'MongoDB'],
+}
 ];
 
 const Projects = () => {
