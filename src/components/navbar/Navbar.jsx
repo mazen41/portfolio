@@ -10,10 +10,8 @@ import CloseIcon from '@mui/icons-material/Close';
 const Navbar = () => {
   const location = window.location;
   const { theme, toggleTheme } = useTheme();
-  const [navClassName, setClassName] = useState("mob-nav");
   const [navStatus, setNavStatus] = useState(false);
   const handleNav = () => {
-    setClassName('mob-nav active')
     setNavStatus(true);
   }
   const handleClose = () => {
