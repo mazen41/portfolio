@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import EastIcon from "@mui/icons-material/East";
 import "./welcome.css";
 import { motion, AnimatePresence } from "framer-motion";
+import { pageVariants, riseIn, staggerParent, useMotionTuning, easeOutExpo } from '../../motionSystem';
 import { Link } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import { useTheme } from '../../Them';
@@ -14,6 +15,7 @@ const Welcome = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [roleVisible, setRoleVisible] = useState(true);
   const { theme } = useTheme();
+  const motionTuning = useMotionTuning();
 
   useEffect(() => {
     const text = "Hello.";
@@ -44,9 +46,11 @@ const Welcome = () => {
   return (
     <motion.div
       className={`welcome ${theme}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      variants={pageVariants}
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      transition={{ duration: motionTuning.duration, ease: easeOutExpo }}
     >
       {loading && (
         <div className="loading-animation">
@@ -61,16 +65,16 @@ const Welcome = () => {
 
         <motion.div
           className="introduction"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+          variants={staggerParent}
+          initial='hidden'
+          animate='show'
         >
-          <div className="eyebrow">
+          <motion.div className="eyebrow" variants={riseIn} transition={motionTuning.spring}>
             <span className="dot" />
             <p>Available for freelance & full-time roles</p>
-          </div>
+          </motion.div>
 
-          <div className="title">
+          <motion.div className="title" variants={riseIn} transition={motionTuning.spring}>
             <h1 className="name">MAZEN HOSSNY</h1>
             <div className="role-line">
               <AnimatePresence mode="wait">
@@ -88,9 +92,9 @@ const Welcome = () => {
                 )}
               </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="description">
+          <motion.div className="description" variants={riseIn} transition={motionTuning.spring}>
             <p>
               I'm a <strong>full-stack developer</strong> with 6+ years of experience building
               scalable web systems, enterprise platforms, and polished digital products.
@@ -102,9 +106,9 @@ const Welcome = () => {
               to e-commerce stores and payment gateways — working closely with clients to deliver
               work that actually moves the needle.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="cta-group">
+          <motion.div className="cta-group" variants={riseIn}>
             <Link to="/projects" className="cta-primary">
               View My Work
               <EastIcon fontSize="small" />
@@ -112,9 +116,9 @@ const Welcome = () => {
             <Link to="/contact" className="cta-secondary">
               Get in Touch
             </Link>
-          </div>
+          </motion.div>
 
-          <div className="stats-row">
+          <motion.div className="stats-row" variants={riseIn}>
             <div className="stat">
               <span className="stat-num">6+</span>
               <span className="stat-label">Years Experience</span>
@@ -129,7 +133,7 @@ const Welcome = () => {
               <span className="stat-num">10+</span>
               <span className="stat-label">Happy Clients</span>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </motion.div>

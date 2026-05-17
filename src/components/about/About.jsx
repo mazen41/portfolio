@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { pageVariants, easeOutExpo, useMotionTuning } from '../../motionSystem';
 import './about.css';
 import Navbar from '../navbar/Navbar';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -19,13 +20,16 @@ const skills = {
 
 const About = () => {
     const { theme } = useTheme();
+    const motionTuning = useMotionTuning();
 
     return (
         <motion.div
             className={`about ${theme}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            variants={pageVariants}
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            transition={{ duration: motionTuning.duration, ease: easeOutExpo }}
         >
             <div className="navbar">
                 <Navbar />

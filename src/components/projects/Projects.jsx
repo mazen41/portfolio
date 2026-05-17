@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { pageVariants, easeOutExpo, useMotionTuning } from '../../motionSystem';
 import Navbar from '../navbar/Navbar';
 import './projects.css';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -165,13 +166,15 @@ const categoryColors = {
     'Frontend': '#2c5f2e',
 };
 
-const Project = ({ project, onProjectClick, index }) => {
+const Project = ({ project, onProjectClick, index, motionTuning }) => {
     return (
         <motion.div
             className="project-card"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            whileHover={motionTuning.cardHover}
+            transition={{ duration: 0.55, delay: index * 0.06, ease: easeOutExpo }}
             onClick={() => onProjectClick(project)}
         >
             <div className="image-container">
@@ -203,6 +206,7 @@ const Project = ({ project, onProjectClick, index }) => {
 const Projects = () => {
     const { theme } = useTheme();
     const [selectedProject, setSelectedProject] = useState(null);
+    const motionTuning = useMotionTuning();
     const [filter, setFilter] = useState('All');
 
     const categories = ['All', ...Array.from(new Set(projectsData.map(p => p.category)))];
@@ -232,9 +236,11 @@ const Projects = () => {
     return (
         <motion.div
             className={`projects-page ${theme}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            variants={pageVariants}
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            transition={{ duration: motionTuning.duration, ease: easeOutExpo }}
         >
             <div className="navbar">
                 <Navbar />
@@ -266,6 +272,7 @@ const Projects = () => {
                             project={project}
                             onProjectClick={handleProjectClick}
                             index={index}
+                            motionTuning={motionTuning}
                         />
                     ))}
                 </div>
