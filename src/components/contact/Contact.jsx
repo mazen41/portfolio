@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { pageVariants, easeOutExpo, useMotionTuning } from '../../motionSystem';
 import Navbar from "../navbar/Navbar";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
@@ -14,6 +15,7 @@ import { useTheme } from '../../Them';
 
 const Contact = () => {
     const { theme } = useTheme();
+    const motionTuning = useMotionTuning();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
@@ -32,9 +34,11 @@ const Contact = () => {
     return (
         <motion.div
             className={`contact ${theme}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            variants={pageVariants}
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            transition={{ duration: motionTuning.duration, ease: easeOutExpo }}
         >
             <div className="navbar">
                 <Navbar />
