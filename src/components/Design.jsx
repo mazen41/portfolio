@@ -5,7 +5,7 @@ import { loadSlim } from "tsparticles-slim"; // if you are going to use `loadSli
 import { useTheme } from '../Them';
 
 const Design = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
     const particlesInit = useCallback(async engine => {
         console.log(engine);
