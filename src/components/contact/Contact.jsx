@@ -1,174 +1,153 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../navbar/Navbar";
-import EastIcon from "@mui/icons-material/East";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import EmailIcon from '@mui/icons-material/Email';
 import { Link } from "react-router-dom";
+import EastIcon from "@mui/icons-material/East";
 import './contact.css';
 import { useTheme } from '../../Them';
 
 const Contact = () => {
-  const { theme, toggleTheme } = useTheme();
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [message, setMessage] = useState("")
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setName("");
-    setEmail("");
-    setMessage("");
-    const clinet = {
-      name: name,
-      email: email,
-      message: message,
-    }
-    localStorage.setItem("client", JSON.stringify(clinet))
-  }
-  return (
-    <motion.div
-      className={`contact ${theme}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <div className="navbar">
-        <Navbar />
-      </div>
-      <div className="contact-container">
-        <div className="title">
-          <h2>Contact.</h2>
-          <p>Get in touch or send email directly to <span>mazen.hossn.121@gmail.com</span></p>
-        </div>
-        <div className="form">
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <input type="text" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-            </div>
-            <div className="input-group">
-              <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-            </div>
-            <div className="input-group">
-              <textarea rows="5" placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)}>
+    const { theme } = useTheme();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [submitted, setSubmitted] = useState(false);
 
-              </textarea>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!name || !email || !message) return;
+        setSubmitted(true);
+        setTimeout(() => {
+            setName(""); setEmail(""); setMessage("");
+            setSubmitted(false);
+        }, 4000);
+    };
+
+    return (
+        <motion.div
+            className={`contact ${theme}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <div className="navbar">
+                <Navbar />
             </div>
-            <div className="button">
-              <button>Send Message</button>
+
+            <div className="contact-container">
+                <div className="contact-header">
+                    <h2 className="contact-title">Let's Work Together.</h2>
+                    <p className="contact-subtitle">
+                        Have a project in mind? Looking for a developer to join your team?
+                        I'd love to hear from you.
+                    </p>
+                </div>
+
+                <div className="contact-body">
+                    <div className="contact-info">
+                        <div className="info-item">
+                            <EmailIcon fontSize="small" />
+                            <div>
+                                <span className="info-label">Email</span>
+                                <a href="mailto:mazen.hossn.121@gmail.com" className="info-value">
+                                    mazen.hossn.121@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="availability-badge">
+                            <span className="dot" />
+                            <span>Available for new projects</span>
+                        </div>
+
+                        <div className="social-section">
+                            <span className="info-label">Find Me Online</span>
+                            <div className="social-icons">
+                                <a href="https://www.linkedin.com/in/mazen-hossny-54a8a02b7/" target="_blank" rel="noreferrer">
+                                    <LinkedInIcon /> LinkedIn
+                                </a>
+                                <a href="https://github.com/mazen41" target="_blank" rel="noreferrer">
+                                    <GitHubIcon /> GitHub
+                                </a>
+                                <a href="https://twitter.com/mazen_hossny" target="_blank" rel="noreferrer">
+                                    <XIcon /> Twitter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="contact-form-wrapper">
+                        {submitted ? (
+                            <motion.div
+                                className="success-state"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                            >
+                                <div className="success-icon">✓</div>
+                                <h3>Message Sent!</h3>
+                                <p>Thanks for reaching out. I'll get back to you shortly.</p>
+                            </motion.div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="contact-form">
+                                <div className="field-row">
+                                    <div className="field-group">
+                                        <label htmlFor="name">Name</label>
+                                        <input
+                                            id="name"
+                                            type="text"
+                                            placeholder="Your full name"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="field-group">
+                                        <label htmlFor="email">Email</label>
+                                        <input
+                                            id="email"
+                                            type="email"
+                                            placeholder="your@email.com"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="field-group">
+                                    <label htmlFor="message">Message</label>
+                                    <textarea
+                                        id="message"
+                                        rows="6"
+                                        placeholder="Tell me about your project or opportunity..."
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" className="submit-btn">
+                                    Send Message
+                                    <EastIcon fontSize="small" />
+                                </button>
+                            </form>
+                        )}
+                    </div>
+                </div>
+
+                <div className="contact-footer">
+                    <Link to="/" className="back-link">
+                        <EastIcon fontSize="small" style={{ transform: 'rotate(180deg)' }} />
+                        Back to Home
+                    </Link>
+                </div>
             </div>
-          </form>
-        </div>
-        <div className="go_back">
-          <Link to={"/"}>
-            <p>Go Back</p>
-          </Link>
-          <span>
-            <EastIcon />
-          </span>
-        </div>
-        <div className="links">
-          <ul>
-            <a href="https://twitter.com/mazen_hossny"><XIcon /></a>
-            <a href="https://www.facebook.com/mazen.hossny.7"><FacebookOutlinedIcon /></a>
-            <a href="https://www.linkedin.com/in/mazen-hossny-54a8a02b7/"><LinkedInIcon /></a>
-            <a href="https://www.instagram.com/hossny_mazen/"><InstagramIcon /></a>
-            <a href=""><GitHubIcon /></a>
-          </ul>
-        </div>
-      </div>
-    </motion.div>
-  );
+        </motion.div>
+    );
 };
 
 export default Contact;
-// import React from "react";
-// import { useState } from "react";
-// import { motion } from "framer-motion";
-// import Navbar from "../navbar/Navbar";
-// import EastIcon from "@mui/icons-material/East";
-// import InstagramIcon from '@mui/icons-material/Instagram';
-// import XIcon from '@mui/icons-material/X';
-// import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-// import LinkedInIcon from '@mui/icons-material/LinkedIn';
-// import GitHubIcon from '@mui/icons-material/GitHub';
-// import { Link } from "react-router-dom";
-// import './contact.css';
-// import { useTheme } from '../../Theme'; // Corrected the import
-
-// const Contact = () => {
-//   const { theme, toggleTheme } = useTheme();
-//   const [name, setName] = useState("");  // Initialized with empty string
-//   const [email, setEmail] = useState("");  // Initialized with empty string
-//   const [message, setMessage] = useState("");   // Initialized with empty string
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setName("");
-//     setEmail("");
-//     setMessage("");
-//     const client = {
-//       name: name,
-//       email: email,
-//       message: message,
-//     }
-//     localStorage.setItem("client", JSON.stringify(client))
-//   }
-
-//   return (
-//     <motion.div
-//       className={`contact ${theme}`}
-//       initial={{ opacity: 0 }}
-//       animate={{ opacity: 1 }}
-//       exit={{ opacity: 0 }}
-//     >
-//       <div className="navbar">
-//         <Navbar />
-//       </div>
-//       <div className="contact-container">
-//         <div className="title">
-//           <h2>Contact.</h2>
-//           <p>Get in touch or send email directly to <span>mazen.hossn.121@gmail.com</span></p>
-//         </div>
-//         <div className="form">
-//           <form onSubmit={handleSubmit}>
-//             <div className="input-group">
-//               <input type="text" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} /> {/* Fixed */}
-//             </div>
-//             <div className="input-group">
-//               <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" /> {/* Fixed */}
-//             </div>
-//             <div className="input-group">
-//               <textarea rows="5" placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea> {/* Fixed */}
-//             </div>
-//             <div className="button">
-//               <button>Send Message</button>
-//             </div>
-//           </form>
-//         </div>
-//         <div className="go_back">
-//           <Link to={"/"}>
-//             <p>Go Back</p>
-//           </Link>
-//           <span>
-//             <EastIcon />
-//           </span>
-//         </div>
-//         <div className="links">
-//           <ul>
-//             <a href="https://twitter.com/mazen_hossny"><XIcon /></a>
-//             <a href="https://www.facebook.com/mazen.hossny.7"><FacebookOutlinedIcon /></a>
-//             <a href="https://www.linkedin.com/in/mazen-hossny-54a8a02b7/"><LinkedInIcon /></a>
-//             <a href="https://www.instagram.com/hossny_mazen/"><InstagramIcon /></a>
-//             <a href="https://github.com/mazen-hossny"><GitHubIcon /></a> {/* Fixed */}
-//           </ul>
-//         </div>
-//       </div>
-//     </motion.div>
-//   );
-// };
-
-// export default Contact;
