@@ -21,9 +21,7 @@
 }
 
 /* ─── Header ─────────────────────────────────────────────────── */
-.page-header {
-    margin-bottom: 28px;
-}
+.page-header { margin-bottom: 28px; }
 
 .page-title {
     font-family: 'Syne', sans-serif;
@@ -82,14 +80,10 @@
     transition: border-color 0.3s;
 }
 
-.project-card:hover {
-    border-color: #ffffff33;
-}
+.project-card:hover { border-color: #ffffff33; }
 
 .project-card:nth-child(1),
-.project-card:nth-child(2) {
-    grid-column: span 6;
-}
+.project-card:nth-child(2) { grid-column: span 6; }
 
 .project-card:nth-child(3) {
     grid-column: span 12;
@@ -104,9 +98,7 @@
     position: relative;
 }
 
-.project-card:nth-child(3) .image-container {
-    height: 100%;
-}
+.project-card:nth-child(3) .image-container { height: 100%; }
 
 .image-container img {
     width: 100%;
@@ -115,9 +107,7 @@
     transition: transform 0.5s ease;
 }
 
-.project-card:hover .image-container img {
-    transform: scale(1.07);
-}
+.project-card:hover .image-container img { transform: scale(1.07); }
 
 .image-overlay {
     position: absolute;
@@ -127,14 +117,10 @@
     transition: opacity 0.3s;
 }
 
-.project-card:hover .image-overlay {
-    opacity: 1;
-}
+.project-card:hover .image-overlay { opacity: 1; }
 
 /* ─── Card Content ───────────────────────────────────────────── */
-.card-content {
-    padding: 18px;
-}
+.card-content { padding: 18px; }
 
 .category-badge {
     display: inline-block;
@@ -159,11 +145,7 @@
     line-height: 1.5;
 }
 
-.tech-pills {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
+.tech-pills { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .tech-pill {
     padding: 4px 10px;
@@ -173,29 +155,39 @@
     color: var(--muted);
 }
 
-/* ─── MODAL WRAPPER (flex centering — no transform conflict) ─── */
+/* ══════════════════════════════════════════════════════════════
+   MODAL — flex-centered, no transform conflict with Framer Motion
+   ══════════════════════════════════════════════════════════════ */
+
+/* Full-screen flex container — centers the panel */
 .modal-wrapper {
     position: fixed;
-    inset: 0;
-    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9000;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    /* pointer-events handled per child */
+    padding: 24px;
 }
 
-/* ─── MODAL BACKDROP ─────────────────────────────────────────── */
+/* Backdrop sits behind the panel */
 .modal-backdrop {
     position: absolute;
-    inset: 0;
-    background: rgba(2, 8, 19, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(2, 8, 19, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     cursor: pointer;
+    z-index: 0;
 }
 
-/* ─── MODAL PANEL ────────────────────────────────────────────── */
+/* Panel floats above the backdrop */
 .modal-panel {
     position: relative;
     z-index: 1;
@@ -210,14 +202,13 @@
     border-radius: 22px;
     overflow-y: auto;
     overflow-x: hidden;
-    box-shadow: 0 32px 100px rgba(0, 0, 0, 0.7), 0 8px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 32px 100px rgba(0,0,0,0.75), 0 8px 30px rgba(0,0,0,0.5);
     cursor: default;
 }
 
-/* scrollbar styling */
 .modal-panel::-webkit-scrollbar { width: 4px; }
 .modal-panel::-webkit-scrollbar-track { background: transparent; }
-.modal-panel::-webkit-scrollbar-thumb { background: #ffffff20; border-radius: 4px; }
+.modal-panel::-webkit-scrollbar-thumb { background: #ffffff25; border-radius: 4px; }
 
 /* ─── Modal Header ───────────────────────────────────────────── */
 .modal-header {
@@ -286,9 +277,7 @@
 }
 
 /* ─── Modal Body ─────────────────────────────────────────────── */
-.modal-body {
-    padding: 28px 30px 36px;
-}
+.modal-body { padding: 28px 30px 36px; }
 
 .modal-title {
     font-family: 'Syne', sans-serif;
@@ -310,10 +299,8 @@
     margin: 22px 0;
 }
 
-/* ─── Modal Sections ─────────────────────────────────────────── */
-.modal-section {
-    margin-bottom: 26px;
-}
+/* ─── Sections ───────────────────────────────────────────────── */
+.modal-section { margin-bottom: 26px; }
 
 .modal-section-label {
     font-family: 'Syne', sans-serif;
@@ -332,7 +319,7 @@
     font-size: 0.95rem;
 }
 
-/* ─── Features List ──────────────────────────────────────────── */
+/* ─── Features ───────────────────────────────────────────────── */
 .modal-features {
     list-style: none;
     margin: 0;
@@ -360,12 +347,8 @@
     box-shadow: 0 0 6px var(--accent);
 }
 
-/* ─── Tech Grid ──────────────────────────────────────────────── */
-.modal-tech-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
+/* ─── Tech ───────────────────────────────────────────────────── */
+.modal-tech-grid { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .modal-tech-tag {
     padding: 6px 14px;
@@ -378,11 +361,7 @@
 }
 
 /* ─── Links ──────────────────────────────────────────────────── */
-.modal-links {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
+.modal-links { display: flex; gap: 10px; flex-wrap: wrap; }
 
 .modal-link-btn {
     display: inline-flex;
