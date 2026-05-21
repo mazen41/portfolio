@@ -33,7 +33,7 @@ const projectsData = [
         name: 'Qartaji — B2B Procurement & E-Commerce Platform',
         category: 'Enterprise Platform',
         smallDescription: 'Full-featured B2B procurement platform connecting businesses with suppliers.',
-        description: 'Qartaji is a robust B2B procurement and e-commerce platform that bridges the gap between companies and their suppliers. The platform covers the entire procurement lifecycle — from RFQ creation and supplier quotation management, to comparison tools, approval workflows, and order fulfillment. It supports multiple roles including buyers, suppliers, and administrators.',
+        description: 'Qartaji is a robust B2B procurement and e-commerce platform that bridges the gap between companies and their suppliers. The platform covers the entire procurement lifecycle — from RFQ creation and supplier quotation management, to comparison tools, approval workflows, and order fulfillment.',
         features: [
             'RFQ creation & multi-supplier quotation management',
             'Quotation comparison & smart vendor selection',
@@ -53,7 +53,7 @@ const projectsData = [
         name: 'HR System — Human Resources Management Platform',
         category: 'Enterprise System',
         smallDescription: 'Complete HR management covering employees, departments, roles & permissions.',
-        description: 'A full-featured Human Resources Management System (HRMS) designed to centralize and automate all HR operations within an organization. Supports complete employee lifecycle management including onboarding, profile management, and offboarding. Administrators can manage departments, branches, and define granular role-based permission structures.',
+        description: 'A full-featured HRMS designed to centralize and automate all HR operations. Supports complete employee lifecycle management including onboarding, profile management, and offboarding. Administrators can manage departments, branches, and define granular role-based permission structures.',
         features: [
             'Employee lifecycle management (onboarding to offboarding)',
             'Department & branch structure management',
@@ -72,7 +72,7 @@ const projectsData = [
         name: 'Yaman — Orders, Shipping & Tracking Management',
         category: 'Operations Platform',
         smallDescription: 'Full orders, baskets, shipping, and tracking management with reporting.',
-        description: 'Yaman is a comprehensive order and logistics management system built to handle the full operational pipeline — from customer basket creation and order placement to shipping assignment, real-time tracking, and delivery confirmation. Provides administrative dashboards with deep reporting capabilities.',
+        description: 'Yaman is a comprehensive order and logistics management system built to handle the full operational pipeline — from basket creation and order placement to shipping assignment, real-time tracking, and delivery confirmation.',
         features: [
             'Basket & order creation workflows',
             'Shipping assignment & carrier management',
@@ -91,7 +91,7 @@ const projectsData = [
         name: 'MeedaPay — Bilingual Payment Gateway',
         category: 'Fintech Platform',
         smallDescription: 'A secure, modern bilingual payment processing platform.',
-        description: "MeedaPay is a production-ready bilingual (Arabic/English) payment gateway platform built for processing service-based payments. Integrates with the client's existing payment provider through a clean API layer, providing a secure checkout experience with order & customer management. Fully RTL-compatible for Arabic markets.",
+        description: "MeedaPay is a production-ready bilingual (Arabic/English) payment gateway platform. Integrates with the client's existing payment provider through a clean API layer, providing a secure checkout experience. Fully RTL-compatible for Arabic markets.",
         features: [
             'Bilingual Arabic/English interface (full RTL support)',
             'Secure payment processing with provider API integration',
@@ -110,7 +110,7 @@ const projectsData = [
         name: 'Social Media Application',
         category: 'Full-Stack App',
         smallDescription: 'Connect, share, and engage on a full-featured social platform.',
-        description: 'A full-stack social media platform enabling users to connect, share content, and engage with their network. Features user authentication and profiles, post creation with text and images, personalized feeds, commenting and discussion threads, and profile management.',
+        description: 'A full-stack social media platform with user authentication, post creation with text and images, personalized feeds, commenting threads, and profile management.',
         explanation: 'Frontend repository — the backend API is available separately on GitHub.',
         liveLink: null,
         gitFrontendLink: 'https://github.com/mazen41/social-media-app.git',
@@ -123,7 +123,7 @@ const projectsData = [
         name: 'E-Commerce Coffee Store',
         category: 'E-Commerce',
         smallDescription: 'A full-featured online store for a specialty coffee brand.',
-        description: 'A complete e-commerce platform developed for a specialty coffee brand, providing a smooth online shopping experience. Includes product browsing and filtering, a shopping cart system, secure payment processing, and customer account management.',
+        description: 'A complete e-commerce platform for a specialty coffee brand with product browsing, a shopping cart, secure payment processing, and customer account management.',
         explanation: 'Frontend repository — the backend API is available separately on GitHub.',
         liveLink: null,
         gitFrontendLink: 'https://github.com/mazen41/e-commerce-online-store.git',
@@ -136,7 +136,7 @@ const projectsData = [
         name: 'Animated Landing Page',
         category: 'Frontend',
         smallDescription: 'A visually engaging animated landing page experience.',
-        description: 'A carefully crafted animated landing page demonstrating advanced CSS animation techniques combined with smooth scroll interactions. Built to engage visitors immediately with motion-driven storytelling, scroll-triggered reveals, and a polished visual identity.',
+        description: 'A carefully crafted animated landing page demonstrating advanced CSS animation techniques with smooth scroll interactions and motion-driven storytelling.',
         liveLink: null,
         gitFrontendLink: 'https://github.com/mazen41/Animation-Landing-Page.git',
         technology: ['HTML', 'SCSS', 'JavaScript'],
@@ -147,7 +147,7 @@ const projectsData = [
         name: 'Shopify-Style Admin Dashboard',
         category: 'Frontend',
         smallDescription: 'A clean, data-rich admin dashboard for online store management.',
-        description: 'A clean and functional admin dashboard for managing an online store, designed with a Shopify-inspired interface. Includes product management tables, order tracking, sales overview charts, and a responsive layout optimized for desktop administration workflows.',
+        description: 'A clean admin dashboard for managing an online store with product management tables, order tracking, sales overview charts, and a responsive layout.',
         liveLink: null,
         gitFrontendLink: 'https://github.com/mazen41/Dashboard.git',
         technology: ['React', 'SCSS'],
@@ -207,10 +207,7 @@ const Projects = () => {
     const [filter, setFilter] = useState('All');
 
     const categories = ['All', ...Array.from(new Set(projectsData.map(p => p.category)))];
-
-    const filtered = filter === 'All'
-        ? projectsData
-        : projectsData.filter(p => p.category === filter);
+    const filtered = filter === 'All' ? projectsData : projectsData.filter(p => p.category === filter);
 
     const handleProjectClick = useCallback((project) => {
         setSelectedProject(project);
@@ -279,29 +276,28 @@ const Projects = () => {
                 </div>
             </div>
 
-            {/* Modal Portal — rendered outside .projects-container to avoid any stacking context issues */}
+            {/* ── Modal ── rendered at page root level, outside projects-container */}
             <AnimatePresence>
                 {p && (
-                    <>
-                        {/* Backdrop */}
-                        <motion.div
-                            className="modal-backdrop"
-                            key="backdrop"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.25 }}
-                            onClick={handleClose}
-                        />
+                    <motion.div
+                        className="modal-wrapper"
+                        key="modal-wrapper"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.22 }}
+                    >
+                        {/* Backdrop — click to close */}
+                        <div className="modal-backdrop" onClick={handleClose} />
 
-                        {/* Modal Panel */}
+                        {/* Panel — slides up */}
                         <motion.div
                             className="modal-panel"
-                            key="modal"
-                            initial={{ opacity: 0, y: 40, scale: 0.97 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 30, scale: 0.97 }}
-                            transition={{ duration: 0.35, ease: easeOutExpo }}
+                            key="modal-panel"
+                            initial={{ y: 50, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: 40, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: easeOutExpo }}
                             onClick={(e) => e.stopPropagation()}
                             role="dialog"
                             aria-modal="true"
@@ -319,7 +315,7 @@ const Projects = () => {
                                 </button>
                             </div>
 
-                            {/* Hero image */}
+                            {/* Hero */}
                             <div className="modal-hero">
                                 <img src={p.image} alt={p.name} />
                                 <div className="modal-hero-fade" />
@@ -360,7 +356,6 @@ const Projects = () => {
                                     </div>
                                 </div>
 
-                                {/* Links — GitHub only, no Live Demo */}
                                 {(p.gitFrontendLink || p.gitBackendLink) && (
                                     <div className="modal-section modal-links">
                                         {p.gitFrontendLink && (
@@ -393,7 +388,7 @@ const Projects = () => {
                                 )}
                             </div>
                         </motion.div>
-                    </>
+                    </motion.div>
                 )}
             </AnimatePresence>
         </motion.div>

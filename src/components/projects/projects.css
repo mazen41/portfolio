@@ -173,25 +173,34 @@
     color: var(--muted);
 }
 
-/* ─── MODAL BACKDROP ─────────────────────────────────────────── */
-.modal-backdrop {
+/* ─── MODAL WRAPPER (flex centering — no transform conflict) ─── */
+.modal-wrapper {
     position: fixed;
     inset: 0;
-    background: rgba(2, 8, 19, 0.82);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* pointer-events handled per child */
+}
+
+/* ─── MODAL BACKDROP ─────────────────────────────────────────── */
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 8, 19, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    z-index: 1000;
+    cursor: pointer;
 }
 
 /* ─── MODAL PANEL ────────────────────────────────────────────── */
 .modal-panel {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(900px, 92vw);
+    position: relative;
+    z-index: 1;
+    width: min(900px, 100%);
     max-height: 88vh;
-    z-index: 1001;
     background: linear-gradient(
         155deg,
         color-mix(in srgb, var(--card, #0f1724) 90%, #152235),
@@ -202,22 +211,13 @@
     overflow-y: auto;
     overflow-x: hidden;
     box-shadow: 0 32px 100px rgba(0, 0, 0, 0.7), 0 8px 30px rgba(0, 0, 0, 0.5);
-    /* Smooth scrolling inside modal */
-    scroll-behavior: smooth;
-    /* No transform conflict — framer-motion owns the transform on entry/exit */
+    cursor: default;
 }
 
-/* scrollbar styling inside modal */
-.modal-panel::-webkit-scrollbar {
-    width: 4px;
-}
-.modal-panel::-webkit-scrollbar-track {
-    background: transparent;
-}
-.modal-panel::-webkit-scrollbar-thumb {
-    background: #ffffff20;
-    border-radius: 4px;
-}
+/* scrollbar styling */
+.modal-panel::-webkit-scrollbar { width: 4px; }
+.modal-panel::-webkit-scrollbar-track { background: transparent; }
+.modal-panel::-webkit-scrollbar-thumb { background: #ffffff20; border-radius: 4px; }
 
 /* ─── Modal Header ───────────────────────────────────────────── */
 .modal-header {
@@ -267,7 +267,7 @@
 /* ─── Modal Hero ─────────────────────────────────────────────── */
 .modal-hero {
     position: relative;
-    height: 320px;
+    height: 300px;
     overflow: hidden;
 }
 
@@ -396,7 +396,7 @@
     font-weight: 600;
     font-size: 0.88rem;
     background: #ffffff08;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s, color 0.2s;
 }
 
 .modal-link-btn:hover {
@@ -420,23 +420,12 @@
 
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 980px) {
-    .project-card {
-        grid-column: span 6;
-    }
-
-    .project-card:nth-child(3) {
-        grid-template-columns: 1fr;
-    }
-
-    .modal-panel {
-        width: min(720px, 94vw);
-    }
+    .project-card { grid-column: span 6; }
+    .project-card:nth-child(3) { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 680px) {
-    .projects-container {
-        padding: 0 16px 60px;
-    }
+    .projects-container { padding: 0 16px 60px; }
 
     .project-card,
     .project-card:nth-child(1),
@@ -446,25 +435,18 @@
         display: block;
     }
 
+    .modal-wrapper {
+        padding: 0;
+        align-items: flex-end;
+    }
+
     .modal-panel {
-        width: 100vw;
-        height: 100dvh;
-        max-height: 100dvh;
-        border-radius: 0;
-        top: 0;
-        left: 0;
-        transform: none !important;
+        width: 100%;
+        max-height: 95dvh;
+        border-radius: 20px 20px 0 0;
     }
 
-    .modal-hero {
-        height: 210px;
-    }
-
-    .modal-body {
-        padding: 20px 18px 32px;
-    }
-
-    .modal-header {
-        padding: 12px 16px;
-    }
+    .modal-hero { height: 200px; }
+    .modal-body { padding: 20px 18px 32px; }
+    .modal-header { padding: 12px 16px; }
 }
