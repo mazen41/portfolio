@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { pageVariants, easeOutExpo, useMotionTuning } from '../../motionSystem';
 import Navbar from '../navbar/Navbar';
@@ -276,32 +277,33 @@ const Projects = () => {
                 </div>
             </div>
 
-            {/* ── Modal ── rendered at page root level, outside projects-container */}
-            <AnimatePresence>
-                {p && (
-                    <motion.div
-                        className="modal-wrapper"
-                        key="modal-wrapper"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.22 }}
-                    >
-                        {/* Backdrop — click to close */}
-                        <div className="modal-backdrop" onClick={handleClose} />
-
-                        {/* Panel — slides up */}
+            {/* ── Modal ── rendered via portal to avoid transformed-parent offset issues */}
+            {createPortal(
+                <AnimatePresence>
+                    {p && (
                         <motion.div
-                            className="modal-panel"
-                            key="modal-panel"
-                            initial={{ y: 50, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: 40, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: easeOutExpo }}
-                            onClick={(e) => e.stopPropagation()}
-                            role="dialog"
-                            aria-modal="true"
+                            className="modal-wrapper"
+                            key="modal-wrapper"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.22 }}
                         >
+                            {/* Backdrop — click to close */}
+                            <div className="modal-backdrop" onClick={handleClose} />
+
+                            {/* Panel — centered */}
+                            <motion.div
+                                className="modal-panel"
+                                key="modal-panel"
+                                initial={{ y: 50, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                exit={{ y: 40, opacity: 0 }}
+                                transition={{ duration: 0.3, ease: easeOutExpo }}
+                                onClick={(e) => e.stopPropagation()}
+                                role="dialog"
+                                aria-modal="true"
+                            >
                             {/* Sticky header */}
                             <div className="modal-header">
                                 <span
@@ -389,8 +391,10 @@ const Projects = () => {
                             </div>
                         </motion.div>
                     </motion.div>
-                )}
-            </AnimatePresence>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </motion.div>
     );
 };
