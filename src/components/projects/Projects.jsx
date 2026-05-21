@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { pageVariants, easeOutExpo, useMotionTuning } from '../../motionSystem';
 import Navbar from '../navbar/Navbar';
 import './projects.css';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import CloseIcon from '@mui/icons-material/Close';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useTheme } from '../../Them';
 
@@ -14,7 +14,7 @@ const projectsData = [
         name: 'SAMH — Automotive Inspection & Sales Platform',
         category: 'Full-Stack System',
         smallDescription: 'End-to-end car selling, inspection & examination system.',
-        description: 'SAMH is a comprehensive automotive management platform designed to streamline the entire vehicle lifecycle — from listing and inspection to reporting and final sale. The system provides structured workflows for vehicle listings with detailed specs, multi-step inspection flows with standardized checklists, professional PDF report generation, real-time status tracking, and a full administrative control panel. Built to serve dealerships, inspection agencies, and individual sellers with a unified, reliable experience.',
+        description: 'SAMH is a comprehensive automotive management platform designed to streamline the entire vehicle lifecycle — from listing and inspection to reporting and final sale. The system provides structured workflows for vehicle listings with detailed specs, multi-step inspection flows with standardized checklists, professional PDF report generation, real-time status tracking, and a full administrative control panel.',
         features: [
             'Vehicle listing & inventory management',
             'Multi-step inspection workflows & checklists',
@@ -33,7 +33,7 @@ const projectsData = [
         name: 'Qartaji — B2B Procurement & E-Commerce Platform',
         category: 'Enterprise Platform',
         smallDescription: 'Full-featured B2B procurement platform connecting businesses with suppliers.',
-        description: 'Qartaji is a robust B2B procurement and e-commerce platform that bridges the gap between companies and their suppliers. The platform covers the entire procurement lifecycle — from RFQ (Request for Quotation) creation and supplier quotation management, to comparison tools, approval workflows, and order fulfillment. It supports multiple roles including buyers, suppliers, and administrators, each with tailored dashboards and permissions. The system features secure JWT authentication, real-time notifications, and audit-ready approval chains.',
+        description: 'Qartaji is a robust B2B procurement and e-commerce platform that bridges the gap between companies and their suppliers. The platform covers the entire procurement lifecycle — from RFQ creation and supplier quotation management, to comparison tools, approval workflows, and order fulfillment. It supports multiple roles including buyers, suppliers, and administrators.',
         features: [
             'RFQ creation & multi-supplier quotation management',
             'Quotation comparison & smart vendor selection',
@@ -43,7 +43,7 @@ const projectsData = [
             'Secure JWT authentication & session management',
             'Comprehensive dashboards per role',
         ],
-        liveLink: 'https://qartaji.net',
+        liveLink: null,
         gitFrontendLink: null,
         technology: ['Next.js', 'Laravel', 'PHP', 'MySQL', 'REST API', 'JWT'],
     },
@@ -53,7 +53,7 @@ const projectsData = [
         name: 'HR System — Human Resources Management Platform',
         category: 'Enterprise System',
         smallDescription: 'Complete HR management covering employees, departments, roles & permissions.',
-        description: 'A full-featured Human Resources Management System (HRMS) designed to centralize and automate all HR operations within an organization. The platform supports complete employee lifecycle management including onboarding, profile management, and offboarding. Administrators can manage departments, branches, and define granular role-based permission structures. The system provides full visibility into workforce data, organizational hierarchy, and administrative controls through a modern, intuitive dashboard.',
+        description: 'A full-featured Human Resources Management System (HRMS) designed to centralize and automate all HR operations within an organization. Supports complete employee lifecycle management including onboarding, profile management, and offboarding. Administrators can manage departments, branches, and define granular role-based permission structures.',
         features: [
             'Employee lifecycle management (onboarding to offboarding)',
             'Department & branch structure management',
@@ -72,7 +72,7 @@ const projectsData = [
         name: 'Yaman — Orders, Shipping & Tracking Management',
         category: 'Operations Platform',
         smallDescription: 'Full orders, baskets, shipping, and tracking management with reporting.',
-        description: 'Yaman is a comprehensive order and logistics management system built to handle the full operational pipeline — from customer basket creation and order placement to shipping assignment, real-time tracking, and delivery confirmation. The platform provides administrative dashboards with deep reporting capabilities, allowing operations managers to monitor order statuses, shipping performance, and fulfillment metrics. It includes role-based access for staff managing different stages of the fulfillment workflow.',
+        description: 'Yaman is a comprehensive order and logistics management system built to handle the full operational pipeline — from customer basket creation and order placement to shipping assignment, real-time tracking, and delivery confirmation. Provides administrative dashboards with deep reporting capabilities.',
         features: [
             'Basket & order creation workflows',
             'Shipping assignment & carrier management',
@@ -91,7 +91,7 @@ const projectsData = [
         name: 'MeedaPay — Bilingual Payment Gateway',
         category: 'Fintech Platform',
         smallDescription: 'A secure, modern bilingual payment processing platform.',
-        description: 'MeedaPay is a production-ready bilingual (Arabic/English) payment gateway platform built for processing service-based payments. The system integrates with the client\'s existing payment provider through a clean API layer, and provides a secure checkout experience with order & customer management. Built with a scalable architecture to support future service expansions, the UI is modern, responsive, and fully RTL-compatible for Arabic markets.',
+        description: "MeedaPay is a production-ready bilingual (Arabic/English) payment gateway platform built for processing service-based payments. Integrates with the client's existing payment provider through a clean API layer, providing a secure checkout experience with order & customer management. Fully RTL-compatible for Arabic markets.",
         features: [
             'Bilingual Arabic/English interface (full RTL support)',
             'Secure payment processing with provider API integration',
@@ -100,7 +100,7 @@ const projectsData = [
             'Automated notification system',
             'Scalable architecture for future growth',
         ],
-        liveLink: '#',
+        liveLink: null,
         gitFrontendLink: null,
         technology: ['React', 'Node.js', 'REST API', 'MySQL'],
     },
@@ -110,9 +110,9 @@ const projectsData = [
         name: 'Social Media Application',
         category: 'Full-Stack App',
         smallDescription: 'Connect, share, and engage on a full-featured social platform.',
-        description: 'A full-stack social media platform enabling users to connect, share content, and engage with their network. The platform features user authentication and profiles, post creation with text and images, personalized feeds, commenting and discussion threads, and profile management including post editing and deletion. Built with a decoupled React frontend and a Laravel REST API backend.',
-        explanation: 'This is the frontend repository. The backend API is available separately on GitHub.',
-        liveLink: 'https://social-media-app-tau-jet.vercel.app/',
+        description: 'A full-stack social media platform enabling users to connect, share content, and engage with their network. Features user authentication and profiles, post creation with text and images, personalized feeds, commenting and discussion threads, and profile management.',
+        explanation: 'Frontend repository — the backend API is available separately on GitHub.',
+        liveLink: null,
         gitFrontendLink: 'https://github.com/mazen41/social-media-app.git',
         gitBackendLink: 'https://github.com/mazen41/social-media-app-api.git',
         technology: ['React', 'Laravel', 'PHP', 'MySQL'],
@@ -123,9 +123,9 @@ const projectsData = [
         name: 'E-Commerce Coffee Store',
         category: 'E-Commerce',
         smallDescription: 'A full-featured online store for a specialty coffee brand.',
-        description: 'A complete e-commerce platform developed for a specialty coffee brand, providing a smooth and enjoyable online shopping experience. The platform includes product browsing and filtering, a shopping cart system, secure payment processing, and customer account management. Designed with a clean, brand-consistent UI that enhances the premium feel of the product.',
-        explanation: 'This is the frontend repository. The backend API is available separately on GitHub.',
-        liveLink: 'https://e-commerce-online-store-kohl.vercel.app/',
+        description: 'A complete e-commerce platform developed for a specialty coffee brand, providing a smooth online shopping experience. Includes product browsing and filtering, a shopping cart system, secure payment processing, and customer account management.',
+        explanation: 'Frontend repository — the backend API is available separately on GitHub.',
+        liveLink: null,
         gitFrontendLink: 'https://github.com/mazen41/e-commerce-online-store.git',
         gitBackendLink: 'https://github.com/mazen41/online-store-api.git',
         technology: ['React', 'TypeScript', 'Laravel', 'MySQL'],
@@ -136,8 +136,8 @@ const projectsData = [
         name: 'Animated Landing Page',
         category: 'Frontend',
         smallDescription: 'A visually engaging animated landing page experience.',
-        description: 'A carefully crafted animated landing page that demonstrates advanced CSS animation techniques combined with smooth scroll interactions. Built to engage visitors immediately with motion-driven storytelling, scroll-triggered reveals, and a polished visual identity.',
-        liveLink: 'https://animation-landing-page-theta.vercel.app',
+        description: 'A carefully crafted animated landing page demonstrating advanced CSS animation techniques combined with smooth scroll interactions. Built to engage visitors immediately with motion-driven storytelling, scroll-triggered reveals, and a polished visual identity.',
+        liveLink: null,
         gitFrontendLink: 'https://github.com/mazen41/Animation-Landing-Page.git',
         technology: ['HTML', 'SCSS', 'JavaScript'],
     },
@@ -148,7 +148,7 @@ const projectsData = [
         category: 'Frontend',
         smallDescription: 'A clean, data-rich admin dashboard for online store management.',
         description: 'A clean and functional admin dashboard for managing an online store, designed with a Shopify-inspired interface. Includes product management tables, order tracking, sales overview charts, and a responsive layout optimized for desktop administration workflows.',
-        liveLink: 'https://dashboard-iota-eosin.vercel.app/',
+        liveLink: null,
         gitFrontendLink: 'https://github.com/mazen41/Dashboard.git',
         technology: ['React', 'SCSS'],
     },
@@ -165,42 +165,40 @@ const categoryColors = {
     'Frontend': '#2c5f2e',
 };
 
-const Project = ({ project, onProjectClick, index, motionTuning }) => {
-    return (
-        <motion.div
-            className="project-card"
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            whileHover={motionTuning.cardHover}
-            transition={{ duration: 0.55, delay: index * 0.06, ease: easeOutExpo }}
-            onClick={() => onProjectClick(project)}
-        >
-            <div className="image-container">
-                <img src={project.image} alt={project.name} />
-                <div className="image-overlay" />
+const ProjectCard = ({ project, onProjectClick, index, motionTuning }) => (
+    <motion.div
+        className="project-card"
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        whileHover={motionTuning.cardHover}
+        transition={{ duration: 0.55, delay: index * 0.06, ease: easeOutExpo }}
+        onClick={() => onProjectClick(project)}
+    >
+        <div className="image-container">
+            <img src={project.image} alt={project.name} />
+            <div className="image-overlay" />
+        </div>
+        <div className="card-content">
+            <span
+                className="category-badge"
+                style={{ '--badge-color': categoryColors[project.category] || '#555' }}
+            >
+                {project.category}
+            </span>
+            <h4 className="card-title">{project.name}</h4>
+            <p className="card-desc">{project.smallDescription}</p>
+            <div className="tech-pills">
+                {project.technology?.slice(0, 3).map((tech) => (
+                    <span key={tech} className="tech-pill">{tech}</span>
+                ))}
+                {project.technology?.length > 3 && (
+                    <span className="tech-pill more">+{project.technology.length - 3}</span>
+                )}
             </div>
-            <div className="card-content">
-                <span
-                    className="category-badge"
-                    style={{ '--badge-color': categoryColors[project.category] || '#555' }}
-                >
-                    {project.category}
-                </span>
-                <h4 className="card-title">{project.name}</h4>
-                <p className="card-desc">{project.smallDescription}</p>
-                <div className="tech-pills">
-                    {project.technology?.slice(0, 3).map((tech) => (
-                        <span key={tech} className="tech-pill">{tech}</span>
-                    ))}
-                    {project.technology?.length > 3 && (
-                        <span className="tech-pill more">+{project.technology.length - 3}</span>
-                    )}
-                </div>
-            </div>
-        </motion.div>
-    );
-};
+        </div>
+    </motion.div>
+);
 
 const Projects = () => {
     const { theme } = useTheme();
@@ -214,40 +212,40 @@ const Projects = () => {
         ? projectsData
         : projectsData.filter(p => p.category === filter);
 
-    const handleProjectClick = (project) => {
+    const handleProjectClick = useCallback((project) => {
         setSelectedProject(project);
         document.body.style.overflow = 'hidden';
-    };
+    }, []);
 
-    const handleCloseProject = () => {
+    const handleClose = useCallback(() => {
         setSelectedProject(null);
         document.body.style.overflow = '';
-    };
+    }, []);
 
     useEffect(() => {
-        const handleKey = (e) => {
-            if (e.key === 'Escape') handleCloseProject();
-        };
-
-        window.addEventListener('keydown', handleKey);
+        const onKey = (e) => { if (e.key === 'Escape') handleClose(); };
+        window.addEventListener('keydown', onKey);
         return () => {
-            window.removeEventListener('keydown', handleKey);
+            window.removeEventListener('keydown', onKey);
             document.body.style.overflow = '';
         };
-    }, []);
+    }, [handleClose]);
+
+    const p = selectedProject;
 
     return (
         <motion.div
             className={`projects-page ${theme}`}
             variants={pageVariants}
-            initial='initial'
-            animate='animate'
-            exit='exit'
+            initial="initial"
+            animate="animate"
+            exit="exit"
             transition={{ duration: motionTuning.duration, ease: easeOutExpo }}
         >
             <div className="navbar">
                 <Navbar />
             </div>
+
             <div className="projects-container">
                 <div className="page-header">
                     <h2 className="page-title">Selected Work.</h2>
@@ -270,7 +268,7 @@ const Projects = () => {
 
                 <div className="projects-grid">
                     {filtered.map((project, index) => (
-                        <Project
+                        <ProjectCard
                             key={project.id}
                             project={project}
                             onProjectClick={handleProjectClick}
@@ -279,100 +277,125 @@ const Projects = () => {
                         />
                     ))}
                 </div>
+            </div>
 
-                {selectedProject && (
-                    <div className="overlay" onClick={handleCloseProject} />
-                )}
-
-                <AnimatePresence>
-                    {selectedProject && (
+            {/* Modal Portal — rendered outside .projects-container to avoid any stacking context issues */}
+            <AnimatePresence>
+                {p && (
+                    <>
+                        {/* Backdrop */}
                         <motion.div
-                            className="selected-project active"
-                            initial={{ opacity: 0, scale: 0.96, y: 16 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.96, y: 16 }}
-                            transition={{ duration: 0.3, ease: easeOutExpo }}
+                            className="modal-backdrop"
+                            key="backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.25 }}
+                            onClick={handleClose}
+                        />
+
+                        {/* Modal Panel */}
+                        <motion.div
+                            className="modal-panel"
+                            key="modal"
+                            initial={{ opacity: 0, y: 40, scale: 0.97 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 30, scale: 0.97 }}
+                            transition={{ duration: 0.35, ease: easeOutExpo }}
                             onClick={(e) => e.stopPropagation()}
+                            role="dialog"
+                            aria-modal="true"
                         >
-                            <div className="panel-header">
-                                <button className="back-btn" onClick={handleCloseProject}>
-                                    <ArrowBackIosNewIcon fontSize="small" />
-                                    <span>Back to Projects</span>
-                                </button>
+                            {/* Sticky header */}
+                            <div className="modal-header">
                                 <span
-                                    className="panel-category"
-                                    style={{ '--badge-color': categoryColors[selectedProject.category] || '#555' }}
+                                    className="modal-category"
+                                    style={{ '--badge-color': categoryColors[p.category] || '#555' }}
                                 >
-                                    {selectedProject.category}
+                                    {p.category}
                                 </span>
+                                <button className="modal-close" onClick={handleClose} aria-label="Close">
+                                    <CloseIcon fontSize="small" />
+                                </button>
                             </div>
 
-                            <div className="panel-hero">
-                                <img src={selectedProject.image} alt={selectedProject.name} />
+                            {/* Hero image */}
+                            <div className="modal-hero">
+                                <img src={p.image} alt={p.name} />
+                                <div className="modal-hero-fade" />
                             </div>
 
-                            <div className="panel-body">
-                                <h2 className="panel-title">{selectedProject.name}</h2>
-                                <p className="panel-tagline">{selectedProject.smallDescription}</p>
+                            {/* Body */}
+                            <div className="modal-body">
+                                <h2 className="modal-title">{p.name}</h2>
+                                <p className="modal-tagline">{p.smallDescription}</p>
 
-                                <div className="panel-section">
-                                    <h4 className="section-label">Overview</h4>
-                                    <p className="panel-description">{selectedProject.description}</p>
+                                <div className="modal-divider" />
+
+                                <div className="modal-section">
+                                    <h4 className="modal-section-label">Overview</h4>
+                                    <p className="modal-text">{p.description}</p>
                                 </div>
 
-                                {selectedProject.features && (
-                                    <div className="panel-section">
-                                        <h4 className="section-label">Key Features</h4>
-                                        <ul className="features-list">
-                                            {selectedProject.features.map((f, i) => (
-                                                <li key={i}>{f}</li>
+                                {p.features && (
+                                    <div className="modal-section">
+                                        <h4 className="modal-section-label">Key Features</h4>
+                                        <ul className="modal-features">
+                                            {p.features.map((f, i) => (
+                                                <li key={i}>
+                                                    <span className="feature-dot" />
+                                                    {f}
+                                                </li>
                                             ))}
                                         </ul>
                                     </div>
                                 )}
 
-                                <div className="panel-section">
-                                    <h4 className="section-label">Tech Stack</h4>
-                                    <div className="tech-grid">
-                                        {selectedProject.technology.map((t, i) => (
-                                            <span key={i} className="tech-tag">{t}</span>
+                                <div className="modal-section">
+                                    <h4 className="modal-section-label">Tech Stack</h4>
+                                    <div className="modal-tech-grid">
+                                        {p.technology.map((t, i) => (
+                                            <span key={i} className="modal-tech-tag">{t}</span>
                                         ))}
                                     </div>
                                 </div>
 
-                                <div className="panel-section panel-links">
-                                    {selectedProject.gitFrontendLink && selectedProject.gitFrontendLink !== '#' && (
-                                        <a
-                                            href={selectedProject.gitFrontendLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="link-btn secondary"
-                                        >
-                                            <GitHubIcon fontSize="small" />
-                                            Frontend Repo
-                                        </a>
-                                    )}
-                                    {selectedProject.gitBackendLink && selectedProject.gitBackendLink !== '#' && (
-                                        <a
-                                            href={selectedProject.gitBackendLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="link-btn secondary"
-                                        >
-                                            <GitHubIcon fontSize="small" />
-                                            Backend Repo
-                                        </a>
-                                    )}
-                                </div>
+                                {/* Links — GitHub only, no Live Demo */}
+                                {(p.gitFrontendLink || p.gitBackendLink) && (
+                                    <div className="modal-section modal-links">
+                                        {p.gitFrontendLink && (
+                                            <a
+                                                href={p.gitFrontendLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="modal-link-btn"
+                                            >
+                                                <GitHubIcon fontSize="small" />
+                                                Frontend Repo
+                                            </a>
+                                        )}
+                                        {p.gitBackendLink && (
+                                            <a
+                                                href={p.gitBackendLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="modal-link-btn"
+                                            >
+                                                <GitHubIcon fontSize="small" />
+                                                Backend Repo
+                                            </a>
+                                        )}
+                                    </div>
+                                )}
 
-                                {selectedProject.explanation && (
-                                    <p className="panel-note">{selectedProject.explanation}</p>
+                                {p.explanation && (
+                                    <p className="modal-note">{p.explanation}</p>
                                 )}
                             </div>
                         </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
+                    </>
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 };
