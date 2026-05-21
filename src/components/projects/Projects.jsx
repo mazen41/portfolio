@@ -4,7 +4,6 @@ import { pageVariants, easeOutExpo, useMotionTuning } from '../../motionSystem';
 import Navbar from '../navbar/Navbar';
 import './projects.css';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useTheme } from '../../Them';
 
@@ -229,8 +228,12 @@ const Projects = () => {
         const handleKey = (e) => {
             if (e.key === 'Escape') handleCloseProject();
         };
+
         window.addEventListener('keydown', handleKey);
-        return () => window.removeEventListener('keydown', handleKey);
+        return () => {
+            window.removeEventListener('keydown', handleKey);
+            document.body.style.overflow = '';
+        };
     }, []);
 
     return (
@@ -285,10 +288,11 @@ const Projects = () => {
                     {selectedProject && (
                         <motion.div
                             className="selected-project active"
-                            initial={{ x: '100%' }}
-                            animate={{ x: 0 }}
-                            exit={{ x: '100%' }}
-                            transition={{ type: 'spring', damping: 30, stiffness: 260 }}
+                            initial={{ opacity: 0, scale: 0.96, y: 16 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.96, y: 16 }}
+                            transition={{ duration: 0.3, ease: easeOutExpo }}
+                            onClick={(e) => e.stopPropagation()}
                         >
                             <div className="panel-header">
                                 <button className="back-btn" onClick={handleCloseProject}>
@@ -337,17 +341,6 @@ const Projects = () => {
                                 </div>
 
                                 <div className="panel-section panel-links">
-                                    {selectedProject.liveLink && selectedProject.liveLink !== '#' && (
-                                        <a
-                                            href={selectedProject.liveLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="link-btn primary"
-                                        >
-                                            <OpenInNewIcon fontSize="small" />
-                                            View Live
-                                        </a>
-                                    )}
                                     {selectedProject.gitFrontendLink && selectedProject.gitFrontendLink !== '#' && (
                                         <a
                                             href={selectedProject.gitFrontendLink}
