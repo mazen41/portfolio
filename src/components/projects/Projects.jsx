@@ -302,7 +302,6 @@ const Projects = () => {
                 </div>
             </div>
 
-            {/* ── Modal ── rendered via portal to avoid transformed-parent offset issues */}
             {createPortal(
                 <AnimatePresence>
                     {p && (
@@ -314,119 +313,108 @@ const Projects = () => {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.22 }}
                         >
-                            {/* Backdrop — click to close */}
+                            {/* Backdrop */}
                             <div className="modal-backdrop" onClick={handleClose} />
 
-                            {/* Panel — centered */}
-                            <div
-                                className="modal-panel-shell"
+                            {/* Panel */}
                             <motion.div
                                 className="modal-panel"
                                 key="modal-panel"
-                                initial={{ opacity: 0, scale: 0.96 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.98 }}
+                                initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.98, y: 10 }}
                                 transition={{ duration: 0.3, ease: easeOutExpo }}
                                 onClick={(e) => e.stopPropagation()}
                                 role="dialog"
                                 aria-modal="true"
                             >
-                                <motion.div
-                                    className="modal-panel"
-                                    key="modal-panel"
-                                    initial={{ opacity: 0, scale: 0.96 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.98 }}
-                                    transition={{ duration: 0.3, ease: easeOutExpo }}
-                                >
-                            {/* Sticky header */}
-                            <div className="modal-header">
-                                <span
-                                    className="modal-category"
-                                    style={{ '--badge-color': categoryColors[p.category] || '#555' }}
-                                >
-                                    {p.category}
-                                </span>
-                                <button className="modal-close" onClick={handleClose} aria-label="Close">
-                                    <CloseIcon fontSize="small" />
-                                </button>
-                            </div>
-
-                            {/* Hero */}
-                            <div className="modal-hero">
-                                <img src={p.image} alt={p.name} />
-                                <div className="modal-hero-fade" />
-                            </div>
-
-                            {/* Body */}
-                            <div className="modal-body">
-                                <h2 className="modal-title">{p.name}</h2>
-                                <p className="modal-tagline">{p.smallDescription}</p>
-
-                                <div className="modal-divider" />
-
-                                <div className="modal-section">
-                                    <h4 className="modal-section-label">Overview</h4>
-                                    <p className="modal-text">{p.description}</p>
+                                {/* Sticky header */}
+                                <div className="modal-header">
+                                    <span
+                                        className="modal-category"
+                                        style={{ '--badge-color': categoryColors[p.category] || '#555' }}
+                                    >
+                                        {p.category}
+                                    </span>
+                                    <button className="modal-close" onClick={handleClose} aria-label="Close">
+                                        <CloseIcon fontSize="small" />
+                                    </button>
                                 </div>
 
-                                {p.features && (
+                                {/* Hero */}
+                                <div className="modal-hero">
+                                    <img src={p.image} alt={p.name} />
+                                    <div className="modal-hero-fade" />
+                                </div>
+
+                                {/* Body */}
+                                <div className="modal-body">
+                                    <h2 className="modal-title">{p.name}</h2>
+                                    <p className="modal-tagline">{p.smallDescription}</p>
+
+                                    <div className="modal-divider" />
+
                                     <div className="modal-section">
-                                        <h4 className="modal-section-label">Key Features</h4>
-                                        <ul className="modal-features">
-                                            {p.features.map((f, i) => (
-                                                <li key={i}>
-                                                    <span className="feature-dot" />
-                                                    {f}
-                                                </li>
+                                        <h4 className="modal-section-label">Overview</h4>
+                                        <p className="modal-text">{p.description}</p>
+                                    </div>
+
+                                    {p.features && (
+                                        <div className="modal-section">
+                                            <h4 className="modal-section-label">Key Features</h4>
+                                            <ul className="modal-features">
+                                                {p.features.map((f, i) => (
+                                                    <li key={i}>
+                                                        <span className="feature-dot" />
+                                                        {f}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+
+                                    <div className="modal-section">
+                                        <h4 className="modal-section-label">Tech Stack</h4>
+                                        <div className="modal-tech-grid">
+                                            {p.technology.map((t, i) => (
+                                                <span key={i} className="modal-tech-tag">{t}</span>
                                             ))}
-                                        </ul>
+                                        </div>
                                     </div>
-                                )}
 
-                                <div className="modal-section">
-                                    <h4 className="modal-section-label">Tech Stack</h4>
-                                    <div className="modal-tech-grid">
-                                        {p.technology.map((t, i) => (
-                                            <span key={i} className="modal-tech-tag">{t}</span>
-                                        ))}
-                                    </div>
+                                    {(p.gitFrontendLink || p.gitBackendLink) && (
+                                        <div className="modal-section modal-links">
+                                            {p.gitFrontendLink && (
+                                                <a
+                                                    href={p.gitFrontendLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="modal-link-btn"
+                                                >
+                                                    <GitHubIcon fontSize="small" />
+                                                    Frontend Repo
+                                                </a>
+                                            )}
+                                            {p.gitBackendLink && (
+                                                <a
+                                                    href={p.gitBackendLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="modal-link-btn"
+                                                >
+                                                    <GitHubIcon fontSize="small" />
+                                                    Backend Repo
+                                                </a>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {p.explanation && (
+                                        <p className="modal-note">{p.explanation}</p>
+                                    )}
                                 </div>
-
-                                {(p.gitFrontendLink || p.gitBackendLink) && (
-                                    <div className="modal-section modal-links">
-                                        {p.gitFrontendLink && (
-                                            <a
-                                                href={p.gitFrontendLink}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="modal-link-btn"
-                                            >
-                                                <GitHubIcon fontSize="small" />
-                                                Frontend Repo
-                                            </a>
-                                        )}
-                                        {p.gitBackendLink && (
-                                            <a
-                                                href={p.gitBackendLink}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="modal-link-btn"
-                                            >
-                                                <GitHubIcon fontSize="small" />
-                                                Backend Repo
-                                            </a>
-                                        )}
-                                    </div>
-                                )}
-
-                                {p.explanation && (
-                                    <p className="modal-note">{p.explanation}</p>
-                                )}
-                            </div>
+                            </motion.div>
                         </motion.div>
-                            </div>
-                    </motion.div>
                     )}
                 </AnimatePresence>,
                 document.body

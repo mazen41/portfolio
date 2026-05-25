@@ -156,14 +156,17 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   MODAL — always dark, perfectly centered, no CSS-var dependency
+   MODAL — always dark, perfectly centered, scroll-independent
    ══════════════════════════════════════════════════════════════ */
 
 .modal-wrapper {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
 }
 
 .modal-backdrop {
@@ -176,20 +179,11 @@
 }
 
 /* ── The panel itself ───────────────────────────────────────── */
-.modal-panel-shell {
 .modal-panel {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     z-index: 1;
-    width: min(860px, calc(100vw - 48px));
+    width: min(860px, 100%);
     max-height: calc(100dvh - 80px);
-}
-
-.modal-panel {
-    width: 100%;
-    max-height: 100%;
     /* ALWAYS dark — never inherits light theme vars */
     background: linear-gradient(160deg, #0d1d2e 0%, #071018 100%);
     border: 1px solid rgba(42, 246, 255, 0.12);
@@ -202,7 +196,6 @@
         0 8px 32px rgba(0, 0, 0, 0.6),
         inset 0 1px 0 rgba(255,255,255,0.06);
     cursor: default;
-    /* smooth scroll inside */
     scroll-behavior: smooth;
 }
 
@@ -461,14 +454,11 @@
         display: block;
     }
 
-    .modal-panel-shell {
-        width: calc(100vw - 32px);
-        max-height: calc(100dvh - 32px);
+    .modal-wrapper {
+        padding: 16px;
     }
 
     .modal-panel {
-    .modal-panel {
-        width: calc(100vw - 32px);
         max-height: calc(100dvh - 32px);
         border-radius: 22px;
     }
