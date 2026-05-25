@@ -177,6 +177,7 @@
 
 /* ── The panel itself ───────────────────────────────────────── */
 .modal-panel-shell {
+.modal-panel {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -466,6 +467,9 @@
     }
 
     .modal-panel {
+    .modal-panel {
+        width: calc(100vw - 32px);
+        max-height: calc(100dvh - 32px);
         border-radius: 22px;
     }
 

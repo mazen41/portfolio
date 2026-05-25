@@ -320,6 +320,13 @@ const Projects = () => {
                             {/* Panel — centered */}
                             <div
                                 className="modal-panel-shell"
+                            <motion.div
+                                className="modal-panel"
+                                key="modal-panel"
+                                initial={{ opacity: 0, scale: 0.96 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.98 }}
+                                transition={{ duration: 0.3, ease: easeOutExpo }}
                                 onClick={(e) => e.stopPropagation()}
                                 role="dialog"
                                 aria-modal="true"
