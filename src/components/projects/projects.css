@@ -176,6 +176,7 @@
 }
 
 /* ── The panel itself ───────────────────────────────────────── */
+.modal-panel-shell {
 .modal-panel {
     position: fixed;
     top: 50%;
@@ -184,6 +185,11 @@
     z-index: 1;
     width: min(860px, calc(100vw - 48px));
     max-height: calc(100dvh - 80px);
+}
+
+.modal-panel {
+    width: 100%;
+    max-height: 100%;
     /* ALWAYS dark — never inherits light theme vars */
     background: linear-gradient(160deg, #0d1d2e 0%, #071018 100%);
     border: 1px solid rgba(42, 246, 255, 0.12);
@@ -455,6 +461,12 @@
         display: block;
     }
 
+    .modal-panel-shell {
+        width: calc(100vw - 32px);
+        max-height: calc(100dvh - 32px);
+    }
+
+    .modal-panel {
     .modal-panel {
         width: calc(100vw - 32px);
         max-height: calc(100dvh - 32px);
