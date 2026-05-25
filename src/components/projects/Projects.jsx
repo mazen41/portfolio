@@ -206,25 +206,50 @@ const Projects = () => {
     const [selectedProject, setSelectedProject] = useState(null);
     const motionTuning = useMotionTuning();
     const [filter, setFilter] = useState('All');
+    const [scrollY, setScrollY] = useState(0);
 
     const categories = ['All', ...Array.from(new Set(projectsData.map(p => p.category)))];
     const filtered = filter === 'All' ? projectsData : projectsData.filter(p => p.category === filter);
 
     const handleProjectClick = useCallback((project) => {
-        setSelectedProject(project);
+        const currentScrollY = window.scrollY || window.pageYOffset || 0;
+        setScrollY(currentScrollY);
+
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${currentScrollY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
         document.body.style.overflow = 'hidden';
+
+        setSelectedProject(project);
     }, []);
 
     const handleClose = useCallback(() => {
         setSelectedProject(null);
+
+        const savedScrollY = Math.abs(parseInt(document.body.style.top || '0', 10)) || scrollY;
+
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
         document.body.style.overflow = '';
-    }, []);
+
+        window.scrollTo(0, savedScrollY);
+    }, [scrollY]);
 
     useEffect(() => {
         const onKey = (e) => { if (e.key === 'Escape') handleClose(); };
         window.addEventListener('keydown', onKey);
         return () => {
             window.removeEventListener('keydown', onKey);
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.right = '';
+            document.body.style.width = '';
             document.body.style.overflow = '';
         };
     }, [handleClose]);
@@ -293,17 +318,20 @@ const Projects = () => {
                             <div className="modal-backdrop" onClick={handleClose} />
 
                             {/* Panel — centered */}
-                            <motion.div
-                                className="modal-panel"
-                                key="modal-panel"
-                                initial={{ y: 50, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                exit={{ y: 40, opacity: 0 }}
-                                transition={{ duration: 0.3, ease: easeOutExpo }}
+                            <div
+                                className="modal-panel-shell"
                                 onClick={(e) => e.stopPropagation()}
                                 role="dialog"
                                 aria-modal="true"
                             >
+                                <motion.div
+                                    className="modal-panel"
+                                    key="modal-panel"
+                                    initial={{ opacity: 0, scale: 0.96 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.98 }}
+                                    transition={{ duration: 0.3, ease: easeOutExpo }}
+                                >
                             {/* Sticky header */}
                             <div className="modal-header">
                                 <span
@@ -390,6 +418,7 @@ const Projects = () => {
                                 )}
                             </div>
                         </motion.div>
+                            </div>
                     </motion.div>
                     )}
                 </AnimatePresence>,
