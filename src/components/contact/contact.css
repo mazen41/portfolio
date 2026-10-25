@@ -1,1 +1,169 @@
-.contact-wrap{padding:34px}.contact-links{display:grid;gap:12px;margin-top:20px}.contact-links a{padding:12px 14px;border:1px solid var(--line);border-radius:12px;transition:.25s}.contact-links a:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 25px #0ff3}
+.contact-page { position: relative; }
+
+.contact-inner {
+  max-width: 680px;
+}
+
+.contact-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.contact-headline { margin-bottom: 20px; }
+
+.contact-sub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
+
+/* ── Email block ───────────────────────────────────────────── */
+.contact-email-block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--line2);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 28px;
+}
+
+.contact-email-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: rgba(42,246,255,0.09);
+  border: 1px solid var(--line);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.contact-email-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-email-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.contact-email-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: color 0.2s;
+}
+.contact-email-value:hover { color: var(--accent); }
+
+.contact-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line2);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.contact-copy-btn:hover {
+  background: rgba(42,246,255,0.07);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.contact-copy-btn.copied {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(34,212,122,0.07);
+}
+
+/* ── Socials ───────────────────────────────────────────────── */
+.contact-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--line2);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+  text-decoration: none;
+}
+
+.social-card:hover {
+  border-color: var(--social-color, var(--accent));
+  transform: translateX(6px);
+  background: rgba(255,255,255,0.02);
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line2);
+  color: var(--social-color, var(--accent));
+  flex-shrink: 0;
+}
+
+.social-label {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.social-handle {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.social-arrow {
+  margin-left: auto;
+  font-size: 1.1rem;
+  color: var(--muted2);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.social-card:hover .social-arrow {
+  color: var(--social-color, var(--accent));
+  transform: translate(3px, -3px);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 500px) {
+  .contact-email-block { flex-wrap: wrap; }
+  .contact-copy-btn { width: 100%; justify-content: center; }
+}
