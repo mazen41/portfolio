@@ -127,6 +127,31 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── CTA row ──────────────────────────────────────────── */}
+      <motion.div
+        className="about-cta-row"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, ease: easeOutExpo }}
+      >
+        <a
+          href="/resume.pdf"
+          download
+          className="about-cv-btn"
+        >
+          ↓ Download Resume
+        </a>
+        <a
+          href="https://github.com/mazen41"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="about-gh-btn"
+        >
+          ✧ View GitHub
+        </a>
+      </motion.div>
+
     </motion.main>
   );
 }

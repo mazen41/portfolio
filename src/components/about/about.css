@@ -162,3 +162,107 @@
   .timeline-item { grid-template-columns: 1fr; gap: 6px; }
   .timeline-year { padding-top: 0; }
 }
+
+/* ── CTA Row (CV + GitHub) ──────────────────────────────── */
+.about-cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+  margin-bottom: 60px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.about-cv-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 28px;
+  border-radius: 999px;
+  background: linear-gradient(110deg, var(--accent), var(--accent2));
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(42,246,255,0.2);
+  text-decoration: none;
+}
+
+.about-cv-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(42,246,255,0.3);
+}
+
+:root.light .about-cv-btn {
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(5,134,167,0.25);
+}
+
+.about-gh-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 28px;
+  border-radius: 999px;
+  border: 1px solid var(--line2);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+
+.about-gh-btn:hover {
+  border-color: var(--accent);
+  background: rgba(42,246,255,0.05);
+  transform: translateY(-2px);
+}
+
+:root.light .about-gh-btn:hover {
+  background: rgba(5,134,167,0.05);
+  border-color: var(--accent);
+}
+
+/* ── Light mode about overrides ────────────────────────────── */
+:root.light .skill-group {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.09);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+:root.light .skill-group-label {
+  color: #111111;
+}
+
+:root.light .skill-pill {
+  border-color: rgba(0,0,0,0.12);
+  color: #555;
+}
+
+:root.light .skill-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+:root.light .timeline-list {
+  border-left-color: rgba(5,134,167,0.25);
+}
+
+:root.light .timeline-item {
+  border-bottom-color: rgba(0,0,0,0.08);
+}
+
+:root.light .timeline-item::before {
+  background: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(5,134,167,0.3);
+}
+
+:root.light .timeline-role {
+  color: #111111;
+}
+
+:root.light .about-bio {
+  color: #444444;
+}

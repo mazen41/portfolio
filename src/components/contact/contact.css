@@ -167,3 +167,64 @@
   .contact-email-block { flex-wrap: wrap; }
   .contact-copy-btn { width: 100%; justify-content: center; }
 }
+
+/* ── Light mode contact overrides ──────────────────────────── */
+:root.light .contact-email-block {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.09);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+
+:root.light .contact-email-icon {
+  background: rgba(5,134,167,0.07);
+  border-color: rgba(5,134,167,0.2);
+  color: var(--accent);
+}
+
+:root.light .contact-email-value {
+  color: #111111;
+}
+
+:root.light .contact-copy-btn {
+  border-color: rgba(0,0,0,0.12);
+  color: #555;
+}
+
+:root.light .contact-copy-btn:hover {
+  background: rgba(5,134,167,0.06);
+  border-color: var(--accent);
+  color: #111;
+}
+
+:root.light .social-card {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.09);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+:root.light .social-card:hover {
+  border-color: var(--social-color, var(--accent));
+  box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+}
+
+:root.light .social-icon {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.08);
+}
+
+:root.light .social-label {
+  color: #111111;
+}
+
+:root.light .social-handle {
+  color: #666;
+}
+
+:root.light .social-arrow {
+  color: #999;
+}
+
+:root.light .contact-headline,
+:root.light .contact-sub {
+  color: var(--text);
+}

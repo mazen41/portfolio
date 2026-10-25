@@ -73,6 +73,14 @@ export default function Welcome() {
           >
             <Link to="/projects" className="btn-primary">View My Work</Link>
             <Link to="/contact"  className="btn-ghost">Get In Touch</Link>
+            <a
+              href="/resume.pdf"
+              download
+              className="btn-cv"
+              aria-label="Download CV"
+            >
+              ↓ Download CV
+            </a>
           </motion.div>
         </motion.section>
 

@@ -4,6 +4,8 @@ import LightModeRoundedIcon  from '@mui/icons-material/LightModeRounded';
 import DarkModeRoundedIcon   from '@mui/icons-material/DarkModeRounded';
 import MenuRoundedIcon       from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon      from '@mui/icons-material/CloseRounded';
+import GitHubIcon            from '@mui/icons-material/GitHub';
+import LinkedInIcon         from '@mui/icons-material/LinkedIn';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../Them';
 import './navbar.css';
@@ -58,6 +60,26 @@ export default function Navbar() {
         </nav>
 
         <div className="nav-actions">
+          <a
+            href="https://github.com/mazen41"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-icon-btn"
+            aria-label="GitHub profile"
+            title="GitHub"
+          >
+            <GitHubIcon style={{ fontSize: 18 }} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/mazen-hossny-54a8a02b7/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-icon-btn"
+            aria-label="LinkedIn profile"
+            title="LinkedIn"
+          >
+            <LinkedInIcon style={{ fontSize: 18 }} />
+          </a>
           <button className="nav-icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
             {theme === 'dark'
               ? <LightModeRoundedIcon style={{ fontSize: 18 }} />
@@ -115,6 +137,26 @@ export default function Navbar() {
                     ? <><LightModeRoundedIcon style={{ fontSize: 16 }} /> Light mode</>
                     : <><DarkModeRoundedIcon  style={{ fontSize: 16 }} /> Dark mode</>}
                 </button>
+                <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                  <a
+                    href="https://github.com/mazen41"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="nav-icon-btn"
+                    style={{ flex: 1, justifyContent: 'center', gap: 6, fontSize: '0.82rem' }}
+                  >
+                    <GitHubIcon style={{ fontSize: 16 }} /> GitHub
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/mazen-hossny-54a8a02b7/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="nav-icon-btn"
+                    style={{ flex: 1, justifyContent: 'center', gap: 6, fontSize: '0.82rem' }}
+                  >
+                    <LinkedInIcon style={{ fontSize: 16 }} /> LinkedIn
+                  </a>
+                </div>
               </div>
             </motion.aside>
           </motion.div>

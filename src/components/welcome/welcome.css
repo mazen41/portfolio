@@ -222,3 +222,69 @@
   .stats-row  { gap: 10px; }
   .stat-card  { min-width: calc(50% - 5px); }
 }
+
+/* ── CV / Resume download button ───────────────────────── */
+.btn-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px dashed var(--line2);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.btn-cv:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(42,246,255,0.04);
+  transform: translateY(-2px);
+}
+
+:root.light .btn-cv:hover {
+  background: rgba(5,134,167,0.06);
+}
+
+/* ── Light mode overrides ────────────────────────────────── */
+:root.light .marquee-wrap {
+  background: rgba(248,249,251,0.92);
+  border-top-color:    rgba(5,134,167,0.12);
+  border-bottom-color: rgba(5,134,167,0.12);
+}
+
+:root.light .marquee-item {
+  color: #666;
+}
+
+:root.light .marquee-item::before {
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+:root.light .orb {
+  opacity: 0.07;
+}
+
+:root.light .btn-ghost {
+  border-color: rgba(0,0,0,0.15);
+  color: var(--text);
+}
+
+:root.light .btn-ghost:hover {
+  border-color: var(--accent);
+  background: rgba(5,134,167,0.05);
+}
+
+:root.light .stat-card {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.09);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+
+:root.light .stat-label {
+  color: #666;
+}

@@ -72,15 +72,24 @@
 .project-card {
     grid-column: span 4;
     background: var(--card);
-    border: 1px solid #ffffff1f;
+    border: 1px solid var(--line2);
     border-radius: 18px;
     overflow: hidden;
     backdrop-filter: blur(8px);
     cursor: pointer;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.project-card:hover { border-color: #ffffff33; }
+.project-card:hover { border-color: rgba(42,246,255,0.3); }
+
+:root.light .project-card {
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+
+:root.light .project-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
 
 .project-card:nth-child(1),
 .project-card:nth-child(2) { grid-column: span 6; }
@@ -510,4 +519,41 @@
 }
 .modal-link-primary:hover {
     background: rgba(34, 212, 122, 0.22) !important;
+}
+
+/* ── Light mode project page overrides ─────────────────────── */
+:root.light .filter-btn {
+    background: rgba(0,0,0,0.04);
+    border-color: rgba(0,0,0,0.12);
+    color: var(--text);
+}
+
+:root.light .filter-btn:hover {
+    background: rgba(0,0,0,0.08);
+    border-color: rgba(0,0,0,0.25);
+}
+
+:root.light .filter-btn.active {
+    background: linear-gradient(120deg, var(--accent), var(--accent2));
+    color: #ffffff;
+    border-color: transparent;
+}
+
+:root.light .tech-pill {
+    border-color: rgba(0,0,0,0.12);
+    color: #555;
+}
+
+:root.light .card-title {
+    color: #111111;
+}
+
+:root.light .page-title {
+    color: #111111;
+}
+
+:root.light .projects-page::before {
+    background:
+        radial-gradient(circle at 20% 10%, rgba(5,134,167,0.05), transparent 35%),
+        radial-gradient(circle at 80% 20%, rgba(12,184,212,0.04), transparent 30%);
 }

@@ -186,3 +186,75 @@
 @media (max-width: 480px) {
   .nav-root { padding: 10px 12px; }
 }
+
+/* ── Light mode navbar overrides ──────────────────────────── */
+:root.light .nav-inner {
+  background: rgba(255,255,255,0.97);
+  border-color: rgba(0,0,0,0.09);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+}
+
+:root.light .nav-root.scrolled .nav-inner {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+:root.light .nav-brand-text {
+  color: #111111;
+}
+
+:root.light .nav-link {
+  color: #555;
+}
+
+:root.light .nav-link:hover,
+:root.light .nav-link.active {
+  color: #111111;
+}
+
+:root.light .nav-link-underline {
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(5,134,167,0.4);
+}
+
+:root.light .nav-icon-btn {
+  color: #333;
+  border-color: rgba(0,0,0,0.12);
+}
+
+:root.light .nav-icon-btn:hover {
+  background: rgba(5,134,167,0.06);
+  border-color: var(--accent);
+  color: #111;
+}
+
+:root.light .nav-overlay {
+  background: rgba(0,0,0,0.4);
+}
+
+:root.light .nav-drawer {
+  background: #ffffff;
+  border-left-color: rgba(0,0,0,0.1);
+}
+
+:root.light .nav-drawer-header {
+  border-bottom-color: rgba(0,0,0,0.08);
+}
+
+:root.light .nav-drawer-link {
+  color: #555;
+}
+
+:root.light .nav-drawer-link:hover,
+:root.light .nav-drawer-link.active {
+  background: rgba(5,134,167,0.07);
+  color: #111111;
+}
+
+:root.light .nav-drawer-footer {
+  border-top-color: rgba(0,0,0,0.08);
+}
+
+:root.light .nav-brand-dot {
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(5,134,167,0.5);
+}

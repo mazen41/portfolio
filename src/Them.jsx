@@ -7,10 +7,14 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const storedTheme = localStorage.getItem('theme');
-  const initialTheme = storedTheme ? JSON.parse(storedTheme) : 'light';
-
-  const [theme, setTheme] = useState(initialTheme);
+  const [theme, setTheme] = useState(() => {
+    try {
+      const stored = localStorage.getItem('theme');
+      return stored ? JSON.parse(stored) : 'light';
+    } catch {
+      return 'light';
+    }
+  });
 
   useEffect(() => {
     localStorage.setItem('theme', JSON.stringify(theme));

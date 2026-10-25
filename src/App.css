@@ -22,18 +22,19 @@
 }
 
 :root.light {
-  --bg:      #f0f4f8;
-  --bg2:     #e2eaf2;
-  --bg3:     #d4e0ec;
-  --text:    #0d1520;
-  --muted:   #4a6070;
-  --muted2:  #7a9ab0;
-  --card:    rgba(255,255,255,0.82);
-  --line:    rgba(5, 134, 167, 0.15);
-  --line2:   rgba(0,0,0,0.08);
+  --bg:      #ffffff;
+  --bg2:     #f8f9fb;
+  --bg3:     #f0f2f5;
+  --text:    #111111;
+  --muted:   #4a4a4a;
+  --muted2:  #888888;
+  --card:    rgba(255,255,255,0.97);
+  --line:    rgba(5, 134, 167, 0.18);
+  --line2:   rgba(0,0,0,0.10);
   --accent:  #0586a7;
   --accent2: #0cb8d4;
   --accent3: #057a99;
+  --green:   #1a8c00;
 }
 
 /* ═══════════════════════════════════════════════════════
