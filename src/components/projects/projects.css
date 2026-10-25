@@ -4,15 +4,7 @@
     padding-top: 96px;
 }
 
-.projects-page::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background:
-        radial-gradient(circle at 20% 10%, #11d5d922, transparent 35%),
-        radial-gradient(circle at 80% 20%, #2af6ff1f, transparent 30%);
-}
+/* Background removed — was causing paint on every frame */
 
 .projects-container {
     max-width: 1200px;
@@ -75,7 +67,6 @@
     border: 1px solid var(--line2);
     border-radius: 18px;
     overflow: hidden;
-    backdrop-filter: blur(8px);
     cursor: pointer;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -94,12 +85,6 @@
 .project-card:nth-child(1),
 .project-card:nth-child(2) { grid-column: span 6; }
 
-.project-card:nth-child(3) {
-    grid-column: span 12;
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-}
-
 /* ─── Card Image ─────────────────────────────────────────────── */
 .image-container {
     height: 220px;
@@ -107,13 +92,12 @@
     position: relative;
 }
 
-.project-card:nth-child(3) .image-container { height: 100%; }
-
 .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.4s ease;
+    will-change: transform;
 }
 
 .project-card:hover .image-container img { transform: scale(1.07); }
@@ -447,7 +431,6 @@
    ══════════════════════════════════════════════════════════════ */
 @media (max-width: 980px) {
     .project-card { grid-column: span 6; }
-    .project-card:nth-child(3) { grid-template-columns: 1fr; }
 
     .modal-features { grid-template-columns: 1fr; }
 }
@@ -457,10 +440,8 @@
 
     .project-card,
     .project-card:nth-child(1),
-    .project-card:nth-child(2),
-    .project-card:nth-child(3) {
+    .project-card:nth-child(2) {
         grid-column: span 12;
-        display: block;
     }
 
     .modal-wrapper {

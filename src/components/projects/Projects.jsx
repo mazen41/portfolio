@@ -213,14 +213,13 @@ const categoryColors = {
     'Full-Stack App': '#4a5568',
 };
 
-const ProjectCard = ({ project, onProjectClick, index, motionTuning }) => (
+const ProjectCard = ({ project, onProjectClick, index }) => (
     <motion.div
         className="project-card"
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-        whileHover={motionTuning.cardHover}
-        transition={{ duration: 0.55, delay: index * 0.06, ease: easeOutExpo }}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.4, delay: index * 0.05, ease: easeOutExpo }}
         onClick={() => onProjectClick(project)}
     >
         <div className="image-container">
@@ -339,7 +338,6 @@ const Projects = () => {
                             project={project}
                             onProjectClick={handleProjectClick}
                             index={index}
-                            motionTuning={motionTuning}
                         />
                     ))}
                 </div>
