@@ -24,7 +24,7 @@
 .page-header { margin-bottom: 28px; }
 
 .page-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(2rem, 5vw, 3.8rem);
     margin: 0 0 8px;
 }
@@ -50,7 +50,7 @@
     background: #ffffff08;
     color: var(--text);
     cursor: pointer;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
@@ -144,7 +144,7 @@
 .card-title {
     font-size: 1.05rem;
     margin: 10px 0 6px;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .card-desc {
@@ -295,7 +295,7 @@
 }
 
 .modal-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(1.5rem, 3vw, 2.2rem);
     font-weight: 700;
     margin: 0 0 10px;
@@ -322,7 +322,7 @@
 }
 
 .modal-section-label {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.15em;
@@ -391,7 +391,7 @@
     font-size: 0.78rem;
     color: #c5e8ef;
     background: rgba(42, 246, 255, 0.06);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 500;
     transition: background 0.2s, border-color 0.2s;
 }
