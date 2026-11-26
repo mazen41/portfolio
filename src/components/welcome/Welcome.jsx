@@ -166,7 +166,7 @@ export default function Welcome() {
               </div>
               <div className="mockup-content">
                 <img
-                  src="./Landing_Page.png"
+                  src="./nazbiz/nazbiz-1.jpeg"
                   alt="Mazen Hossny - Featured Platform NazBiz"
                   className="mockup-img"
                 />
@@ -174,7 +174,7 @@ export default function Welcome() {
                   <div className="floating-badge-pulse" />
                   <div>
                     <strong className="floating-title">Featured Project</strong>
-                    <span className="floating-sub">NazBiz · AI Messaging Platform</span>
+                    <span className="floating-sub">NazBiz · Omnichannel AI Messaging</span>
                   </div>
                 </div>
               </div>
