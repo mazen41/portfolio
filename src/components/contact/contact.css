@@ -1,7 +1,7 @@
 .contact-page { position: relative; }
 
 .contact-inner {
-  max-width: 680px;
+  max-width: 720px;
 }
 
 .contact-eyebrow {
@@ -20,19 +20,44 @@
   font-size: 1.05rem;
   color: var(--muted);
   line-height: 1.75;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
-/* ── Email block ───────────────────────────────────────────── */
-.contact-email-block {
+/* ── 24-Hour Guarantee Banner ──────────────────────────────── */
+.response-guarantee-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(34, 212, 122, 0.12);
+  border: 1px solid rgba(34, 212, 122, 0.35);
+  border-radius: 999px;
+  padding: 8px 18px;
+  color: #22d47a;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+
+.guarantee-icon {
+  font-size: 18px !important;
+}
+
+/* ── Contact Quick Channels (Email + WhatsApp) ─────────────── */
+.contact-quick-channels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.contact-channel-card {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   background: var(--card);
   border: 1px solid var(--line2);
   border-radius: var(--radius);
-  padding: 20px 22px;
-  margin-bottom: 28px;
+  padding: 18px 20px;
 }
 
 .contact-email-icon {
@@ -52,6 +77,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  overflow: hidden;
 }
 
 .contact-email-label {
@@ -63,10 +89,14 @@
 }
 
 .contact-email-value {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--text);
   transition: color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
 }
 .contact-email-value:hover { color: var(--accent); }
 
@@ -74,12 +104,12 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
+  padding: 7px 12px;
   border-radius: 8px;
   border: 1px solid var(--line2);
   background: transparent;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
@@ -99,132 +129,221 @@
   background: rgba(34,212,122,0.07);
 }
 
-/* ── Socials ───────────────────────────────────────────────── */
-.contact-socials {
+/* WhatsApp Button Card */
+.whatsapp-btn-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card);
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.whatsapp-btn-card:hover {
+  background: rgba(37, 211, 102, 0.06);
+  border-color: #25d366;
+  transform: translateY(-2px);
+}
+
+.whatsapp-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: rgba(37, 211, 102, 0.12);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  color: #25d366;
+  flex-shrink: 0;
+}
+
+.whatsapp-info {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 2px;
+}
+
+.whatsapp-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #25d366;
+  font-weight: 700;
+}
+
+.whatsapp-number {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Project Inquiry Form ──────────────────────────────────── */
+.project-form-container {
+  background: var(--card);
+  border: 1px solid var(--line2);
+  border-radius: 20px;
+  padding: 32px 28px;
+  margin-bottom: 36px;
+}
+
+.form-header {
+  margin-bottom: 24px;
+}
+
+.form-header h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.form-header p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-group input,
+.form-group textarea {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--line2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.92rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(42, 246, 255, 0.15);
+}
+
+.submit-project-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+/* ── Socials ───────────────────────────────────────────────── */
+.contact-socials {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 .social-card {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   background: var(--card);
   border: 1px solid var(--line2);
   border-radius: var(--radius);
-  padding: 18px 22px;
-  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+  padding: 18px 20px;
+  color: var(--text);
   text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
 }
 
 .social-card:hover {
-  border-color: var(--social-color, var(--accent));
-  transform: translateX(6px);
-  background: rgba(255,255,255,0.02);
+  border-color: var(--social-color);
+  background: rgba(42,246,255,0.03);
+  transform: translateY(-2px);
 }
 
 .social-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--line2);
-  color: var(--social-color, var(--accent));
-  flex-shrink: 0;
+  color: var(--social-color);
+  font-size: 22px;
 }
 
 .social-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.social-handle {
   display: block;
   font-size: 0.92rem;
   font-weight: 600;
   color: var(--text);
 }
 
-.social-handle {
-  display: block;
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-.social-arrow {
+.social-arrow, .channel-arrow {
   margin-left: auto;
+  color: var(--muted);
   font-size: 1.1rem;
-  color: var(--muted2);
-  transition: color 0.2s, transform 0.2s;
+  transition: transform 0.2s, color 0.2s;
 }
 
-.social-card:hover .social-arrow {
-  color: var(--social-color, var(--accent));
-  transform: translate(3px, -3px);
-}
-
-/* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 500px) {
-  .contact-email-block { flex-wrap: wrap; }
-  .contact-copy-btn { width: 100%; justify-content: center; }
-}
-
-/* ── Light mode contact overrides ──────────────────────────── */
-:root.light .contact-email-block {
-  background: #ffffff;
-  border-color: rgba(0,0,0,0.09);
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-}
-
-:root.light .contact-email-icon {
-  background: rgba(5,134,167,0.07);
-  border-color: rgba(5,134,167,0.2);
+.social-card:hover .social-arrow,
+.whatsapp-btn-card:hover .channel-arrow {
+  transform: translate(2px, -2px);
   color: var(--accent);
 }
 
-:root.light .contact-email-value {
-  color: #111111;
-}
-
-:root.light .contact-copy-btn {
-  border-color: rgba(0,0,0,0.12);
-  color: #555;
-}
-
-:root.light .contact-copy-btn:hover {
-  background: rgba(5,134,167,0.06);
-  border-color: var(--accent);
-  color: #111;
-}
-
+/* ── Light Mode Overrides ─────────────────────────────────── */
+:root.light .contact-channel-card,
+:root.light .whatsapp-btn-card,
+:root.light .project-form-container,
 :root.light .social-card {
   background: #ffffff;
-  border-color: rgba(0,0,0,0.09);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  border-color: rgba(0, 0, 0, 0.09);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.05);
 }
 
-:root.light .social-card:hover {
-  border-color: var(--social-color, var(--accent));
-  box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+:root.light .form-group input,
+:root.light .form-group textarea {
+  background: #f8fafc;
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
-:root.light .social-icon {
-  background: rgba(0,0,0,0.04);
-  border-color: rgba(0,0,0,0.08);
-}
-
-:root.light .social-label {
-  color: #111111;
-}
-
-:root.light .social-handle {
-  color: #666;
-}
-
-:root.light .social-arrow {
-  color: #999;
-}
-
-:root.light .contact-headline,
-:root.light .contact-sub {
-  color: var(--text);
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .contact-quick-channels,
+  .form-row.two-col,
+  .contact-socials {
+    grid-template-columns: 1fr;
+  }
 }

@@ -5,6 +5,7 @@ import Welcome  from './components/welcome/Welcome';
 import Contact  from './components/contact/Contact';
 import About    from './components/about/About';
 import Projects from './components/projects/Projects';
+import ProjectDetail from './components/projects/ProjectDetail';
 import { ThemeProvider, useTheme } from './Them';
 
 // Cursor using refs + direct DOM style — zero framer overhead
@@ -50,10 +51,11 @@ function Inner() {
       <Cursor />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/"        element={<Welcome />} />
-          <Route path="/about"   element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/"                 element={<Welcome />} />
+          <Route path="/about"            element={<About />} />
+          <Route path="/projects"         element={<Projects />} />
+          <Route path="/projects/:slug"   element={<ProjectDetail />} />
+          <Route path="/contact"          element={<Contact />} />
         </Routes>
       </AnimatePresence>
     </div>

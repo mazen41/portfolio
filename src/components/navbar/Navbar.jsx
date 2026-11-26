@@ -86,7 +86,7 @@ export default function Navbar() {
               : <DarkModeRoundedIcon  style={{ fontSize: 18 }} />}
           </button>
           <a
-            href="mailto:mazen.hossn.121@gmail.com"
+            href="mailto:mazen.hossny.121@gmail.com"
             className="nav-cta"
           >
             Hire Me
