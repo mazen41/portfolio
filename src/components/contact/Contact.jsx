@@ -12,10 +12,21 @@ import SendIcon from '@mui/icons-material/Send';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { pageVariants, easeOutExpo, fadeUp, staggerParent } from '../../motionSystem';
 import './contact.css';
+import { EMAIL, whatsappLink } from '../../contactConfig';
 
-const EMAIL = 'mazen.hossny.121@gmail.com';
 const WHATSAPP_NUMBER_PLACEHOLDER = '+20 115 287 9755'; // Mazen's official verified number from CV
-const WHATSAPP_LINK = 'https://wa.me/201152879755';
+const WHATSAPP_LINK = whatsappLink();
+
+// Plain-text summary of the form, used to prefill WhatsApp.
+function summaryFor(d) {
+  const parts = ['Hi Mazen,'];
+  if (d.name) parts.push("I'm " + d.name + '.');
+  if (d.project) parts.push(d.project);
+  if (d.budget) parts.push('Budget: ' + d.budget + '.');
+  if (d.timeline) parts.push('Timeline: ' + d.timeline + '.');
+  if (parts.length === 1) parts.push("I'd like to discuss a project.");
+  return parts.join(' ');
+}
 
 const SOCIALS = [
   {
@@ -37,6 +48,9 @@ const SOCIALS = [
 export default function Contact() {
   useSeo({ title: 'Contact | Mazen Hossny, Hire a Full-Stack Developer', description: 'Start a project with Mazen Hossny by email or WhatsApp. Salla apps, SaaS products and Flutter mobile apps.', path: '/contact' });
   const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const [errorMsg, setErrorMsg] = useState('');
+  const [lastSent, setLastSent] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -56,12 +70,31 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Project Inquiry: ${formData.project || 'New Project'} from ${formData.name}`);
-    const bodyText = `Hello Mazen,\n\nName: ${formData.name}\nEmail: ${formData.email}\nProject Details: ${formData.project}\nBudget: ${formData.budget || 'Not specified'}\nTimeline: ${formData.timeline || 'Not specified'}\n`;
-    const mailtoUrl = `mailto:${EMAIL}?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
-    window.location.href = mailtoUrl;
+    const hp = e.currentTarget.elements.website ? e.currentTarget.elements.website.value : '';
+    const payload = { ...formData, website: hp };
+    setStatus('sending');
+    setErrorMsg('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        setLastSent(formData);
+        setFormData({ name: '', email: '', project: '', budget: '', timeline: '' });
+        setStatus('success');
+      } else {
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+        setStatus('error');
+      }
+    } catch (err) {
+      setErrorMsg('Could not reach the server.');
+      setStatus('error');
+    }
   };
 
   return (
@@ -164,10 +197,34 @@ export default function Contact() {
         >
           <div className="form-header">
             <h3>Start a Project</h3>
-            <p>Tell me a bit about your idea, timeline, and goals. This form creates an email directly to my inbox.</p>
+            <p>Tell me a bit about your idea, timeline, and goals. Your message goes straight to my inbox.</p>
           </div>
 
+          {status === 'success' && lastSent ? (
+            <div className="form-success" role="status">
+              <CheckIcon style={{ fontSize: 30 }} />
+              <h4>Message sent.</h4>
+              <p>Thanks, {lastSent.name}. I reply within 24 hours at the email you gave me.</p>
+              <a
+                href={whatsappLink(summaryFor(lastSent))}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-whatsapp"
+              >
+                <WhatsAppIcon style={{ fontSize: 18 }} /> Or message me on WhatsApp
+              </a>
+              <button type="button" className="form-reset-btn" onClick={() => setStatus('idle')}>
+                Send another message
+              </button>
+            </div>
+          ) : (
           <form onSubmit={handleFormSubmit} className="project-form">
+            {/* Honeypot: hidden from people, bots tend to fill it. */}
+            <div className="hp-field" aria-hidden="true">
+              <label htmlFor="website">Website (leave empty)</label>
+              <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
+            </div>
+
             <div className="form-row two-col">
               <div className="form-group">
                 <label htmlFor="name">Your Name *</label>
@@ -235,11 +292,26 @@ export default function Contact() {
               </div>
             </div>
 
-            <button type="submit" className="btn-primary submit-project-btn">
+            {status === 'error' && (
+              <div className="form-error" role="alert">
+                <p>{errorMsg} If it keeps failing, email <a href={'mailto:' + EMAIL}>{EMAIL}</a> or use WhatsApp below.</p>
+                <a
+                  href={whatsappLink(summaryFor(formData))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-whatsapp"
+                >
+                  <WhatsAppIcon style={{ fontSize: 18 }} /> Send this on WhatsApp
+                </a>
+              </div>
+            )}
+
+            <button type="submit" className="btn-primary submit-project-btn" disabled={status === 'sending'}>
               <SendIcon style={{ fontSize: 18, marginRight: 8 }} />
-              Send Project Inquiry to Email
+              {status === 'sending' ? 'Sending…' : 'Send Project Inquiry'}
             </button>
           </form>
+          )}
         </motion.div>
 
         {/* ── Socials (Without inactive X) ──────────────────── */}

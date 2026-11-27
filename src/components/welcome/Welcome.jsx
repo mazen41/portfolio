@@ -9,8 +9,10 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import Navbar from '../navbar/Navbar';
 import { pageVariants, easeOutExpo, fadeUp, staggerParent } from '../../motionSystem';
+import { whatsappLink } from '../../contactConfig';
 import './welcome.css';
 
 // Stats accurate to actual codebase & CV (12 shipped featured projects displayed on the site)
@@ -123,7 +125,15 @@ export default function Welcome() {
               variants={fadeUp}
               transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.16 }}
             >
-              <Link to="/projects" className="btn-primary">View My Work</Link>
+              <a
+                href={whatsappLink("Hi Mazen, I found your portfolio and I'd like to talk about a project.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-whatsapp"
+              >
+                <WhatsAppIcon style={{ fontSize: 18 }} /> WhatsApp Me
+              </a>
+              <Link to="/projects" className="btn-ghost">View My Work</Link>
               <Link to="/contact"  className="btn-ghost">Get In Touch</Link>
               <a
                 href="/resume.pdf"

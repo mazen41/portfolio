@@ -347,3 +347,52 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ── Form states: honeypot, success, error, reset ──────────── */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0 4px;
+  color: var(--green);
+}
+.form-success h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+.form-success p { color: var(--muted); line-height: 1.6; }
+
+.form-reset-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 4px 0;
+}
+
+.form-error {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid rgba(255, 110, 110, 0.45);
+  background: rgba(255, 110, 110, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.form-error p { color: var(--text); font-size: 0.9rem; line-height: 1.5; }
+.form-error a { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+.submit-project-btn:disabled { opacity: 0.6; cursor: wait; }

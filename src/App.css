@@ -168,3 +168,21 @@ img { display: block; max-width: 100%; }
 
 /* Focus ring */
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+
+/* ── WhatsApp button (hero, contact, error and success panels) ── */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #04240f;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-whatsapp:hover { opacity: 0.9; transform: translateY(-1px); }

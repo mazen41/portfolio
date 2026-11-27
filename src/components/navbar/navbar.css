@@ -123,6 +123,34 @@
 
 .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
 
+.nav-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 211, 102, 0.55);
+  color: #25d366;
+  font-weight: 600;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-whatsapp:hover { background: rgba(37, 211, 102, 0.1); border-color: #25d366; }
+
+.nav-drawer-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0 4px;
+}
+.nav-drawer-cta .nav-cta,
+.nav-drawer-cta .nav-whatsapp {
+  justify-content: center;
+  padding: 12px;
+  font-size: 0.95rem;
+}
+
 .nav-hamburger { display: none; }
 
 /* ── Mobile Drawer ─────────────────────────────────────────── */
@@ -177,9 +205,14 @@
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .nav-header-social { display: none; }
+}
+
 @media (max-width: 860px) {
   .nav-links { display: none; }
-  .nav-cta   { display: none; }
+  .nav-actions > .nav-cta,
+  .nav-actions > .nav-whatsapp { display: none; }
   .nav-hamburger { display: inline-flex; }
 }
 

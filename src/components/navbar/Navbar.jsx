@@ -6,9 +6,13 @@ import MenuRoundedIcon       from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon      from '@mui/icons-material/CloseRounded';
 import GitHubIcon            from '@mui/icons-material/GitHub';
 import LinkedInIcon         from '@mui/icons-material/LinkedIn';
+import WhatsAppIcon          from '@mui/icons-material/WhatsApp';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../Them';
+import { whatsappLink } from '../../contactConfig';
 import './navbar.css';
+
+const WHATSAPP_HREF = whatsappLink("Hi Mazen, I'd like to talk about a project.");
 
 const LINKS = [
   { to: '/',        label: 'Home' },
@@ -86,6 +90,14 @@ export default function Navbar() {
               : <DarkModeRoundedIcon  style={{ fontSize: 18 }} />}
           </button>
           <a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-whatsapp"
+          >
+            <WhatsAppIcon style={{ fontSize: 16 }} /> WhatsApp
+          </a>
+          <a
             href="mailto:mazen.hossny.121@gmail.com"
             className="nav-cta"
           >
@@ -131,7 +143,19 @@ export default function Navbar() {
                   {label}
                 </Link>
               ))}
+              <div className="nav-drawer-cta">
+                <a href="mailto:mazen.hossny.121@gmail.com" className="nav-cta">Hire Me</a>
+                <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-whatsapp"
+                >
+                  <WhatsAppIcon style={{ fontSize: 16 }} /> WhatsApp
+                </a>
+              </div>
               <div className="nav-drawer-footer">
+
                 <button className="nav-icon-btn" onClick={toggleTheme}>
                   {theme === 'dark'
                     ? <><LightModeRoundedIcon style={{ fontSize: 16 }} /> Light mode</>
