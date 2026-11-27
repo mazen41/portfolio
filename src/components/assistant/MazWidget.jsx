@@ -23,6 +23,15 @@ export default function MazWidget() {
   const [messages, setMessages] = useState([]);
   const listRef = useRef(null);
   const audioRef = useRef(null);
+  const [pastHero, setPastHero] = useState(false);
+
+  // The mobile chat button stays out of the hero until the visitor scrolls past it.
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > 420);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     if (listRef.current) {
@@ -208,7 +217,7 @@ export default function MazWidget() {
 
       <button
         type="button"
-        className={`maz-orb-btn maz-fab${heroRobotActive ? ' hero-on' : ''}`}
+        className={`maz-orb-btn maz-fab${heroRobotActive ? ' hero-on' : ''}${heroRobotActive && !pastHero ? ' at-hero' : ''}`}
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? t('mazCloseAria') : t('mazOpenAria')}
       >
