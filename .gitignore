@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# API keys (never commit)
+public/Metrials/groq_key_elevllabs_key.txt

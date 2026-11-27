@@ -8,17 +8,17 @@ export const projectsData = [
     category: 'SaaS Platform',
     featured: true,
     badge: 'Featured SaaS · nazbiz.io',
-    image: './nazbiz/nazbiz-1.jpeg',
+    image: '/nazbiz/nazbiz-1.jpeg',
     screenshots: [
-      { src: './nazbiz/nazbiz-1.jpeg', title: 'NazBiz Unified Conversation & Inbox Management' },
-      { src: './nazbiz/nazbiz-2.jpeg', title: 'Omnichannel Customer Messaging Hub' },
-      { src: './nazbiz/nazbiz-3.jpeg', title: 'AI Assistant & Knowledge Base Grounding' },
-      { src: './nazbiz/nazbiz-4.jpeg', title: 'Automated Bot Workflows, Sequences & Campaigns' },
-      { src: './nazbiz/nazbiz-5.jpeg', title: 'Salla E-Commerce Integration & Live Order Status' },
-      { src: './nazbiz/nazbiz-6.jpeg', title: 'Interactive Multi-Channel Messaging Flows' },
-      { src: './nazbiz/nazbiz-7.jpeg', title: 'Human Handoff & Team Collaboration' },
-      { src: './nazbiz/nazbiz-8.jpeg', title: 'Operations Dashboard & Analytics (AR & EN)' },
-      { src: './nazbiz/nazbiz-9.jpeg', title: 'Channel & Webhook Settings' }
+      { src: '/nazbiz/nazbiz-1.jpeg', title: 'NazBiz Unified Conversation & Inbox Management' },
+      { src: '/nazbiz/nazbiz-2.jpeg', title: 'Omnichannel Customer Messaging Hub' },
+      { src: '/nazbiz/nazbiz-3.jpeg', title: 'AI Assistant & Knowledge Base Grounding' },
+      { src: '/nazbiz/nazbiz-4.jpeg', title: 'Automated Bot Workflows, Sequences & Campaigns' },
+      { src: '/nazbiz/nazbiz-5.jpeg', title: 'Salla E-Commerce Integration & Live Order Status' },
+      { src: '/nazbiz/nazbiz-6.jpeg', title: 'Interactive Multi-Channel Messaging Flows' },
+      { src: '/nazbiz/nazbiz-7.jpeg', title: 'Human Handoff & Team Collaboration' },
+      { src: '/nazbiz/nazbiz-8.jpeg', title: 'Operations Dashboard & Analytics (AR & EN)' },
+      { src: '/nazbiz/nazbiz-9.jpeg', title: 'Channel & Webhook Settings' }
     ],
     smallDescription: 'Omnichannel AI customer messaging platform unifying WhatsApp, Instagram, Messenger, Telegram, TikTok & email with multi-LLM AI.',
     overview: 'NazBiz (Nazeer Business | nazbiz.io) puts WhatsApp, Instagram, Messenger, Telegram, TikTok and email into one inbox and answers customers automatically with AI (OpenAI, Claude and Gemini) grounded in each business\'s own knowledge base. Naz AutoReply is its dedicated app for Salla merchants. Shipped in 2026 across a 60-day product build cycle.',
@@ -50,11 +50,11 @@ export const projectsData = [
     category: 'E-Commerce / Salla App',
     featured: true,
     badge: 'Featured · Salla App Store',
-    image: './nazbiz/nazbiz-5.jpeg',
+    image: '/nazbiz/nazbiz-5.jpeg',
     screenshots: [
-      { src: './nazbiz/nazbiz-5.jpeg', title: 'Naz AutoReply Salla Integration & Live Order Operations' },
-      { src: './nazbiz/nazbiz-2.jpeg', title: 'Automated Merchant Messaging & Notification Hub' },
-      { src: './nazbiz/nazbiz-4.jpeg', title: 'Bot Sequences & Salla Event Trigger Flows' }
+      { src: '/nazbiz/nazbiz-5.jpeg', title: 'Naz AutoReply Salla Integration & Live Order Operations' },
+      { src: '/nazbiz/nazbiz-2.jpeg', title: 'Automated Merchant Messaging & Notification Hub' },
+      { src: '/nazbiz/nazbiz-4.jpeg', title: 'Bot Sequences & Salla Event Trigger Flows' }
     ],
     smallDescription: 'Automated customer messaging and notification application built specifically for Salla e-commerce merchants.',
     overview: 'Naz AutoReply is NazBiz\'s dedicated Salla App Store application enabling merchants across Saudi Arabia and the GCC to automate transactional and promotional messaging directly linked to Salla store events (live order creation, abandoned carts, shipping and fulfillment status updates).',
@@ -82,9 +82,9 @@ export const projectsData = [
     name: 'Etkalem Arabi — Arabic Language Learning App',
     category: 'Mobile App',
     badge: 'Live on Play Store · 50K+ Downloads',
-    image: './etkalm-arabi.webp',
+    image: '/etkalm-arabi.webp',
     screenshots: [
-      { src: './etkalm-arabi.webp', title: 'Interactive Learning Interface' }
+      { src: '/etkalm-arabi.webp', title: 'Interactive Learning Interface' }
     ],
     smallDescription: 'Children\'s Arabic-learning app associated with Egypt\'s Speak Arabic initiative, featuring Arabic letters, 500+ vocabulary words, stories, and games.',
     overview: 'Built for Nahdet Misr Publishing Group in partnership with Egypt\'s Ministry of Immigration and Expatriates Affairs, Etkalem Arabi is a production Flutter app designed to teach Arabic to Egyptian children living abroad. The app blends interactive exercises, animated stories, and songs to build reading, writing, listening, and speaking skills.',
@@ -112,9 +112,9 @@ export const projectsData = [
     name: 'NileLangu — Egyptian Languages Learning App',
     category: 'Mobile App',
     badge: 'Live on Play Store · 4.3★ Rating',
-    image: './nilelangu.webp',
+    image: '/nilelangu.webp',
     screenshots: [
-      { src: './nilelangu.webp', title: 'NileLangu Learning Dashboard' }
+      { src: '/nilelangu.webp', title: 'NileLangu Learning Dashboard' }
     ],
     smallDescription: 'Language-learning app for Egyptian Arabic, Bohairic Coptic, and Middle Egyptian/hieroglyphs, with structured lessons, vocabulary, and audio.',
     overview: 'NileLangu is a comprehensive language-learning Flutter app covering all three historical Egyptian language branches: Modern Egyptian Arabic for daily conversations, Bohairic Coptic for heritage and liturgy, and Middle Egyptian Hieroglyphs for ancient culture and inscriptions.',
@@ -142,9 +142,9 @@ export const projectsData = [
     name: 'Reliant — Security Operations Platform',
     category: 'Enterprise Platform',
     badge: 'Live · reliant.sa',
-    image: './reliant.png',
+    image: '/reliant.png',
     screenshots: [
-      { src: './reliant.png', title: 'Reliant Enterprise Platform' }
+      { src: '/reliant.png', title: 'Reliant Enterprise Platform' }
     ],
     smallDescription: 'Saudi enterprise platform focused on bug-bounty and penetration-testing management.',
     overview: 'Reliant (reliant.sa) is a specialized Security Operations Platform engineered for Saudi enterprise clients. It unifies the governance of bug bounty programs, scoped penetration testing engagements, vulnerability disclosure lifecycles, and security researcher payouts into one compliant portal.',
@@ -172,10 +172,10 @@ export const projectsData = [
     name: 'Qartaji — B2B Procurement Platform',
     category: 'Enterprise Platform',
     badge: 'Enterprise Platform',
-    image: './qartaji.png',
+    image: '/qartaji.png',
     screenshots: [
-      { src: './qartaji.png', title: 'Qartaji Procurement System' },
-      { src: './qartjiPNG.PNG', title: 'Supplier Quotation Management' }
+      { src: '/qartaji.png', title: 'Qartaji Procurement System' },
+      { src: '/qartjiPNG.PNG', title: 'Supplier Quotation Management' }
     ],
     smallDescription: 'B2B procurement platform connecting businesses with suppliers through RFQ and multi-stage approval flows.',
     overview: 'Qartaji is a full-featured B2B procurement platform bridging corporate buyers and vetted commercial suppliers. It manages the entire procurement journey: requisition creation, RFQ issuance, multi-supplier quote comparison, multi-tier corporate approvals, and purchase order tracking.',
@@ -203,10 +203,10 @@ export const projectsData = [
     name: 'SAMH — Vehicle Inspection & Operations System',
     category: 'Full-Stack System',
     badge: 'Operations Platform',
-    image: './samh.png',
+    image: '/samh.png',
     screenshots: [
-      { src: './samh.png', title: 'SAMH Vehicle Dashboard' },
-      { src: './samh (2).png', title: 'Inspection Flow & Checklist' }
+      { src: '/samh.png', title: 'SAMH Vehicle Dashboard' },
+      { src: '/samh%20(2).png', title: 'Inspection Flow & Checklist' }
     ],
     smallDescription: 'Vehicle operations platform with vehicle listings, multi-stage inspection checklists, real-time vehicle status, and PDF reports.',
     overview: 'SAMH is an automotive operations management system designed to coordinate vehicle listings, multi-stage digital inspections, defect cataloging, automated PDF inspection report generation, and administrative status tracking.',
@@ -234,9 +234,9 @@ export const projectsData = [
     name: 'Dalala — Saudi Classifieds Marketplace',
     category: 'Mobile App',
     badge: 'Live on Google Play · Saudi Arabia',
-    image: './dalala.webp',
+    image: '/dalala.webp',
     screenshots: [
-      { src: './dalala.webp', title: 'Dalala Marketplace App' }
+      { src: '/dalala.webp', title: 'Dalala Marketplace App' }
     ],
     smallDescription: 'Saudi classified marketplace enabling category- and location-based listings and direct communication between buyers and sellers.',
     overview: 'Dalala is a production Flutter mobile classifieds application built for the Saudi Arabian market. Users can publish ads, browse listings across Saudi regions, filter by city and category, and communicate in real time.',
@@ -264,9 +264,9 @@ export const projectsData = [
     name: 'Enterprise HR & Payroll ERP',
     category: 'Enterprise System',
     badge: 'Enterprise ERP',
-    image: './hr-system.png',
+    image: '/hr-system.png',
     screenshots: [
-      { src: './hr-system.png', title: 'HR System Dashboard' }
+      { src: '/hr-system.png', title: 'HR System Dashboard' }
     ],
     smallDescription: 'PHP HR and payroll ERP covering payroll processing, leave management, fingerprint-device integration, and 30+ exportable reports.',
     overview: 'A complete enterprise HRMS and payroll solution engineered to automate human resource operations. It features automated payroll calculation, attendance sync with biometric fingerprint devices, leave request workflows, employee self-service portals, and 30+ exportable financial and compliance reports.',
@@ -294,9 +294,9 @@ export const projectsData = [
     name: 'Yaman — Orders, Shipping & Tracking Platform',
     category: 'Operations Platform',
     badge: 'Logistics System',
-    image: './yaman.png',
+    image: '/yaman.png',
     screenshots: [
-      { src: './yaman.png', title: 'Yaman Logistics & Order Tracker' }
+      { src: '/yaman.png', title: 'Yaman Logistics & Order Tracker' }
     ],
     smallDescription: 'Full order and logistics management — from basket creation to delivery confirmation and analytics.',
     overview: 'Yaman is an end-to-end order fulfillment and courier tracking platform. It guides orders through the complete operational pipeline: customer basket creation, carrier assignment, barcode scanning, status updates, and digital proof-of-delivery confirmation.',
@@ -324,9 +324,9 @@ export const projectsData = [
     name: 'MeedaPay — Bilingual Payment Gateway',
     category: 'Fintech Platform',
     badge: 'Fintech System',
-    image: './MeedaPayPNG.PNG',
+    image: '/MeedaPayPNG.PNG',
     screenshots: [
-      { src: './MeedaPayPNG.PNG', title: 'MeedaPay Bilingual Checkout' }
+      { src: '/MeedaPayPNG.PNG', title: 'MeedaPay Bilingual Checkout' }
     ],
     smallDescription: 'Production-ready Arabic/English payment processing platform with full RTL support.',
     overview: 'MeedaPay is a bilingual payment gateway integration platform offering Arabic and English checkout experiences, merchant transaction reconciliation, and secure communication with upstream financial providers.',
@@ -353,9 +353,9 @@ export const projectsData = [
     name: 'Full-Stack Social Media Application',
     category: 'Full-Stack App',
     badge: 'Open Source',
-    image: './Social_Media_App_Picture.png',
+    image: '/Social_Media_App_Picture.png',
     screenshots: [
-      { src: './Social_Media_App_Picture.png', title: 'Social Platform Feed & Posts' }
+      { src: '/Social_Media_App_Picture.png', title: 'Social Platform Feed & Posts' }
     ],
     smallDescription: 'Full-stack social platform with authentication, feeds, posts, comments & profile management.',
     overview: 'A complete full-stack social networking application featuring secure user authentication, media posts, personalized feed generation, comment threads, and user profile management.',
