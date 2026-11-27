@@ -72,7 +72,7 @@ function fitToView(scene, camera, animations) {
   return (visibleHeight - 1) / 2;
 }
 
-function Robot({ waveSignal, reduced }) {
+function Robot({ waveSignal, reduced, pointerRef, speaking }) {
   const group = useRef();
   const { camera } = useThree();
   const { scene, animations } = useGLTF('/models/robot.glb');
@@ -130,9 +130,11 @@ function Robot({ waveSignal, reduced }) {
     if (!group.current) return;
     if (!reduced) {
       const t = state.clock.elapsedTime;
-      group.current.position.y = Math.sin(t * 1.6) * floatAmp.current;
-      const targetY = state.pointer.x * 0.5;
-      const targetX = -state.pointer.y * 0.25;
+      const p = pointerRef ? pointerRef.current : state.pointer;
+      const talk = speaking ? Math.sin(t * 14) * 0.02 : 0;
+      group.current.position.y = Math.sin(t * 1.6) * floatAmp.current + talk;
+      const targetY = p.x * 0.5;
+      const targetX = -p.y * 0.25;
       group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, targetY, 0.08);
       group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, targetX, 0.08);
     }
@@ -145,7 +147,7 @@ function Robot({ waveSignal, reduced }) {
   );
 }
 
-export default function MazRobot3D({ waveSignal, reduced }) {
+export default function MazRobot3D({ waveSignal, reduced, pointerRef, speaking }) {
   return (
     <Canvas
       dpr={[1, 1.5]}
@@ -156,7 +158,7 @@ export default function MazRobot3D({ waveSignal, reduced }) {
     >
       <hemisphereLight args={['#ffffff', '#334455', 1.1]} />
       <directionalLight position={[2, 3, 3]} intensity={1.2} />
-      <Robot waveSignal={waveSignal} reduced={reduced} />
+      <Robot waveSignal={waveSignal} reduced={reduced} pointerRef={pointerRef} speaking={speaking} />
     </Canvas>
   );
 }

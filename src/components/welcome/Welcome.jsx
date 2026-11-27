@@ -14,6 +14,8 @@ import Navbar from '../navbar/Navbar';
 import { pageVariants, easeOutExpo, fadeUp, staggerParent } from '../../motionSystem';
 import { whatsappLink } from '../../contactConfig';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { useMazIntro } from '../intro/MazIntro';
+import HeroRobot from '../intro/HeroRobot';
 import './welcome.css';
 
 // Stats accurate to actual codebase & CV (12 shipped featured projects displayed on the site)
@@ -66,6 +68,7 @@ const SERVICES = [
 
 export default function Welcome() {
   const { t } = useLanguage();
+  const { heroRobotActive } = useMazIntro();
   useSeo({ title: 'Mazen Hossny | Full-Stack Developer for Salla Stores, SaaS and Mobile Apps', description: 'Full-stack developer for Salla stores, SaaS and mobile apps. Laravel, Next.js, Flutter. 50K+ app downloads, live in Egypt, Saudi Arabia and the UAE.', path: '/' });
   return (
     <motion.main
@@ -150,10 +153,11 @@ export default function Welcome() {
 
           {/* Right Column: Interactive Product Mockup */}
           <motion.div
-            className="hero-visual-col"
+            className={`hero-visual-col${heroRobotActive ? ' has-robot' : ''}`}
             variants={fadeUp}
             transition={{ duration: 0.5, ease: easeOutExpo, delay: 0.2 }}
           >
+            <HeroRobot />
             <div className="hero-mockup-frame">
               <div className="mockup-window-header">
                 <span className="mockup-dot red" />
