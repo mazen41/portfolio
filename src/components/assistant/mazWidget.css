@@ -340,10 +340,27 @@
   display: block;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 767px) {
   .maz-orb-btn-3d {
-    width: 96px;
-    height: 96px;
+    width: 90px;
+    height: 90px;
+  }
+
+  .maz-launcher-bubble {
+    max-width: 150px;
+    white-space: normal;
+    gap: 6px;
+    padding: 6px 8px 6px 10px;
+    font-size: 0.74rem;
+  }
+
+  .maz-launcher-bubble[dir='rtl'] {
+    padding: 6px 10px 6px 8px;
+  }
+
+  .maz-launcher-bubble button {
+    padding: 5px 9px;
+    font-size: 0.72rem;
   }
 }
 
