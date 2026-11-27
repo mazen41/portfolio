@@ -313,3 +313,77 @@
     inset-inline-end: 12px;
   }
 }
+
+/* ── 3D robot launcher variant ──────────────────────────────
+   Overrides the glowing-orb look: transparent so the robot's own
+   render shows through, and bigger since the model needs more room
+   to read clearly than the flat monogram did. Position/RTL corner
+   placement still comes from .maz-root (inset-inline-end), so this
+   only needs to change size + background. */
+.maz-orb-btn-3d {
+  width: 120px;
+  height: 120px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  animation: none;
+  overflow: visible;
+}
+
+.maz-orb-btn-3d:hover {
+  box-shadow: none;
+}
+
+.maz-orb-btn-3d canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+@media (max-width: 420px) {
+  .maz-orb-btn-3d {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+/* ── "Hi! I'm Maz" bubble ────────────────────────────────────
+   Sits above the launcher in .maz-root's column flex, so it
+   inherits the same RTL-safe corner placement automatically. */
+.maz-launcher-bubble {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg2, #0b1622);
+  color: var(--text, #eef6fb);
+  border: 1px solid var(--line2, rgba(255, 255, 255, 0.14));
+  border-radius: 14px;
+  padding: 8px 10px 8px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+}
+
+.maz-launcher-bubble[dir='rtl'] {
+  padding: 8px 14px 8px 10px;
+}
+
+.maz-launcher-bubble button {
+  background: var(--accent, #2af6ff);
+  color: #04131a;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+:root.light .maz-launcher-bubble {
+  background: #ffffff;
+  color: #0e1e29;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
