@@ -21,7 +21,7 @@ function canUse3D() {
   } catch {
     gl = false;
   }
-  return { ok: gl && !slow && !weak, reduced };
+  return { ok: gl && !slow && !weak && !reduced, reduced };
 }
 
 function MonogramOrb({ onClick, ariaLabel }) {
