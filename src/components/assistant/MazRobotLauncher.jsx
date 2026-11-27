@@ -32,7 +32,7 @@ function MonogramOrb({ onClick, ariaLabel }) {
   );
 }
 
-export default function MazRobotLauncher({ onClick, ariaLabel, showBubble }) {
+export default function MazRobotLauncher({ onClick, onOpen, ariaLabel, showBubble }) {
   const { lang, t } = useLanguage();
   const [mode, setMode] = useState({ ok: false, reduced: false });
   const [load, setLoad] = useState(false);
@@ -48,19 +48,21 @@ export default function MazRobotLauncher({ onClick, ariaLabel, showBubble }) {
       'cancelIdleCallback' in window ? window.cancelIdleCallback(id) : clearTimeout(id);
   }, []);
 
-  const handleClick = () => {
-    setWave((n) => n + 1);
-    onClick();
+  const handleWave = () => setWave((n) => n + 1);
+  // Robot click and the bubble's Start both wave and open the chat (never close it).
+  const handleOpen = () => {
+    handleWave();
+    onOpen();
   };
 
   const button =
     !mode.ok || !load ? (
-      <MonogramOrb onClick={handleClick} ariaLabel={ariaLabel} />
+      <MonogramOrb onClick={onClick} ariaLabel={ariaLabel} />
     ) : (
       <button
         type="button"
         className="maz-orb-btn maz-orb-btn-3d"
-        onClick={handleClick}
+        onClick={handleOpen}
         aria-label={ariaLabel}
       >
         <Suspense fallback={<span className="maz-orb-monogram" dir="ltr">MH</span>}>
@@ -79,7 +81,7 @@ export default function MazRobotLauncher({ onClick, ariaLabel, showBubble }) {
       {bubbleVisible && (
         <div className="maz-launcher-bubble" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
           <span>{t('mazBubbleGreeting')}</span>
-          <button type="button" onClick={handleClick}>
+          <button type="button" onClick={handleOpen}>
             {t('mazBubbleStart')}
           </button>
         </div>

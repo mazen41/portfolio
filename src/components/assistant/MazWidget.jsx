@@ -205,6 +205,7 @@ export default function MazWidget() {
 
       <MazRobotLauncher
         onClick={() => setOpen((v) => !v)}
+        onOpen={() => setOpen(true)}
         ariaLabel={open ? t('mazCloseAria') : t('mazOpenAria')}
         showBubble={!open && !hasOpenedOnce}
       />
