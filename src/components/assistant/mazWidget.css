@@ -1,0 +1,315 @@
+/* Maz AI Assistant floating orb & chat panel */
+.maz-root {
+  position: fixed;
+  bottom: 18px;
+  inset-inline-end: 18px;
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* ── Glowing Orb Trigger ─────────────────────────────────── */
+.maz-orb-btn {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(42, 246, 255, 0.55);
+  background: radial-gradient(circle at 35% 30%, rgba(42, 246, 255, 0.45), rgba(5, 134, 167, 0.85) 55%, #071018 100%);
+  box-shadow: 0 0 22px rgba(42, 246, 255, 0.35), 0 8px 24px rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: maz-breathe 3.2s ease-in-out infinite;
+}
+
+.maz-orb-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 28px rgba(42, 246, 255, 0.55), 0 10px 28px rgba(0, 0, 0, 0.55);
+}
+
+.maz-orb-monogram {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.maz-orb-avatar {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(42, 246, 255, 0.6);
+  background: radial-gradient(circle at 35% 30%, rgba(42, 246, 255, 0.5), rgba(5, 134, 167, 0.88) 60%, #071018 100%);
+  box-shadow: 0 0 14px rgba(42, 246, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.maz-orb-avatar .maz-orb-monogram {
+  font-size: 0.72rem;
+}
+
+.maz-orb-avatar.thinking::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--accent);
+  animation: maz-spin 1.8s linear infinite;
+}
+
+.maz-orb-avatar.speaking {
+  animation: maz-pulse 0.85s ease-in-out infinite;
+}
+
+@keyframes maz-breathe {
+  0%, 100% { transform: scale(0.98); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes maz-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes maz-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(42, 246, 255, 0.35); transform: scale(1); }
+  50% { box-shadow: 0 0 22px rgba(42, 246, 255, 0.75); transform: scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maz-orb-btn,
+  .maz-orb-avatar.thinking::after,
+  .maz-orb-avatar.speaking {
+    animation: none;
+  }
+}
+
+/* ── Chat Panel ──────────────────────────────────────────── */
+.maz-panel {
+  width: min(360px, calc(100vw - 24px));
+  max-height: min(520px, calc(100vh - 100px));
+  background: var(--bg2, #0b1622);
+  border: 1px solid var(--line2, rgba(255, 255, 255, 0.14));
+  border-radius: 18px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--text, #eef6fb);
+}
+
+.maz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line2, rgba(255, 255, 255, 0.1));
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.maz-header-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.maz-header-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.maz-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.maz-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--line2, rgba(255, 255, 255, 0.14));
+  background: transparent;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.maz-icon-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.maz-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.maz-msg {
+  max-width: 88%;
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.maz-msg.assistant {
+  align-self: flex-start;
+  background: rgba(42, 246, 255, 0.08);
+  border: 1px solid rgba(42, 246, 255, 0.2);
+}
+
+.maz-msg.user {
+  align-self: flex-end;
+  background: var(--accent, #0586a7);
+  color: #04131a;
+  font-weight: 500;
+}
+
+.maz-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 14px 10px;
+}
+
+.maz-chip {
+  font-size: 0.75rem;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line2, rgba(255, 255, 255, 0.16));
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: start;
+}
+
+.maz-chip:hover {
+  border-color: var(--accent);
+}
+
+.maz-quick-links {
+  display: flex;
+  gap: 8px;
+  padding: 8px 14px;
+  border-top: 1px solid var(--line2, rgba(255, 255, 255, 0.08));
+}
+
+.maz-quick-link {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid var(--line2, rgba(255, 255, 255, 0.14));
+  color: inherit;
+}
+
+.maz-quick-link.wa {
+  border-color: rgba(37, 211, 102, 0.45);
+  color: #25d366;
+}
+
+.maz-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line2, rgba(255, 255, 255, 0.1));
+}
+
+.maz-input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--line2, rgba(255, 255, 255, 0.16));
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  padding: 0 10px;
+  font-size: 0.85rem;
+}
+
+.maz-send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent, #0586a7);
+  color: #04131a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.maz-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.maz-disclaimer {
+  font-size: 0.7rem;
+  color: var(--muted, #8ea3b0);
+  text-align: center;
+  padding: 0 12px 8px;
+}
+
+/* Light theme overrides */
+:root.light .maz-panel {
+  background: #ffffff;
+  color: #0e1e29;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+:root.light .maz-msg.assistant {
+  background: rgba(5, 134, 167, 0.08);
+  border-color: rgba(5, 134, 167, 0.22);
+}
+
+:root.light .maz-msg.user {
+  color: #ffffff;
+}
+
+:root.light .maz-input {
+  background: #f5f8fa;
+  border-color: rgba(0, 0, 0, 0.14);
+}
+
+@media (max-width: 420px) {
+  .maz-root {
+    bottom: 12px;
+    inset-inline-end: 12px;
+  }
+}
