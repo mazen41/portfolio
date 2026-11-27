@@ -242,20 +242,31 @@
     top: auto;
     transform: none;
     width: 100%;
-    max-width: 360px;
-    height: 260px;
-    margin: 8px auto 0;
+    max-width: 420px;
+    height: 220px;
+    margin: 0 auto;
+    order: -1;
   }
 
   .hero-robot-glow {
-    width: 260px;
-    height: 260px;
+    display: none;
+  }
+
+  .hero-robot-stage {
+    position: relative;
+    inset: auto;
+    width: 220px;
+    height: 220px;
   }
 
   .hero-robot-bubble {
-    top: -4px;
-    max-width: 220px;
+    top: 8px;
+    inset-inline-start: 190px;
+    inset-inline-end: 0;
+    max-width: none;
     font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 10px 12px;
   }
 }
 
@@ -272,5 +283,13 @@
 @media (max-width: 767px) {
   .maz-fab.hero-on {
     display: flex;
+  }
+}
+
+/* Narrow phones (360-400px): keep the CTA row inside the first screen. */
+@media (max-width: 400px) {
+  .hero-robot,
+  .hero-robot-stage {
+    height: 200px;
   }
 }
