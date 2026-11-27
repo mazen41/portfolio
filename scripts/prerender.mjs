@@ -85,9 +85,22 @@ async function renderRoute(browser, baseUrl, route) {
   const problems = [];
   page.on('pageerror', (err) => problems.push(err.message));
   page.on('console', (msg) => {
-    if (msg.type() === 'error') problems.push(msg.text());
+    if (msg.type() === 'error') {
+      const where = msg.location()?.url || '';
+      problems.push(msg.text() + (where ? ' [' + where + ']' : ''));
+    }
   });
   try {
+    // Vercel serves /_vercel/insights/script.js in production. The local server does not,
+    // so answer that one request with an empty script to keep the console clean.
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      if (req.url().includes('/_vercel/insights/')) {
+        req.respond({ status: 200, contentType: 'application/javascript', body: '/* analytics off during prerender */' });
+      } else {
+        req.continue();
+      }
+    });
     await page.goto(baseUrl + route, { waitUntil: 'domcontentloaded', timeout: 60000 });
     await page.waitForFunction(() => document.getElementById('root')?.children.length > 0, { timeout: 30000 });
     await new Promise((resolve) => setTimeout(resolve, 2500));
@@ -148,7 +161,7 @@ async function main() {
       await mkdir(outDir, { recursive: true });
       await writeFile(path.join(outDir, 'index.html'), html, 'utf8');
       console.log('OK   ' + route + ' -> ' + path.relative(root, path.join(outDir, 'index.html')));
-      if (problems.length) console.log('     console errors on this route: ' + problems.length);
+      for (const p of problems) console.log('     console error: ' + String(p).slice(0, 300));
     }
 
     // Pass 2: load the saved files and check that React hydrates them without mismatches.
