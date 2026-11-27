@@ -1,0 +1,129 @@
+/* Arabic and RTL overrides. Loaded by LanguageContext, so it applies only when the site is in Arabic. */
+
+html[lang="ar"] body,
+html[lang="ar"] *,
+html[lang="ar"] *::before,
+html[lang="ar"] *::after {
+  font-family: 'Cairo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  letter-spacing: normal;
+}
+
+/* Keep Latin brand text and code-like words readable inside Arabic lines. */
+html[lang="ar"] .nav-brand-text {
+  font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+}
+
+/* Mobile drawer opens from the left in RTL. */
+html[dir="rtl"] .nav-drawer {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 1px solid var(--line2);
+}
+
+html[dir="rtl"] .nav-drawer-header,
+html[dir="rtl"] .nav-drawer-link {
+  text-align: right;
+}
+
+html[dir="rtl"] .form-group label,
+html[dir="rtl"] .project-form input,
+html[dir="rtl"] .project-form textarea {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="rtl"] .project-form input[type="email"],
+html[dir="rtl"] .contact-email-value {
+  direction: ltr;
+  text-align: right;
+}
+
+html[dir="rtl"] .contact-email-text,
+html[dir="rtl"] .whatsapp-info,
+html[dir="rtl"] .form-success,
+html[dir="rtl"] .form-error {
+  text-align: right;
+}
+
+/* Language switch button in the header and drawer. */
+.nav-lang-btn {
+  min-width: 44px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--line2);
+  background: transparent;
+  color: inherit;
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-lang-btn:hover {
+  border-color: var(--accent);
+}
+
+/* ── RTL layout flips ───────────────────────────────────── */
+
+/* Navbar: flip auto-margin and inner padding */
+html[dir="rtl"] .nav-links {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Timeline left border → right border */
+html[dir="rtl"] .timeline-item {
+  border-left: none;
+  border-right: 2px solid var(--line);
+  padding-left: 0;
+  padding-right: 28px;
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+/* Project detail result accent border */
+html[dir="rtl"] .result-card {
+  border-left: none;
+  border-right: 4px solid var(--green);
+}
+
+/* Contact submit button icon */
+html[dir="rtl"] .submit-project-btn .MuiSvgIcon-root {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* Keep URLs, emails, tech names, stat numbers LTR inside RTL */
+html[dir="rtl"] .contact-email-value,
+html[dir="rtl"] .whatsapp-number,
+html[dir="rtl"] .tech-pill,
+html[dir="rtl"] .tech-tag,
+html[dir="rtl"] .skill-pill,
+html[dir="rtl"] .mockup-title-bar,
+html[dir="rtl"] .social-handle {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Stat values (numbers like 6+, 50K+) stay LTR */
+html[dir="rtl"] .stat-value,
+html[dir="rtl"] .price-val {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Prevent horizontal scroll from any element overflowing in RTL */
+html[dir="rtl"] body {
+  overflow-x: hidden;
+}
+
+/* Breadcrumb direction stays LTR for slash separators */
+html[dir="rtl"] .breadcrumb-trail {
+  direction: ltr;
+}
+
+/* Marquee tech strip stays LTR */
+html[dir="rtl"] .marquee-wrap {
+  direction: ltr;
+}

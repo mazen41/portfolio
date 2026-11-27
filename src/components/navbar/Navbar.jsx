@@ -9,20 +9,22 @@ import LinkedInIcon         from '@mui/icons-material/LinkedIn';
 import WhatsAppIcon          from '@mui/icons-material/WhatsApp';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../Them';
+import { useLanguage } from '../../i18n/LanguageContext';
 import { whatsappLink } from '../../contactConfig';
 import './navbar.css';
 
 const WHATSAPP_HREF = whatsappLink("Hi Mazen, I'd like to talk about a project.");
 
 const LINKS = [
-  { to: '/',        label: 'Home' },
-  { to: '/about',   label: 'About' },
-  { to: '/projects',label: 'Work' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/',         key: 'navHome' },
+  { to: '/about',    key: 'navAbout' },
+  { to: '/projects', key: 'navWork' },
+  { to: '/contact',  key: 'navContact' },
 ];
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const { t, toggleLang, isRtl } = useLanguage();
   const location = useLocation();
   const [open,      setOpen]    = useState(false);
   const [scrolled,  setScrolled] = useState(false);
@@ -46,11 +48,11 @@ export default function Navbar() {
         </Link>
 
         <nav className="nav-links">
-          {LINKS.map(({ to, label }) => {
+          {LINKS.map(({ to, key }) => {
             const active = location.pathname === to;
             return (
               <Link key={to} to={to} className={`nav-link${active ? ' active' : ''}`}>
-                {label}
+                {t(key)}
                 {active && (
                   <motion.span
                     className="nav-link-underline"
@@ -84,7 +86,10 @@ export default function Navbar() {
           >
             <LinkedInIcon style={{ fontSize: 18 }} />
           </a>
-          <button className="nav-icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
+          <button className="nav-lang-btn" onClick={toggleLang} aria-label={t('navLangAria')}>
+            {t('navLangLabel')}
+          </button>
+          <button className="nav-icon-btn" onClick={toggleTheme} aria-label={t('navThemeAria')}>
             {theme === 'dark'
               ? <LightModeRoundedIcon style={{ fontSize: 18 }} />
               : <DarkModeRoundedIcon  style={{ fontSize: 18 }} />}
@@ -95,15 +100,15 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="nav-whatsapp"
           >
-            <WhatsAppIcon style={{ fontSize: 16 }} /> WhatsApp
+            <WhatsAppIcon style={{ fontSize: 16 }} /> {t('navWhatsApp')}
           </a>
           <a
             href="mailto:mazen.hossny.121@gmail.com"
             className="nav-cta"
           >
-            Hire Me
+            {t('navHire')}
           </a>
-          <button className="nav-icon-btn nav-hamburger" onClick={() => setOpen(true)} aria-label="Open menu">
+          <button className="nav-icon-btn nav-hamburger" onClick={() => setOpen(true)} aria-label={t('navOpenMenu')}>
             <MenuRoundedIcon style={{ fontSize: 20 }} />
           </button>
         </div>
@@ -122,44 +127,46 @@ export default function Navbar() {
           >
             <motion.aside
               className="nav-drawer"
-              initial={{ x: '100%' }}
+              initial={{ x: isRtl ? '-100%' : '100%' }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
+              exit={{ x: isRtl ? '-100%' : '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="nav-drawer-header">
-                <span className="nav-brand-text">Menu</span>
-                <button className="nav-icon-btn" onClick={() => setOpen(false)} aria-label="Close">
+                <span className="nav-brand-text">{t('navMenu')}</span>
+                <button className="nav-icon-btn" onClick={() => setOpen(false)} aria-label={t('navClose')}>
                   <CloseRoundedIcon style={{ fontSize: 20 }} />
                 </button>
               </div>
-              {LINKS.map(({ to, label }) => (
+              {LINKS.map(({ to, key }) => (
                 <Link
                   key={to}
                   to={to}
                   className={`nav-drawer-link${location.pathname === to ? ' active' : ''}`}
                 >
-                  {label}
+                  {t(key)}
                 </Link>
               ))}
               <div className="nav-drawer-cta">
-                <a href="mailto:mazen.hossny.121@gmail.com" className="nav-cta">Hire Me</a>
+                <a href="mailto:mazen.hossny.121@gmail.com" className="nav-cta">{t('navHire')}</a>
                 <a
                   href={WHATSAPP_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="nav-whatsapp"
                 >
-                  <WhatsAppIcon style={{ fontSize: 16 }} /> WhatsApp
+                  <WhatsAppIcon style={{ fontSize: 16 }} /> {t('navWhatsApp')}
                 </a>
               </div>
               <div className="nav-drawer-footer">
-
+                <button className="nav-lang-btn" onClick={toggleLang} aria-label={t('navLangAria')}>
+                  {t('navLangLabel')}
+                </button>
                 <button className="nav-icon-btn" onClick={toggleTheme}>
                   {theme === 'dark'
-                    ? <><LightModeRoundedIcon style={{ fontSize: 16 }} /> Light mode</>
-                    : <><DarkModeRoundedIcon  style={{ fontSize: 16 }} /> Dark mode</>}
+                    ? <><LightModeRoundedIcon style={{ fontSize: 16 }} /> {t('lightMode')}</>
+                    : <><DarkModeRoundedIcon  style={{ fontSize: 16 }} /> {t('darkMode')}</>}
                 </button>
                 <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                   <a

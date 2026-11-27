@@ -5,35 +5,37 @@ import Navbar from '../navbar/Navbar';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import { pageVariants, easeOutExpo, fadeUp, staggerParent } from '../../motionSystem';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './about.css';
 
-const SKILLS = {
-  'Backend & APIs':  ['PHP', 'Laravel', 'Node.js', 'RESTful API Design', 'Redis', 'Pusher/Echo'],
-  'Frontend':        ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3', 'Framer Motion'],
-  'Mobile':          ['Flutter', 'Dart', 'Android', 'iOS', 'In-App Purchases', 'Push Notifications'],
-  'Data & Caching':  ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis'],
-  'DevOps & Tools':  ['Git', 'Docker', 'Linux', 'Nginx', 'Vercel', 'Postman'],
-};
+const SKILL_CATEGORIES = [
+  { key: 'aSkillCatBackend',  items: ['PHP', 'Laravel', 'Node.js', 'RESTful API Design', 'Redis', 'Pusher/Echo'] },
+  { key: 'aSkillCatFrontend', items: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3', 'Framer Motion'] },
+  { key: 'aSkillCatMobile',   items: ['Flutter', 'Dart', 'Android', 'iOS', 'In-App Purchases', 'Push Notifications'] },
+  { key: 'aSkillCatData',     items: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis'] },
+  { key: 'aSkillCatDevops',   items: ['Git', 'Docker', 'Linux', 'Nginx', 'Vercel', 'Postman'] },
+];
 
 // Accurately reflects CV: 2024–Now (Vertex / Full-Stack & Freelance), 2020–2024 (Freelance Full-Stack)
 const TIMELINE = [
   {
-    year: '2024 – Present',
-    role: 'Full-Stack Developer (Remote & Freelance)',
-    company: 'Vertex / Self-Employed (Freelance)',
-    statusBadge: 'Current — Open for Freelance Work',
-    desc: 'Delivering production web, SaaS, and mobile applications with Laravel, Next.js, React, and Flutter. Building WhatsApp CRM & AutoReply automation, hotel channel-manager integrations (Nobeds), and optimized REST APIs for thousands of active users.',
+    yearKey: 'aTime1Year',
+    roleKey: 'aTime1Role',
+    companyKey: 'aTime1Company',
+    badgeKey: 'aTime1Badge',
+    descKey: 'aTime1Desc',
   },
   {
-    year: '2020 – 2024',
-    role: 'Freelance Full-Stack Developer',
-    company: 'Self-Employed',
-    statusBadge: 'Completed',
-    desc: 'Delivered end-to-end web and mobile solutions for clients across Egypt, Saudi Arabia, and the UAE using Laravel, Flutter, Node.js, and React. Built e-commerce stores, classified marketplaces, booking platforms, and custom ERP dashboards.',
+    yearKey: 'aTime2Year',
+    roleKey: 'aTime2Role',
+    companyKey: 'aTime2Company',
+    badgeKey: 'aTime2Badge',
+    descKey: 'aTime2Desc',
   },
 ];
 
 export default function About() {
+  const { t } = useLanguage();
   useSeo({ title: 'About | Mazen Hossny, Full-Stack Developer', description: 'Mazen Hossny: 6 years of full-stack engineering across SaaS, e-commerce, HR, logistics and mobile apps, with 50K+ app downloads. Live in Egypt, Saudi Arabia and the UAE.', path: '/about' });
   return (
     <motion.main
@@ -55,7 +57,7 @@ export default function About() {
       >
         <div className="about-text-col">
           <motion.div variants={fadeUp} transition={{ duration: 0.35, ease: easeOutExpo }}>
-            <span className="about-eyebrow">About Mazen Hossny</span>
+            <span className="about-eyebrow">{t('aEyebrow')}</span>
           </motion.div>
 
           <motion.h1
@@ -63,8 +65,8 @@ export default function About() {
             variants={fadeUp}
             transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.05 }}
           >
-            Engineering scalable platforms,<br />
-            <span className="gradient-text">built for real businesses.</span>
+            {t('aHead1')}<br />
+            <span className="gradient-text">{t('aHead2')}</span>
           </motion.h1>
 
           <motion.div
@@ -73,7 +75,7 @@ export default function About() {
             transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.08 }}
           >
             <WorkOutlineIcon className="avail-icon" />
-            <span>Currently working as a <strong>Freelance Full-Stack Developer</strong> — available for contracts and client projects.</span>
+            <span>{t('aAvailPrefix')} <strong>{t('aAvailRole')}</strong> {t('aAvailSuffix')}</span>
           </motion.div>
 
           <motion.p
@@ -81,7 +83,7 @@ export default function About() {
             variants={fadeUp}
             transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.1 }}
           >
-            I am a Full-Stack Software Engineer with 6 years of experience delivering production web and mobile applications across SaaS, hospitality, HR, logistics, and e-commerce. Strong in Laravel/PHP, Next.js, React, and Flutter, with hands-on experience in API design, database optimization, third-party integrations, and end-to-end product delivery.
+            {t('aBio1')}
           </motion.p>
 
           <motion.p
@@ -89,7 +91,7 @@ export default function About() {
             variants={fadeUp}
             transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.12 }}
           >
-            Beyond clean code, I care deeply about product usability, speed, and business outcomes. Whether bridging multi-channel WhatsApp messaging with AI or developing bilingual Arabic/English mobile apps with 50K+ downloads, I partner directly with founders and teams to ship software that works smoothly from day one.
+            {t('aBio2')}
           </motion.p>
         </div>
 
@@ -104,14 +106,14 @@ export default function About() {
               {/* Photo placeholder designed with initials avatar and fallback styling */}
               <div className="profile-avatar-placeholder">
                 <span className="avatar-initials">MH</span>
-                <span className="avatar-caption">Mazen Hossny</span>
+                <span className="avatar-caption">{t('aAvatarName')}</span>
               </div>
             </div>
             <div className="photo-badge">
               <VerifiedIcon className="photo-badge-icon" />
               <div>
-                <strong>Mazen Hossny Ahmed</strong>
-                <span>Full-Stack Engineer</span>
+                <strong>{t('aBadgeName')}</strong>
+                <span>{t('aBadgeRole')}</span>
               </div>
             </div>
           </div>
@@ -120,21 +122,21 @@ export default function About() {
 
       {/* ── Skills ─────────────────────────────────────────── */}
       <section className="about-skills">
-        <h2 className="about-section-label">Technical Stack & Skills</h2>
+        <h2 className="about-section-label">{t('aSkillsTitle')}</h2>
         <div className="skills-grid">
-          {Object.entries(SKILLS).map(([cat, items], idx) => (
+          {SKILL_CATEGORIES.map(({ key, items }, idx) => (
             <motion.div
-              key={cat}
+              key={key}
               className="skill-group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.4, ease: easeOutExpo, delay: idx * 0.07 }}
             >
-              <span className="skill-group-label">{cat}</span>
+              <span className="skill-group-label">{t(key)}</span>
               <div className="skill-pills">
                 {items.map((s) => (
-                  <span key={s} className="skill-pill">{s}</span>
+                  <span key={s} className="skill-pill" dir="ltr">{s}</span>
                 ))}
               </div>
             </motion.div>
@@ -144,7 +146,7 @@ export default function About() {
 
       {/* ── Timeline ───────────────────────────────────────── */}
       <section className="about-timeline">
-        <h2 className="about-section-label">Professional Experience (Consistent with CV)</h2>
+        <h2 className="about-section-label">{t('aTimelineTitle')}</h2>
         <div className="timeline-list">
           {TIMELINE.map((item, idx) => (
             <motion.div
@@ -156,15 +158,15 @@ export default function About() {
               transition={{ duration: 0.4, ease: easeOutExpo, delay: idx * 0.08 }}
             >
               <div className="timeline-year">
-                <span>{item.year}</span>
-                {item.statusBadge && (
-                  <span className="timeline-status-badge">{item.statusBadge}</span>
+                <span>{t(item.yearKey)}</span>
+                {item.badgeKey && (
+                  <span className="timeline-status-badge">{t(item.badgeKey)}</span>
                 )}
               </div>
               <div className="timeline-content">
-                <h3 className="timeline-role">{item.role}</h3>
-                <span className="timeline-company">{item.company}</span>
-                <p className="timeline-desc">{item.desc}</p>
+                <h3 className="timeline-role">{t(item.roleKey)}</h3>
+                <span className="timeline-company">{t(item.companyKey)}</span>
+                <p className="timeline-desc">{t(item.descKey)}</p>
               </div>
             </motion.div>
           ))}
@@ -184,7 +186,7 @@ export default function About() {
           download
           className="about-cv-btn"
         >
-          ↓ Download Resume (Updated)
+          {t('aCvBtn')}
         </a>
         <a
           href="https://github.com/mazen41"
@@ -192,7 +194,7 @@ export default function About() {
           rel="noopener noreferrer"
           className="about-gh-btn"
         >
-          ✧ View GitHub
+          {t('aGhBtn')}
         </a>
         <a
           href="https://www.linkedin.com/in/mazen-hossny-54a8a02b7/"
@@ -200,7 +202,7 @@ export default function About() {
           rel="noopener noreferrer"
           className="about-gh-btn"
         >
-          LinkedIn
+          {t('aLiBtn')}
         </a>
       </motion.div>
 

@@ -13,14 +13,15 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import Navbar from '../navbar/Navbar';
 import { pageVariants, easeOutExpo, fadeUp, staggerParent } from '../../motionSystem';
 import { whatsappLink } from '../../contactConfig';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './welcome.css';
 
 // Stats accurate to actual codebase & CV (12 shipped featured projects displayed on the site)
 const STATS = [
-  { value: '6+',  label: 'Years Experience' },
-  { value: '12+', label: 'Shipped Projects' },
-  { value: '50K+', label: 'App Downloads' },
-  { value: '3',   label: 'Countries Deployed (EG, SA, UAE)' },
+  { value: '6+',  key: 'hStatYears' },
+  { value: '12+', key: 'hStatProjects' },
+  { value: '50K+', key: 'hStatDownloads' },
+  { value: '3',   key: 'hStatCountries' },
 ];
 
 const STACK = [
@@ -33,37 +34,38 @@ const STACK = [
 const SERVICES = [
   {
     icon: <DevicesIcon className="service-icon" />,
-    title: 'Landing Page',
-    desc: 'A focused one-page site for a product, service or campaign, built with Next.js or React, with a clear WhatsApp or contact call to action.',
+    titleKey: 'hServ1Title',
+    descKey: 'hServ1Desc',
     price: '$250',
   },
   {
     icon: <ShoppingBagIcon className="service-icon" />,
-    title: 'Business Website or E-commerce Store',
-    desc: 'Company websites and online stores, including Salla stores, built with Laravel, Next.js or React.',
+    titleKey: 'hServ2Title',
+    descKey: 'hServ2Desc',
     price: '$500',
   },
   {
     icon: <DashboardIcon className="service-icon" />,
-    title: 'Web App or SaaS MVP',
-    desc: 'High-performance SaaS platforms, client portals and web products engineered with Next.js, React and Laravel.',
+    titleKey: 'hServ3Title',
+    descKey: 'hServ3Desc',
     price: '$1,500',
   },
   {
     icon: <SmartToyIcon className="service-icon" />,
-    title: 'WhatsApp or Salla Integration & Automation',
-    desc: 'WhatsApp automation bots, Salla app plugins, webhook event triggers and multi-channel messaging pipelines.',
+    titleKey: 'hServ4Title',
+    descKey: 'hServ4Desc',
     price: '$300',
   },
   {
     icon: <BugReportIcon className="service-icon" />,
-    title: 'Code Audit or Bug Fixing',
-    desc: 'Review your existing code, find the bugs and risks, and fix them.',
+    titleKey: 'hServ5Title',
+    descKey: 'hServ5Desc',
     price: '$15/hr',
   },
 ];
 
 export default function Welcome() {
+  const { t } = useLanguage();
   useSeo({ title: 'Mazen Hossny | Full-Stack Developer for Salla Stores, SaaS and Mobile Apps', description: 'Full-stack developer for Salla stores, SaaS and mobile apps. Laravel, Next.js, Flutter. 50K+ app downloads, live in Egypt, Saudi Arabia and the UAE.', path: '/' });
   return (
     <motion.main
@@ -92,7 +94,7 @@ export default function Welcome() {
           {/* Left Column: Copy & CTAs */}
           <div className="hero-text-col">
             <motion.div variants={fadeUp} transition={{ duration: 0.4, ease: easeOutExpo }}>
-              <span className="hero-eyebrow">Available for freelance & contract</span>
+              <span className="hero-eyebrow">{t('hEyebrow')}</span>
             </motion.div>
 
             <motion.h1
@@ -100,7 +102,7 @@ export default function Welcome() {
               variants={fadeUp}
               transition={{ duration: 0.45, ease: easeOutExpo, delay: 0.05 }}
             >
-              Full-stack developer for Salla stores, SaaS and mobile apps.
+              {t('hHeadline')}
             </motion.h1>
 
             <motion.p
@@ -108,7 +110,7 @@ export default function Welcome() {
               variants={fadeUp}
               transition={{ duration: 0.45, ease: easeOutExpo, delay: 0.08 }}
             >
-              <span className="gradient-text">Laravel, Next.js, Flutter. Arabic and English.</span>
+              <span className="gradient-text">{t('hTechLead')}</span>
             </motion.p>
 
             <motion.div
@@ -117,7 +119,7 @@ export default function Welcome() {
               transition={{ duration: 0.45, ease: easeOutExpo, delay: 0.12 }}
             >
               <VerifiedIcon className="proof-icon" />
-              <span>50K+ app downloads, live in Egypt, Saudi Arabia and the UAE.</span>
+              <span>{t('hProof')}</span>
             </motion.div>
 
             <motion.div
@@ -131,17 +133,17 @@ export default function Welcome() {
                 rel="noopener noreferrer"
                 className="btn-whatsapp"
               >
-                <WhatsAppIcon style={{ fontSize: 18 }} /> WhatsApp Me
+                <WhatsAppIcon style={{ fontSize: 18 }} /> {t('hWaBtn')}
               </a>
-              <Link to="/projects" className="btn-ghost">View My Work</Link>
-              <Link to="/contact"  className="btn-ghost">Get In Touch</Link>
+              <Link to="/projects" className="btn-ghost">{t('hViewWork')}</Link>
+              <Link to="/contact"  className="btn-ghost">{t('hGetInTouch')}</Link>
               <a
                 href="/resume.pdf"
                 download
                 className="btn-cv"
-                aria-label="Download CV"
+                aria-label={t('hDownloadCvAria')}
               >
-                ↓ Download CV
+                {t('hDownloadCv')}
               </a>
             </motion.div>
           </div>
@@ -168,8 +170,8 @@ export default function Welcome() {
                 <div className="mockup-floating-card">
                   <div className="floating-badge-pulse" />
                   <div>
-                    <strong className="floating-title">Featured Project</strong>
-                    <span className="floating-sub">NazBiz · Omnichannel AI Messaging</span>
+                    <strong className="floating-title">{t('hFeaturedProject')}</strong>
+                    <span className="floating-sub">{t('hFeaturedSub')}</span>
                   </div>
                 </div>
               </div>
@@ -185,36 +187,36 @@ export default function Welcome() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: easeOutExpo }}
         >
-          {STATS.map(({ value, label }) => (
-            <div key={label} className="stat-card">
-              <span className="stat-value">{value}</span>
-              <span className="stat-label">{label}</span>
+          {STATS.map(({ value, key }) => (
+            <div key={key} className="stat-card">
+              <span className="stat-value" dir="ltr">{value}</span>
+              <span className="stat-label">{t(key)}</span>
             </div>
           ))}
         </motion.div>
 
         {/* ── Credibility Highlight Ribbon ─────────────────── */}
         <div className="credibility-ribbon">
-          <span className="ribbon-label">Key Credibility:</span>
-          <span className="ribbon-text">Built for <strong>Nahdet Misr</strong> and the <strong>Ministry of Immigration</strong></span>
+          <span className="ribbon-label">{t('hCredLabel')}</span>
+          <span className="ribbon-text">{t('hCredText1')} <strong>{t('hCredNahdet')}</strong> {t('hCredAnd')} <strong>{t('hCredMinistry')}</strong></span>
           <span className="ribbon-divider">•</span>
-          <span className="ribbon-text">Published apps live on <strong>Google Play & App Store</strong></span>
+          <span className="ribbon-text">{t('hCredText2')} <strong>{t('hCredStores')}</strong></span>
         </div>
 
         {/* ── Services Section ─────────────────────────────── */}
         <section className="services-section">
           <div className="section-head-center">
-            <span className="hero-eyebrow">What I Build</span>
-            <h2 className="section-title">Specialized Services</h2>
+            <span className="hero-eyebrow">{t('hServEyebrow')}</span>
+            <h2 className="section-title">{t('hServTitle')}</h2>
             <p className="section-desc">
-              End-to-end engineering tailored for startups, e-commerce brands, and enterprises.
+              {t('hServDesc')}
             </p>
           </div>
 
           <div className="services-grid">
             {SERVICES.map((service, index) => (
               <motion.div
-                key={service.title}
+                key={service.titleKey}
                 className="service-card"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -222,28 +224,28 @@ export default function Welcome() {
                 transition={{ duration: 0.4, delay: index * 0.08, ease: easeOutExpo }}
               >
                 <div className="service-icon-wrap">{service.icon}</div>
-                <h3 className="service-title">{service.title}</h3>
-                <p className="service-body">{service.desc}</p>
+                <h3 className="service-title">{t(service.titleKey)}</h3>
+                <p className="service-body">{t(service.descKey)}</p>
                 <div className="service-price-tag">
-                  <span className="price-label">Starting at</span>
-                  <span className="price-val">{service.price}</span>
+                  <span className="price-label">{t('hServStartAt')}</span>
+                  <span className="price-val" dir="ltr">{service.price}</span>
                 </div>
               </motion.div>
             ))}
           </div>
-          <p className="services-note">Final price depends on scope. Free quote within 24 hours.</p>
+          <p className="services-note">{t('hServNote')}</p>
         </section>
 
         {/* ── Bottom CTA ───────────────────────────────────── */}
         <section className="home-final-cta">
-          <h2>Ready to build your next product?</h2>
-          <p>Let's talk about your project scope, timeline, and deliverables.</p>
+          <h2>{t('hCtaTitle')}</h2>
+          <p>{t('hCtaSub')}</p>
           <div className="cta-buttons">
             <Link to="/contact" className="btn-primary">
-              Start a Conversation <ArrowForwardIcon style={{ fontSize: 16, marginLeft: 6 }} />
+              {t('hCtaBtn1')} <ArrowForwardIcon style={{ fontSize: 16, marginInlineStart: 6 }} />
             </Link>
             <Link to="/projects" className="btn-ghost">
-              Explore All Projects
+              {t('hCtaBtn2')}
             </Link>
           </div>
         </section>

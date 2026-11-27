@@ -11,12 +11,14 @@ import Navbar from '../navbar/Navbar';
 import { getProjectBySlug, projectsData } from '../../projectsData';
 import { pageVariants, easeOutExpo, fadeUp, staggerParent } from '../../motionSystem';
 import { useTheme } from '../../Them';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './projectDetail.css';
 
 export default function ProjectDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const project = getProjectBySlug(slug);
 
   useEffect(() => {
@@ -34,10 +36,10 @@ export default function ProjectDetail() {
       <div className={`project-detail-page ${theme}`}>
         <Navbar />
         <div className="case-study-shell not-found-shell">
-          <h2>Project Not Found</h2>
-          <p>The case study you are looking for does not exist or has been moved.</p>
+          <h2>{t('pdNotFoundTitle')}</h2>
+          <p>{t('pdNotFoundBody')}</p>
           <Link to="/projects" className="btn-back">
-            <ArrowBackIcon fontSize="small" /> Back to All Projects
+            <ArrowBackIcon fontSize="small" /> {t('pdBackAll')}
           </Link>
         </div>
       </div>
@@ -63,10 +65,10 @@ export default function ProjectDetail() {
         {/* Navigation Breadcrumb */}
         <div className="case-study-nav">
           <button onClick={() => navigate(-1)} className="btn-back-text">
-            <ArrowBackIcon style={{ fontSize: 18 }} /> Back
+            <ArrowBackIcon style={{ fontSize: 18 }} /> {t('pdBack')}
           </button>
           <div className="breadcrumb-trail">
-            <Link to="/projects">Work</Link>
+            <Link to="/projects">{t('pdWorkCrumb')}</Link>
             <span>/</span>
             <span className="current-crumb">{project.name.split('—')[0].trim()}</span>
           </div>
@@ -86,11 +88,11 @@ export default function ProjectDetail() {
             )}
           </div>
 
-          <motion.h1 className="case-study-title" variants={fadeUp}>
+          <motion.h1 className="case-study-title" variants={fadeUp} dir="ltr">
             {project.name}
           </motion.h1>
 
-          <motion.p className="case-study-summary" variants={fadeUp}>
+          <motion.p className="case-study-summary" variants={fadeUp} dir="ltr">
             {project.overview}
           </motion.p>
 
@@ -99,8 +101,8 @@ export default function ProjectDetail() {
             <motion.div className="credibility-callout" variants={fadeUp}>
               <VerifiedIcon className="credibility-icon" />
               <div>
-                <strong className="credibility-lead">Credibility Highlight: </strong>
-                <span>{project.credibility || project.resultNumber}</span>
+                <strong className="credibility-lead">{t('pdCredHighlight')} </strong>
+                <span dir="ltr">{project.credibility || project.resultNumber}</span>
               </div>
             </motion.div>
           )}
@@ -114,8 +116,8 @@ export default function ProjectDetail() {
                 rel="noopener noreferrer"
                 className="btn-primary"
               >
-                <OpenInNewIcon style={{ fontSize: 18, marginRight: 6 }} />
-                {project.liveLink.includes('play.google.com') ? 'View on Google Play' : 'View Live Product'}
+                <OpenInNewIcon style={{ fontSize: 18, marginInlineEnd: 6 }} />
+                {project.liveLink.includes('play.google.com') ? t('pdViewPlay') : t('pdViewLive')}
               </a>
             )}
             {project.gitFrontendLink && (
@@ -125,8 +127,8 @@ export default function ProjectDetail() {
                 rel="noopener noreferrer"
                 className="btn-ghost"
               >
-                <GitHubIcon style={{ fontSize: 18, marginRight: 6 }} />
-                Frontend Code
+                <GitHubIcon style={{ fontSize: 18, marginInlineEnd: 6 }} />
+                {t('pdFrontendCode')}
               </a>
             )}
             {project.gitBackendLink && (
@@ -136,12 +138,12 @@ export default function ProjectDetail() {
                 rel="noopener noreferrer"
                 className="btn-ghost"
               >
-                <GitHubIcon style={{ fontSize: 18, marginRight: 6 }} />
-                Backend API
+                <GitHubIcon style={{ fontSize: 18, marginInlineEnd: 6 }} />
+                {t('pdBackendApi')}
               </a>
             )}
             <Link to="/contact" className="btn-ghost">
-              Hire Me For Similar Project
+              {t('pdHireSimilar')}
             </Link>
           </motion.div>
         </motion.section>
@@ -165,21 +167,21 @@ export default function ProjectDetail() {
           <div className="case-study-content">
             {/* The Problem */}
             <section className="case-section">
-              <h2 className="section-heading">The Problem & Context</h2>
-              <p className="section-body">{project.problem}</p>
+              <h2 className="section-heading">{t('pdProblemHeading')}</h2>
+              <p className="section-body" dir="ltr">{project.problem}</p>
             </section>
 
             {/* My Role & Architecture */}
             <section className="case-section">
-              <h2 className="section-heading">My Role & Engineering Scope</h2>
-              <p className="section-body">{project.role}</p>
+              <h2 className="section-heading">{t('pdRoleHeading')}</h2>
+              <p className="section-body" dir="ltr">{project.role}</p>
             </section>
 
             {/* Key Features */}
             {project.features && project.features.length > 0 && (
               <section className="case-section">
-                <h2 className="section-heading">Key Capabilities Delivered</h2>
-                <ul className="feature-checklist">
+                <h2 className="section-heading">{t('pdFeaturesHeading')}</h2>
+                <ul className="feature-checklist" dir="ltr">
                   {project.features.map((feature, i) => (
                     <li key={i}>
                       <CheckCircleOutlineIcon className="feature-icon" />
@@ -193,7 +195,7 @@ export default function ProjectDetail() {
             {/* Screenshots Gallery */}
             {project.screenshots && project.screenshots.length > 0 && (
               <section className="case-section">
-                <h2 className="section-heading">Screenshots & Visuals</h2>
+                <h2 className="section-heading">{t('pdScreenshotsHeading')}</h2>
                 <div className="case-screenshots-grid">
                   {project.screenshots.map((s, idx) => (
                     <figure key={idx} className="screenshot-figure">
@@ -207,14 +209,14 @@ export default function ProjectDetail() {
 
             {/* The Result & Impact */}
             <section className="case-section result-section">
-              <h2 className="section-heading">The Result & Real-World Impact</h2>
+              <h2 className="section-heading">{t('pdResultHeading')}</h2>
               <div className="result-card">
                 {project.resultNumber && (
                   <div className="result-stat-pill">
                     {project.resultNumber}
                   </div>
                 )}
-                <p className="result-narrative">{project.result}</p>
+                <p className="result-narrative" dir="ltr">{project.result}</p>
               </div>
             </section>
           </div>
@@ -222,10 +224,10 @@ export default function ProjectDetail() {
           {/* Sidebar / Meta Details */}
           <aside className="case-study-sidebar">
             <div className="sidebar-card">
-              <h3 className="sidebar-title">Tech Stack</h3>
+              <h3 className="sidebar-title">{t('pdTechStack')}</h3>
               <div className="sidebar-tags">
                 {project.stack.map((tech) => (
-                  <span key={tech} className="tech-tag">
+                  <span key={tech} className="tech-tag" dir="ltr">
                     {tech}
                   </span>
                 ))}
@@ -233,28 +235,28 @@ export default function ProjectDetail() {
             </div>
 
             <div className="sidebar-card">
-              <h3 className="sidebar-title">Project Summary</h3>
+              <h3 className="sidebar-title">{t('pdSummaryTitle')}</h3>
               <dl className="meta-list">
-                <dt>Category</dt>
+                <dt>{t('pdCategory')}</dt>
                 <dd>{project.category}</dd>
-                <dt>Role Scope</dt>
-                <dd>Full-Stack / Architecture</dd>
+                <dt>{t('pdRoleScope')}</dt>
+                <dd>{t('pdRoleScopeVal')}</dd>
                 {project.resultNumber && (
                   <>
-                    <dt>Key Metric</dt>
+                    <dt>{t('pdKeyMetric')}</dt>
                     <dd>{project.resultNumber}</dd>
                   </>
                 )}
-                <dt>Availability</dt>
-                <dd>Open for new projects</dd>
+                <dt>{t('pdAvailability')}</dt>
+                <dd>{t('pdAvailabilityVal')}</dd>
               </dl>
             </div>
 
             <div className="sidebar-card cta-card">
-              <h3>Have a similar challenge?</h3>
-              <p>I can help you architect, build, and deploy your product from day one.</p>
+              <h3>{t('pdChallengeTitle')}</h3>
+              <p>{t('pdChallengeBody')}</p>
               <Link to="/contact" className="btn-primary full-width">
-                Discuss Your Project
+                {t('pdDiscussBtn')}
               </Link>
             </div>
           </aside>
@@ -262,7 +264,7 @@ export default function ProjectDetail() {
 
         {/* Next Case Study Banner */}
         <div className="next-project-banner">
-          <span className="next-label">Next Case Study</span>
+          <span className="next-label">{t('pdNextLabel')}</span>
           <Link to={`/projects/${nextProject.slug}`} className="next-link">
             <h3>{nextProject.name} →</h3>
           </Link>

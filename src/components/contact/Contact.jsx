@@ -13,6 +13,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { pageVariants, easeOutExpo, fadeUp, staggerParent } from '../../motionSystem';
 import './contact.css';
 import { EMAIL, whatsappLink } from '../../contactConfig';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 const WHATSAPP_NUMBER_PLACEHOLDER = '+20 115 287 9755'; // Mazen's official verified number from CV
 const WHATSAPP_LINK = whatsappLink();
@@ -46,6 +47,7 @@ const SOCIALS = [
 ];
 
 export default function Contact() {
+  const { t } = useLanguage();
   useSeo({ title: 'Contact | Mazen Hossny, Hire a Full-Stack Developer', description: 'Start a project with Mazen Hossny by email or WhatsApp. Salla apps, SaaS products and Flutter mobile apps.', path: '/contact' });
   const [copied, setCopied] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
@@ -120,7 +122,7 @@ export default function Contact() {
           variants={fadeUp}
           transition={{ duration: 0.35, ease: easeOutExpo }}
         >
-          Contact
+          {t('cEyebrow')}
         </motion.p>
 
         <motion.h1
@@ -128,8 +130,8 @@ export default function Contact() {
           variants={fadeUp}
           transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.05 }}
         >
-          Let's build something<br />
-          <span className="gradient-text">extraordinary.</span>
+          {t('cHead1')}<br />
+          <span className="gradient-text">{t('cHead2')}</span>
         </motion.h1>
 
         <motion.p
@@ -137,7 +139,7 @@ export default function Contact() {
           variants={fadeUp}
           transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.1 }}
         >
-          Whether you need a custom Salla app, a SaaS product, a mobile app, or end-to-end full-stack development — I am ready to discuss your goals.
+          {t('cSub')}
         </motion.p>
 
         {/* ── 24-Hour Response Guarantee Banner ─────────────── */}
@@ -147,7 +149,7 @@ export default function Contact() {
           transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.12 }}
         >
           <AccessTimeIcon className="guarantee-icon" />
-          <span>I reply within 24 hours.</span>
+          <span>{t('cGuarantee')}</span>
         </motion.div>
 
         {/* ── Contact Methods Row (Email + WhatsApp) ───────── */}
@@ -160,16 +162,16 @@ export default function Contact() {
           <div className="contact-channel-card">
             <div className="contact-email-icon"><EmailIcon /></div>
             <div className="contact-email-text">
-              <span className="contact-email-label">Email</span>
-              <a href={`mailto:${EMAIL}`} className="contact-email-value">{EMAIL}</a>
+              <span className="contact-email-label">{t('cEmailLabel')}</span>
+              <a href={`mailto:${EMAIL}`} className="contact-email-value" dir="ltr">{EMAIL}</a>
             </div>
             <button
               className={`contact-copy-btn${copied ? ' copied' : ''}`}
               onClick={copyEmail}
-              aria-label="Copy email"
+              aria-label={t('cCopyAria')}
             >
               {copied ? <CheckIcon style={{ fontSize: 16 }} /> : <ContentCopyIcon style={{ fontSize: 16 }} />}
-              {copied ? 'Copied!' : 'Copy'}
+              {copied ? t('cCopied') : t('cCopy')}
             </button>
           </div>
 
@@ -182,8 +184,8 @@ export default function Contact() {
           >
             <div className="whatsapp-icon-wrap"><WhatsAppIcon /></div>
             <div className="whatsapp-info">
-              <span className="whatsapp-label">Direct Message</span>
-              <span className="whatsapp-number">WhatsApp ({WHATSAPP_NUMBER_PLACEHOLDER})</span>
+              <span className="whatsapp-label">{t('cWaLabel')}</span>
+              <span className="whatsapp-number">{t('cWaName')} (<span dir="ltr">{WHATSAPP_NUMBER_PLACEHOLDER}</span>)</span>
             </div>
             <span className="channel-arrow">↗</span>
           </a>
@@ -196,57 +198,57 @@ export default function Contact() {
           transition={{ duration: 0.45, ease: easeOutExpo, delay: 0.18 }}
         >
           <div className="form-header">
-            <h3>Start a Project</h3>
-            <p>Tell me a bit about your idea, timeline, and goals. Your message goes straight to my inbox.</p>
+            <h3>{t('cFormTitle')}</h3>
+            <p>{t('cFormDesc')}</p>
           </div>
 
           {status === 'success' && lastSent ? (
             <div className="form-success" role="status">
               <CheckIcon style={{ fontSize: 30 }} />
-              <h4>Message sent.</h4>
-              <p>Thanks, {lastSent.name}. I reply within 24 hours at the email you gave me.</p>
+              <h4>{t('cSuccessTitle')}</h4>
+              <p>{t('cSuccessBody', { name: lastSent.name })}</p>
               <a
                 href={whatsappLink(summaryFor(lastSent))}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-whatsapp"
               >
-                <WhatsAppIcon style={{ fontSize: 18 }} /> Or message me on WhatsApp
+                <WhatsAppIcon style={{ fontSize: 18 }} /> {t('cSuccessWa')}
               </a>
               <button type="button" className="form-reset-btn" onClick={() => setStatus('idle')}>
-                Send another message
+                {t('cSuccessReset')}
               </button>
             </div>
           ) : (
           <form onSubmit={handleFormSubmit} className="project-form">
             {/* Honeypot: hidden from people, bots tend to fill it. */}
             <div className="hp-field" aria-hidden="true">
-              <label htmlFor="website">Website (leave empty)</label>
+              <label htmlFor="website">{t('cHp')}</label>
               <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
             </div>
 
             <div className="form-row two-col">
               <div className="form-group">
-                <label htmlFor="name">Your Name *</label>
+                <label htmlFor="name">{t('cName')}</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   required
-                  placeholder="e.g. Sarah Miller"
+                  placeholder={t('cNamePh')}
                   value={formData.name}
                   onChange={handleInputChange}
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Your Email *</label>
+                <label htmlFor="email">{t('cEmail')}</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required
-                  placeholder="e.g. sarah@example.com"
+                  placeholder={t('cEmailPh')}
                   value={formData.email}
                   onChange={handleInputChange}
                 />
@@ -254,13 +256,13 @@ export default function Contact() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="project">Project Details *</label>
+              <label htmlFor="project">{t('cProject')}</label>
               <textarea
                 id="project"
                 name="project"
                 rows="4"
                 required
-                placeholder="Briefly describe what you are looking to build (e.g. Salla app integration, Flutter mobile app, Laravel SaaS dashboard)..."
+                placeholder={t('cProjectPh')}
                 value={formData.project}
                 onChange={handleInputChange}
               />
@@ -268,24 +270,24 @@ export default function Contact() {
 
             <div className="form-row two-col">
               <div className="form-group">
-                <label htmlFor="budget">Estimated Budget</label>
+                <label htmlFor="budget">{t('cBudget')}</label>
                 <input
                   type="text"
                   id="budget"
                   name="budget"
-                  placeholder="e.g. $1,500 - $3,000"
+                  placeholder={t('cBudgetPh')}
                   value={formData.budget}
                   onChange={handleInputChange}
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="timeline">Desired Timeline</label>
+                <label htmlFor="timeline">{t('cTimeline')}</label>
                 <input
                   type="text"
                   id="timeline"
                   name="timeline"
-                  placeholder="e.g. 3-4 weeks"
+                  placeholder={t('cTimelinePh')}
                   value={formData.timeline}
                   onChange={handleInputChange}
                 />
@@ -294,21 +296,21 @@ export default function Contact() {
 
             {status === 'error' && (
               <div className="form-error" role="alert">
-                <p>{errorMsg} If it keeps failing, email <a href={'mailto:' + EMAIL}>{EMAIL}</a> or use WhatsApp below.</p>
+                <p>{errorMsg || t('cErrorGeneric')} {t('cErrorFallback')} <a href={'mailto:' + EMAIL} dir="ltr">{EMAIL}</a> {t('cErrorOr')}</p>
                 <a
                   href={whatsappLink(summaryFor(formData))}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-whatsapp"
                 >
-                  <WhatsAppIcon style={{ fontSize: 18 }} /> Send this on WhatsApp
+                  <WhatsAppIcon style={{ fontSize: 18 }} /> {t('cErrorWa')}
                 </a>
               </div>
             )}
 
             <button type="submit" className="btn-primary submit-project-btn" disabled={status === 'sending'}>
-              <SendIcon style={{ fontSize: 18, marginRight: 8 }} />
-              {status === 'sending' ? 'Sending…' : 'Send Project Inquiry'}
+              <SendIcon style={{ fontSize: 18, marginInlineEnd: 8 }} />
+              {status === 'sending' ? t('cSending') : t('cSubmit')}
             </button>
           </form>
           )}

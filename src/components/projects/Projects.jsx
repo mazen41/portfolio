@@ -10,6 +10,7 @@ import Navbar from '../navbar/Navbar';
 import { projectsData } from '../../projectsData';
 import { pageVariants, easeOutExpo, useMotionTuning } from '../../motionSystem';
 import { useTheme } from '../../Them';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './projects.css';
 
 const categoryColors = {
@@ -24,7 +25,7 @@ const categoryColors = {
   'Full-Stack App': '#4a5568',
 };
 
-const ProjectCard = ({ project, index }) => (
+const ProjectCard = ({ project, index, t }) => (
   <motion.div
     className={`project-card ${project.featured ? 'featured-card' : ''}`}
     initial={{ opacity: 0, y: 24 }}
@@ -51,8 +52,8 @@ const ProjectCard = ({ project, index }) => (
           </span>
           {project.credibility && (
             <span className="card-credibility-pill" title={project.credibility}>
-              <VerifiedIcon style={{ fontSize: 13, marginRight: 4 }} />
-              {project.credibility.includes('Nahdet Misr') ? 'Nahdet Misr' : 'Enterprise'}
+              <VerifiedIcon style={{ fontSize: 13, marginInlineEnd: 4 }} />
+              {project.credibility.includes('Nahdet Misr') ? 'Nahdet Misr' : t('pEnterprise')}
             </span>
           )}
         </div>
@@ -69,7 +70,7 @@ const ProjectCard = ({ project, index }) => (
 
         <div className="tech-pills">
           {project.stack?.slice(0, 3).map((tech) => (
-            <span key={tech} className="tech-pill">{tech}</span>
+            <span key={tech} className="tech-pill" dir="ltr">{tech}</span>
           ))}
           {project.stack?.length > 3 && (
             <span className="tech-pill more">+{project.stack.length - 3}</span>
@@ -78,7 +79,7 @@ const ProjectCard = ({ project, index }) => (
 
         <div className="card-footer-cta">
           <span className="read-case-study">
-            Read Case Study <ArrowForwardIcon style={{ fontSize: 14, marginLeft: 4 }} />
+            {t('pReadCaseStudy')} <ArrowForwardIcon style={{ fontSize: 14, marginInlineStart: 4 }} />
           </span>
         </div>
       </div>
@@ -92,7 +93,7 @@ const ProjectCard = ({ project, index }) => (
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn"
-          title="Open Live Product"
+          title={t('pOpenLive')}
           onClick={(e) => e.stopPropagation()}
         >
           <OpenInNewIcon fontSize="small" />
@@ -104,7 +105,7 @@ const ProjectCard = ({ project, index }) => (
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn"
-          title="View GitHub Repository"
+          title={t('pViewGithub')}
           onClick={(e) => e.stopPropagation()}
         >
           <GitHubIcon fontSize="small" />
@@ -117,6 +118,7 @@ const ProjectCard = ({ project, index }) => (
 export default function Projects() {
   useSeo({ title: 'Case Studies | Mazen Hossny', description: 'Selected case studies by Mazen Hossny: Salla apps, SaaS platforms, enterprise systems and mobile apps, with the problem, my role and the result.', path: '/projects' });
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const motionTuning = useMotionTuning();
   const [filter, setFilter] = useState('All');
 
@@ -136,10 +138,10 @@ export default function Projects() {
 
       <div className="projects-container">
         <div className="page-header">
-          <span className="hero-eyebrow">Portfolio & Case Studies</span>
-          <h1 className="page-title">Selected Work.</h1>
+          <span className="hero-eyebrow">{t('pEyebrow')}</span>
+          <h1 className="page-title">{t('pTitle')}</h1>
           <p className="page-subtitle">
-            Every project links to a detailed case study detailing the problem, engineering role, stack, and real results.
+            {t('pSubtitle')}
           </p>
         </div>
 
@@ -151,7 +153,7 @@ export default function Projects() {
               className={`filter-btn ${filter === cat ? 'active' : ''}`}
               onClick={() => setFilter(cat)}
             >
-              {cat}
+              {cat === 'All' ? t('pFilterAll') : cat}
             </button>
           ))}
         </div>
@@ -159,7 +161,7 @@ export default function Projects() {
         {/* Featured Products Banner if on All */}
         {filter === 'All' && (
           <div className="featured-section-label">
-            <span>★ Featured SaaS & E-Commerce Products</span>
+            <span>{t('pFeaturedBanner')}</span>
           </div>
         )}
 
@@ -170,6 +172,7 @@ export default function Projects() {
               key={project.id}
               project={project}
               index={index}
+              t={t}
             />
           ))}
         </div>

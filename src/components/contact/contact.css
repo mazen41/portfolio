@@ -376,10 +376,11 @@
 /* ── Form states: honeypot, success, error, reset ──────────── */
 .hp-field {
   position: absolute;
-  left: -10000px;
+  inset-inline-start: -10000px;
   width: 1px;
   height: 1px;
   overflow: hidden;
+  clip-path: inset(50%);
 }
 
 .form-success {

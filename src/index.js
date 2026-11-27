@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { ThemeProvider } from './Them';
+import { LanguageProvider } from './i18n/LanguageContext';
 import { inject } from '@vercel/analytics';
 
 // Initialize Vercel Analytics
@@ -11,7 +12,9 @@ const container = document.getElementById('root');
 const app = (
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
