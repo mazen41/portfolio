@@ -35,6 +35,11 @@ function fitToView(scene, camera) {
   camera.position.set(0, 0, Math.max(distByHeight, distByWidth));
   camera.lookAt(0, 0, 0);
   camera.updateProjectionMatrix();
+
+  // Vertical room left above and below the box (in box-height units). The float
+  // animation uses half of it, so the robot never reaches the canvas edge.
+  const visibleHeight = 2 * camera.position.z * tanHalf;
+  return (visibleHeight - 1) / 2;
 }
 
 function Robot({ waveSignal, reduced }) {
@@ -53,8 +58,9 @@ function Robot({ waveSignal, reduced }) {
     });
   }, [scene]);
 
+  const floatAmp = useRef(0);
   useEffect(() => {
-    fitToView(scene, camera);
+    floatAmp.current = fitToView(scene, camera) * 0.5;
   }, [scene, camera]);
 
   useEffect(() => {
@@ -94,7 +100,7 @@ function Robot({ waveSignal, reduced }) {
     if (!group.current) return;
     if (!reduced) {
       const t = state.clock.elapsedTime;
-      group.current.position.y = Math.sin(t * 1.6) * 0.08;
+      group.current.position.y = Math.sin(t * 1.6) * floatAmp.current;
       const targetY = state.pointer.x * 0.5;
       const targetX = -state.pointer.y * 0.25;
       group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, targetY, 0.08);
