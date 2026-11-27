@@ -7,7 +7,6 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import Navbar from '../navbar/Navbar';
 import { pageVariants, easeOutExpo, fadeUp, staggerParent } from '../../motionSystem';
@@ -27,53 +26,39 @@ const STACK = [
   'Salla Apps', 'REST API', 'MySQL', 'Tailwind',
 ];
 
+// Single place for the service price line. Replace with real prices later.
+const SERVICE_PRICE_NOTE = 'Fixed quote after a free 15 minute call';
+
 const SERVICES = [
   {
     icon: <DevicesIcon className="service-icon" />,
     title: 'Web Applications',
     desc: 'High-performance SaaS platforms, client portals, and web products engineered with Next.js, React, and Laravel.',
-    price: '$ [Custom / Contact for Quote]',
+    price: SERVICE_PRICE_NOTE,
   },
   {
     icon: <PhoneIphoneIcon className="service-icon" />,
     title: 'Flutter Mobile Apps',
     desc: 'Cross-platform iOS and Android mobile apps with native fluid feel, in-app purchases, offline caching, and push notifications.',
-    price: '$ [Custom / Contact for Quote]',
+    price: SERVICE_PRICE_NOTE,
   },
   {
     icon: <ShoppingBagIcon className="service-icon" />,
     title: 'Salla Apps & Stores',
     desc: 'Custom Salla App Store plugins, OAuth integrations, automated webhook event triggers, and tailored e-commerce enhancements.',
-    price: '$ [Custom / Contact for Quote]',
+    price: SERVICE_PRICE_NOTE,
   },
   {
     icon: <DashboardIcon className="service-icon" />,
     title: 'Admin Dashboards & ERPs',
     desc: 'Custom back-office control panels, multi-tenant operations systems, granular RBAC, and automated tabular/PDF reporting.',
-    price: '$ [Custom / Contact for Quote]',
+    price: SERVICE_PRICE_NOTE,
   },
   {
     icon: <SmartToyIcon className="service-icon" />,
     title: 'API & AI Chatbot Integrations',
     desc: 'Multi-channel messaging pipelines, WhatsApp automation bots, AI triage workflows, and custom payment gateway integrations.',
-    price: '$ [Custom / Contact for Quote]',
-  },
-];
-
-const TESTIMONIALS = [
-  {
-    id: 1,
-    quote: '"[Client Testimonial placeholder: Mazen delivered our multi-tenant SaaS on schedule with high reliability, clean architecture, and responsive communication throughout.]"',
-    client: '[Client Name / Founder placeholder]',
-    role: '[CEO / Product Lead placeholder]',
-    company: '[Tech Startup / E-Commerce Brand placeholder]',
-  },
-  {
-    id: 2,
-    quote: '"[Client Testimonial placeholder: Exceptional full-stack and mobile expertise in Flutter and Laravel. He solved our complex workflow automation and provided rock-solid code.]"',
-    client: '[Client Name / Partner placeholder]',
-    role: '[Operations Director placeholder]',
-    company: '[Enterprise Client placeholder]',
+    price: SERVICE_PRICE_NOTE,
   },
 ];
 
@@ -230,37 +215,10 @@ export default function Welcome() {
                 <h3 className="service-title">{service.title}</h3>
                 <p className="service-body">{service.desc}</p>
                 <div className="service-price-tag">
-                  <span className="price-label">Starting at</span>
+                  <span className="price-label">Pricing</span>
                   <span className="price-val">{service.price}</span>
                 </div>
               </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Testimonials Section ─────────────────────────── */}
-        <section className="testimonials-section">
-          <div className="section-head-center">
-            <span className="hero-eyebrow">Client Feedback</span>
-            <h2 className="section-title">Testimonials</h2>
-            <p className="section-desc">
-              Feedback from clients and engineering partners I've collaborated with.
-            </p>
-          </div>
-
-          <div className="testimonials-grid">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.id} className="testimonial-card">
-                <FormatQuoteIcon className="quote-icon" />
-                <p className="testimonial-quote">{t.quote}</p>
-                <div className="testimonial-author">
-                  <div className="author-avatar">{t.client.charAt(1) || 'C'}</div>
-                  <div className="author-info">
-                    <strong className="author-name">{t.client}</strong>
-                    <span className="author-role">{t.role} — {t.company}</span>
-                  </div>
-                </div>
-              </div>
             ))}
           </div>
         </section>
