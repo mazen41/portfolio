@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mazenhossny.vercel.app/sitemap.xml
+Sitemap: https://mazendev.nazbiz.io/sitemap.xml

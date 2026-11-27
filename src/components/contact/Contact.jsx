@@ -1,3 +1,4 @@
+import useSeo from '../../useSeo';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../navbar/Navbar';
@@ -34,6 +35,7 @@ const SOCIALS = [
 ];
 
 export default function Contact() {
+  useSeo({ title: 'Contact | Mazen Hossny, Hire a Full-Stack Developer', description: 'Start a project with Mazen Hossny by email or WhatsApp. Salla apps, SaaS products and Flutter mobile apps.', path: '/contact' });
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({
     name: '',

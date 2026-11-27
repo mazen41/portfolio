@@ -1,3 +1,4 @@
+import useSeo from '../../useSeo';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -114,6 +115,7 @@ const ProjectCard = ({ project, index }) => (
 );
 
 export default function Projects() {
+  useSeo({ title: 'Case Studies | Mazen Hossny', description: 'Selected case studies by Mazen Hossny: Salla apps, SaaS platforms, enterprise systems and mobile apps, with the problem, my role and the result.', path: '/projects' });
   const { theme } = useTheme();
   const motionTuning = useMotionTuning();
   const [filter, setFilter] = useState('All');
