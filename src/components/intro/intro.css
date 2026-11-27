@@ -44,8 +44,8 @@
 }
 
 .maz-intro-btn {
-  width: 116px;
-  height: 116px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   border: 1px solid rgba(42, 246, 255, 0.7);
   background: radial-gradient(circle at 35% 30%, #7ff9ff 0%, #2af6ff 40%, #0586a7 100%);
@@ -62,6 +62,12 @@
 .maz-intro-btn:focus-visible {
   outline: 3px solid #ffffff;
   outline-offset: 4px;
+}
+
+/* App.css sets border-radius on :focus-visible; keep the button round when it is focused. */
+button.maz-intro-btn,
+button.maz-intro-btn:focus-visible {
+  border-radius: 50%;
 }
 
 .maz-intro-icon {
