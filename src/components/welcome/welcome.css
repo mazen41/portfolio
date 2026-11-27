@@ -674,6 +674,10 @@
 @media (max-width: 400px) {
   .hero-headline {
     font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  .hero-eyebrow {
+    margin-bottom: 10px;
   }
   .hero-tech-lead {
     margin-bottom: 14px;
