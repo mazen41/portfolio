@@ -662,3 +662,5 @@
   .services-section, .testimonials-section { margin-top: 60px; }
   .home-final-cta { padding: 36px 18px; margin-top: 60px; }
 }
+
+.services-note { text-align: center; margin-top: 28px; font-size: 0.95rem; opacity: 0.8; }

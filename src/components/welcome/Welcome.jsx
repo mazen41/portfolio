@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DevicesIcon from '@mui/icons-material/Devices';
-import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import BugReportIcon from '@mui/icons-material/BugReport';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
@@ -27,39 +27,37 @@ const STACK = [
   'Salla Apps', 'REST API', 'MySQL', 'Tailwind',
 ];
 
-// Single place for the service price line. Replace with real prices later.
-const SERVICE_PRICE_NOTE = 'Fixed quote after a free 15 minute call';
-
+// Starting prices per service. Edit these values only.
 const SERVICES = [
   {
     icon: <DevicesIcon className="service-icon" />,
-    title: 'Web Applications',
-    desc: 'High-performance SaaS platforms, client portals, and web products engineered with Next.js, React, and Laravel.',
-    price: SERVICE_PRICE_NOTE,
-  },
-  {
-    icon: <PhoneIphoneIcon className="service-icon" />,
-    title: 'Flutter Mobile Apps',
-    desc: 'Cross-platform iOS and Android mobile apps with native fluid feel, in-app purchases, offline caching, and push notifications.',
-    price: SERVICE_PRICE_NOTE,
+    title: 'Landing Page',
+    desc: 'A focused one-page site for a product, service or campaign, built with Next.js or React, with a clear WhatsApp or contact call to action.',
+    price: '$250',
   },
   {
     icon: <ShoppingBagIcon className="service-icon" />,
-    title: 'Salla Apps & Stores',
-    desc: 'Custom Salla App Store plugins, OAuth integrations, automated webhook event triggers, and tailored e-commerce enhancements.',
-    price: SERVICE_PRICE_NOTE,
+    title: 'Business Website or E-commerce Store',
+    desc: 'Company websites and online stores, including Salla stores, built with Laravel, Next.js or React.',
+    price: '$500',
   },
   {
     icon: <DashboardIcon className="service-icon" />,
-    title: 'Admin Dashboards & ERPs',
-    desc: 'Custom back-office control panels, multi-tenant operations systems, granular RBAC, and automated tabular/PDF reporting.',
-    price: SERVICE_PRICE_NOTE,
+    title: 'Web App or SaaS MVP',
+    desc: 'High-performance SaaS platforms, client portals and web products engineered with Next.js, React and Laravel.',
+    price: '$1,500',
   },
   {
     icon: <SmartToyIcon className="service-icon" />,
-    title: 'API & AI Chatbot Integrations',
-    desc: 'Multi-channel messaging pipelines, WhatsApp automation bots, AI triage workflows, and custom payment gateway integrations.',
-    price: SERVICE_PRICE_NOTE,
+    title: 'WhatsApp or Salla Integration & Automation',
+    desc: 'WhatsApp automation bots, Salla app plugins, webhook event triggers and multi-channel messaging pipelines.',
+    price: '$300',
+  },
+  {
+    icon: <BugReportIcon className="service-icon" />,
+    title: 'Code Audit or Bug Fixing',
+    desc: 'Review your existing code, find the bugs and risks, and fix them.',
+    price: '$15/hr',
   },
 ];
 
@@ -217,12 +215,13 @@ export default function Welcome() {
                 <h3 className="service-title">{service.title}</h3>
                 <p className="service-body">{service.desc}</p>
                 <div className="service-price-tag">
-                  <span className="price-label">Pricing</span>
+                  <span className="price-label">Starting at</span>
                   <span className="price-val">{service.price}</span>
                 </div>
               </motion.div>
             ))}
           </div>
+          <p className="services-note">Final price depends on scope. Free quote within 24 hours.</p>
         </section>
 
         {/* ── Bottom CTA ───────────────────────────────────── */}
