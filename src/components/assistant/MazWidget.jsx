@@ -7,6 +7,7 @@ import VolumeOffRoundedIcon from '@mui/icons-material/VolumeOffRounded';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { whatsappLink } from '../../contactConfig';
+import MazRobotLauncher from './MazRobotLauncher';
 import './mazWidget.css';
 
 const WA_HREF = whatsappLink("Hi Mazen, I chatted with Maz and I'd like to discuss a project.");
@@ -14,6 +15,7 @@ const WA_HREF = whatsappLink("Hi Mazen, I chatted with Maz and I'd like to discu
 export default function MazWidget() {
   const { lang, t } = useLanguage();
   const [open, setOpen] = useState(false);
+  const [hasOpenedOnce, setHasOpenedOnce] = useState(false);
   const [voiceOn, setVoiceOn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [speaking, setSpeaking] = useState(false);
@@ -27,6 +29,10 @@ export default function MazWidget() {
       listRef.current.scrollTop = listRef.current.scrollHeight;
     }
   }, [messages, loading, open]);
+
+  useEffect(() => {
+    if (open) setHasOpenedOnce(true);
+  }, [open]);
 
   const stopAudio = () => {
     if (audioRef.current) {
@@ -197,14 +203,11 @@ export default function MazWidget() {
         </section>
       )}
 
-      <button
-        type="button"
-        className="maz-orb-btn"
+      <MazRobotLauncher
         onClick={() => setOpen((v) => !v)}
-        aria-label={open ? t('mazCloseAria') : t('mazOpenAria')}
-      >
-        <span className="maz-orb-monogram" dir="ltr">MH</span>
-      </button>
+        ariaLabel={open ? t('mazCloseAria') : t('mazOpenAria')}
+        showBubble={!open && !hasOpenedOnce}
+      />
     </div>
   );
 }
