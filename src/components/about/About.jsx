@@ -93,6 +93,24 @@ export default function About() {
           >
             {t('aBio2')}
           </motion.p>
+
+          <motion.div
+            className="about-proof-strip"
+            variants={fadeUp}
+            transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.15 }}
+          >
+            {[
+              { valKey: 'aProofYearsVal', labelKey: 'aProofYearsLabel' },
+              { valKey: 'aProofDownloadsVal', labelKey: 'aProofDownloadsLabel' },
+              { valKey: 'aProofRegionsVal', labelKey: 'aProofRegionsLabel' },
+              { valKey: 'aProofStackVal', labelKey: 'aProofStackLabel' },
+            ].map(({ valKey, labelKey }) => (
+              <div key={valKey} className="about-proof-item">
+                <span className="about-proof-val" dir="ltr">{t(valKey)}</span>
+                <span className="about-proof-label">{t(labelKey)}</span>
+              </div>
+            ))}
+          </motion.div>
         </div>
 
         {/* Mazen's Photo / Portrait Frame */}

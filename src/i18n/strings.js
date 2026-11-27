@@ -130,6 +130,14 @@ export const STRINGS = {
     aCvBtn: '↓ Download Resume (Updated)',
     aGhBtn: '✧ View GitHub',
     aLiBtn: 'LinkedIn',
+    aProofYearsVal: '6+',
+    aProofYearsLabel: 'Years Experience',
+    aProofDownloadsVal: '50K+',
+    aProofDownloadsLabel: 'App Downloads',
+    aProofRegionsVal: 'EG · SA · UAE',
+    aProofRegionsLabel: 'Products Live In',
+    aProofStackVal: 'Laravel · Next.js · Flutter',
+    aProofStackLabel: 'Core Stack',
 
     // Projects list
     pEyebrow: 'Portfolio & Case Studies',
@@ -299,6 +307,14 @@ export const STRINGS = {
     aCvBtn: '↓ حمّل السيرة الذاتية (محدّثة)',
     aGhBtn: '✧ شوف GitHub',
     aLiBtn: 'LinkedIn',
+    aProofYearsVal: '6+',
+    aProofYearsLabel: 'سنين خبرة',
+    aProofDownloadsVal: '50K+',
+    aProofDownloadsLabel: 'تحميل للتطبيقات',
+    aProofRegionsVal: 'EG · SA · UAE',
+    aProofRegionsLabel: 'منتجات شغالة في مصر والسعودية والإمارات',
+    aProofStackVal: 'Laravel · Next.js · Flutter',
+    aProofStackLabel: 'التقنيات الأساسية',
 
     // Projects list
     pEyebrow: 'معرض الأعمال ودراسات الحالة',
