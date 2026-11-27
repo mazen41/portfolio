@@ -64,7 +64,7 @@ export default function Navbar() {
             href="https://github.com/mazen41"
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-icon-btn"
+            className="nav-icon-btn nav-header-social"
             aria-label="GitHub profile"
             title="GitHub"
           >
@@ -74,7 +74,7 @@ export default function Navbar() {
             href="https://www.linkedin.com/in/mazen-hossny-54a8a02b7/"
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-icon-btn"
+            className="nav-icon-btn nav-header-social"
             aria-label="LinkedIn profile"
             title="LinkedIn"
           >
