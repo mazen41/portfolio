@@ -1,3 +1,4 @@
+import useSeo from '../../useSeo';
 import React from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../navbar/Navbar';
@@ -33,6 +34,7 @@ const TIMELINE = [
 ];
 
 export default function About() {
+  useSeo({ title: 'About | Mazen Hossny, Full-Stack Developer', description: 'Mazen Hossny: 6 years of full-stack engineering across SaaS, e-commerce, HR, logistics and mobile apps, with 50K+ app downloads. Live in Egypt, Saudi Arabia and the UAE.', path: '/about' });
   return (
     <motion.main
       className="about-page page-shell"

@@ -1,3 +1,4 @@
+import useSeo from '../../useSeo';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -63,6 +64,7 @@ const SERVICES = [
 ];
 
 export default function Welcome() {
+  useSeo({ title: 'Mazen Hossny | Full-Stack Developer for Salla Stores, SaaS and Mobile Apps', description: 'Full-stack developer for Salla stores, SaaS and mobile apps. Laravel, Next.js, Flutter. 50K+ app downloads, live in Egypt, Saudi Arabia and the UAE.', path: '/' });
   return (
     <motion.main
       className="home-page"

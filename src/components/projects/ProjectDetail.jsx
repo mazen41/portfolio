@@ -1,3 +1,4 @@
+import useSeo from '../../useSeo';
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -22,18 +23,11 @@ export default function ProjectDetail() {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  useEffect(() => {
-    if (project) {
-      document.title = `${project.name} | Mazen Hossny — Case Study`;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content', project.smallDescription);
-      }
-    }
-    return () => {
-      document.title = 'Mazen Hossny — Full Stack Developer';
-    };
-  }, [project]);
+  useSeo({
+    title: project ? project.name + ' | Mazen Hossny, Case Study' : 'Case Study | Mazen Hossny',
+    description: project ? project.smallDescription : 'Case study by Mazen Hossny, full-stack developer.',
+    path: '/projects/' + slug,
+  });
 
   if (!project) {
     return (
