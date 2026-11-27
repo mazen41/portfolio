@@ -24,3 +24,4 @@ yarn-error.log*
 
 # API keys (never commit)
 public/Metrials/groq_key_elevllabs_key.txt
+public/Metrials/
