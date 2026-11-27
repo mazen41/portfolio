@@ -19,6 +19,8 @@ export default function HeroRobot() {
   const [ok, setOk] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [ready, setReady] = useState(false);
+  const [sceneReady, setSceneReady] = useState(false);
+  const [zoom, setZoom] = useState(1);
   const [typed, setTyped] = useState('');
   const pointer = useRef({ x: 0, y: 0 });
   const fullText = t('heroGreet');
@@ -37,6 +39,22 @@ export default function HeroRobot() {
       if ('cancelIdleCallback' in window) window.cancelIdleCallback(id);
       else clearTimeout(id);
     };
+  }, []);
+
+  // On phones the robot is zoomed so its visible body reaches about 200px wide,
+  // capped so it still fits the stage height (the stage is 200-400px tall there).
+  useEffect(() => {
+    const update = () => {
+      if (!window.matchMedia('(max-width: 900px)').matches) {
+        setZoom(1);
+        return;
+      }
+      const stageH = Math.min(400, Math.max(200, window.innerHeight - 482));
+      setZoom(Math.min(1.95, (stageH * 0.8) / 135));
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, []);
 
   // Tells the chat button to hide on desktop while this robot is on the page.
@@ -87,6 +105,7 @@ export default function HeroRobot() {
         </div>
       )}
       <button type="button" className="hero-robot-stage" onClick={openChat} aria-label={t('robotOpenAria')}>
+        <span className={`hero-robot-placeholder${sceneReady ? ' is-done' : ''}`} aria-hidden="true" />
         {ready && (
           <Suspense fallback={null}>
             <Scene
@@ -94,6 +113,8 @@ export default function HeroRobot() {
               reduced={reduced}
               pointerRef={pointer}
               speaking={speaking}
+              onReady={() => setSceneReady(true)}
+              zoom={zoom}
             />
           </Suspense>
         )}

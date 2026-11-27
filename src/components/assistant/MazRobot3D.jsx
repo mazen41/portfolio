@@ -44,7 +44,7 @@ function animatedBox(scene, animations) {
 // centre the box on the origin, scale it so the box height is 1 unit, then
 // move the camera back far enough that a 1-unit height covers FILL of the
 // view height, and also far enough that the box width fits the aspect ratio.
-function fitToView(scene, camera, animations) {
+function fitToView(scene, camera, animations, zoom = 1) {
   scene.position.set(0, 0, 0);
   scene.scale.set(1, 1, 1);
   scene.updateMatrixWorld(true);
@@ -60,8 +60,8 @@ function fitToView(scene, camera, animations) {
 
   const tanHalf = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
   const widthNorm = size.x * s;
-  const distByHeight = 1 / FILL / (2 * tanHalf);
-  const distByWidth = widthNorm / FILL / (2 * tanHalf * camera.aspect);
+  const distByHeight = 1 / FILL / (2 * tanHalf) / zoom;
+  const distByWidth = widthNorm / FILL / (2 * tanHalf * camera.aspect) / zoom;
   camera.position.set(0, 0, Math.max(distByHeight, distByWidth));
   camera.lookAt(0, 0, 0);
   camera.updateProjectionMatrix();
@@ -72,8 +72,9 @@ function fitToView(scene, camera, animations) {
   return (visibleHeight - 1) / 2;
 }
 
-function Robot({ waveSignal, reduced, pointerRef, speaking }) {
+function Robot({ waveSignal, reduced, pointerRef, speaking, onReady, zoom = 1 }) {
   const group = useRef();
+  const readyFired = useRef(false);
   const { camera } = useThree();
   const { scene, animations } = useGLTF('/models/robot.glb');
   const { actions } = useAnimations(animations, group);
@@ -90,8 +91,8 @@ function Robot({ waveSignal, reduced, pointerRef, speaking }) {
 
   const floatAmp = useRef(0);
   useEffect(() => {
-    floatAmp.current = fitToView(scene, camera, animations) * 0.5;
-  }, [scene, camera, animations]);
+    floatAmp.current = fitToView(scene, camera, animations, zoom) * 0.5;
+  }, [scene, camera, animations, zoom]);
 
   useEffect(() => {
     const idle = actions['Idle'];
@@ -128,6 +129,10 @@ function Robot({ waveSignal, reduced, pointerRef, speaking }) {
 
   useFrame((state) => {
     if (!group.current) return;
+    if (!readyFired.current) {
+      readyFired.current = true;
+      if (onReady) onReady();
+    }
     if (!reduced) {
       const t = state.clock.elapsedTime;
       const p = pointerRef ? pointerRef.current : state.pointer;
@@ -147,7 +152,7 @@ function Robot({ waveSignal, reduced, pointerRef, speaking }) {
   );
 }
 
-export default function MazRobot3D({ waveSignal, reduced, pointerRef, speaking }) {
+export default function MazRobot3D({ waveSignal, reduced, pointerRef, speaking, onReady, zoom = 1 }) {
   return (
     <Canvas
       dpr={[1, 1.5]}
@@ -158,7 +163,7 @@ export default function MazRobot3D({ waveSignal, reduced, pointerRef, speaking }
     >
       <hemisphereLight args={['#ffffff', '#334455', 1.1]} />
       <directionalLight position={[2, 3, 3]} intensity={1.2} />
-      <Robot waveSignal={waveSignal} reduced={reduced} pointerRef={pointerRef} speaking={speaking} />
+      <Robot waveSignal={waveSignal} reduced={reduced} pointerRef={pointerRef} speaking={speaking} onReady={onReady} zoom={zoom} />
     </Canvas>
   );
 }
