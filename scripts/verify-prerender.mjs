@@ -66,7 +66,7 @@ async function checkRoute(route) {
 }
 
 async function main() {
-  if (process.env.VERCEL) {
+  if (process.env.VERCEL && !process.env.FORCE_PRERENDER && !process.env.CHROME_PATH) {
     console.log('Skipping prerender verification on Vercel (prerender is skipped there too).');
     return;
   }

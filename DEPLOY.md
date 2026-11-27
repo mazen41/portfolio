@@ -22,11 +22,11 @@ Step 3. Build the Vercel output:
 
     vercel build
 
-Step 4. Check that the prerendered text survived step 3. `vercel build` may run the build again on this machine; if it sets `VERCEL`, the prerender is skipped and the case-study pages come back client-only. Run:
+Step 4. Check that the prerendered text survived step 3. `vercel build` sets `VERCEL=1` when it runs `npm run build` locally, which would skip prerendering unless `CHROME_PATH` (or `FORCE_PRERENDER=1`) is set. Both `scripts/prerender.mjs` and `scripts/verify-prerender.mjs` honour `CHROME_PATH` and `FORCE_PRERENDER=1` even when `VERCEL=1` is present, so keeping `$env:CHROME_PATH` set from Step 1 preserves the prerendered output. Still verify:
 
     Select-String -Path .vercel\output\static\projects\nazbiz\index.html -Pattern "NazBiz"
 
-If this finds nothing, do not deploy. Re-run steps 1 and 2, then run `vercel build` with `$env:VERCEL` cleared (`Remove-Item Env:VERCEL -ErrorAction SilentlyContinue`), and check again.
+If this finds nothing, do not deploy. Re-run steps 1 and 2, then run `vercel build` with `$env:CHROME_PATH` set (or `$env:FORCE_PRERENDER = "1"`), and check again.
 
 Step 5. Deploy the prebuilt output:
 
@@ -40,7 +40,14 @@ Vercel's own build runs `npm run build`, which prints "Skipping prerender: this 
 
 ## Environment variables
 
-Set these in Vercel (Project, Settings, Environment Variables), not in the repo. Values never go in Git or in this file. Names are listed in the section for each feature in its branch.
+Set these in Vercel (Project → Settings → Environment Variables), not in the repo. Values never go in Git or in this file.
+
+- [ ] `GROQ_API_KEY` — Groq API key for `/api/assistant` (Maz brain)
+- [ ] `ELEVENLABS_API_KEY` — ElevenLabs API key (text-to-speech scope only) for `/api/assistant`
+- [ ] `ELEVENLABS_VOICE_EN` — ElevenLabs voice ID for English replies
+- [ ] `ELEVENLABS_VOICE_AR` — ElevenLabs voice ID for Arabic replies
+- [ ] `RESEND_API_KEY` — Resend API key for `/api/contact`
+- [ ] `CONTACT_FROM_EMAIL` — Verified sender email in Resend for `/api/contact`
 
 ## Checklist before production
 

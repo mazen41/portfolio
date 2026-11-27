@@ -133,9 +133,9 @@ async function renderRoute(browser, baseUrl, route) {
 const HYDRATION_ERROR = /hydrat|Minified React error #(418|419|423|425)/i;
 
 async function main() {
-  // Vercel's build machine has no Chrome. Skip here so deploys do not fail.
-  if (process.env.VERCEL) {
-    console.log('Skipping prerender: this is a Vercel build, which has no Chrome. Prerender locally with npm run build.');
+  // Vercel's remote build machine has no Chrome. Skip there unless CHROME_PATH or FORCE_PRERENDER=1 is set.
+  if (process.env.VERCEL && !process.env.FORCE_PRERENDER && !process.env.CHROME_PATH) {
+    console.log('Skipping prerender: this is a Vercel build without CHROME_PATH. Prerender locally with CHROME_PATH or FORCE_PRERENDER=1.');
     return;
   }
   const routes = await routesFromSitemap();
