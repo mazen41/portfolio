@@ -103,6 +103,10 @@ img { display: block; max-width: 100%; }
   will-change: transform;
 }
 
+/* Hidden until the pointer moves, so it never sits in the top-left corner. */
+.cursor, .cursor-dot { opacity: 0; }
+.cursor.is-on, .cursor-dot.is-on { opacity: 1; }
+
 /* ═══════════════════════════════════════════════════════
    LAYOUT HELPERS
 ═══════════════════════════════════════════════════════ */

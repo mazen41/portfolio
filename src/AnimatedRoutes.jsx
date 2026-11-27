@@ -24,6 +24,8 @@ function Cursor() {
       ring.style.top  = y + 'px';
       dot.style.left  = x + 'px';
       dot.style.top   = y + 'px';
+      ring.classList.add('is-on');
+      dot.classList.add('is-on');
     };
 
     window.addEventListener('mousemove', move, { passive: true });
