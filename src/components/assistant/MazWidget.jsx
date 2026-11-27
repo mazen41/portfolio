@@ -7,15 +7,15 @@ import VolumeOffRoundedIcon from '@mui/icons-material/VolumeOffRounded';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { whatsappLink } from '../../contactConfig';
-import MazRobotLauncher from './MazRobotLauncher';
+import { useMazIntro } from '../intro/MazIntro';
 import './mazWidget.css';
 
 const WA_HREF = whatsappLink("Hi Mazen, I chatted with Maz and I'd like to discuss a project.");
 
 export default function MazWidget() {
   const { lang, t } = useLanguage();
+  const { heroRobotActive } = useMazIntro();
   const [open, setOpen] = useState(false);
-  const [hasOpenedOnce, setHasOpenedOnce] = useState(false);
   const [voiceOn, setVoiceOn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [speaking, setSpeaking] = useState(false);
@@ -23,6 +23,15 @@ export default function MazWidget() {
   const [messages, setMessages] = useState([]);
   const listRef = useRef(null);
   const audioRef = useRef(null);
+  const [pastHero, setPastHero] = useState(false);
+
+  // The mobile chat button stays out of the hero until the visitor scrolls past it.
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > 420);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     if (listRef.current) {
@@ -30,9 +39,12 @@ export default function MazWidget() {
     }
   }, [messages, loading, open]);
 
+  // The hero robot asks for the chat to open (robot click).
   useEffect(() => {
-    if (open) setHasOpenedOnce(true);
-  }, [open]);
+    const openChat = () => setOpen(true);
+    window.addEventListener('maz:open-chat', openChat);
+    return () => window.removeEventListener('maz:open-chat', openChat);
+  }, []);
 
   const stopAudio = () => {
     if (audioRef.current) {
@@ -203,12 +215,14 @@ export default function MazWidget() {
         </section>
       )}
 
-      <MazRobotLauncher
+      <button
+        type="button"
+        className={`maz-orb-btn maz-fab${heroRobotActive ? ' hero-on' : ''}${heroRobotActive && !pastHero ? ' at-hero' : ''}`}
         onClick={() => setOpen((v) => !v)}
-        onOpen={() => setOpen(true)}
-        ariaLabel={open ? t('mazCloseAria') : t('mazOpenAria')}
-        showBubble={!open && !hasOpenedOnce}
-      />
+        aria-label={open ? t('mazCloseAria') : t('mazOpenAria')}
+      >
+        <span className="maz-orb-monogram" dir="ltr">MH</span>
+      </button>
     </div>
   );
 }

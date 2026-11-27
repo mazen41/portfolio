@@ -44,7 +44,7 @@ function animatedBox(scene, animations) {
 // centre the box on the origin, scale it so the box height is 1 unit, then
 // move the camera back far enough that a 1-unit height covers FILL of the
 // view height, and also far enough that the box width fits the aspect ratio.
-function fitToView(scene, camera, animations) {
+function fitToView(scene, camera, animations, zoom = 1) {
   scene.position.set(0, 0, 0);
   scene.scale.set(1, 1, 1);
   scene.updateMatrixWorld(true);
@@ -60,8 +60,8 @@ function fitToView(scene, camera, animations) {
 
   const tanHalf = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
   const widthNorm = size.x * s;
-  const distByHeight = 1 / FILL / (2 * tanHalf);
-  const distByWidth = widthNorm / FILL / (2 * tanHalf * camera.aspect);
+  const distByHeight = 1 / FILL / (2 * tanHalf) / zoom;
+  const distByWidth = widthNorm / FILL / (2 * tanHalf * camera.aspect) / zoom;
   camera.position.set(0, 0, Math.max(distByHeight, distByWidth));
   camera.lookAt(0, 0, 0);
   camera.updateProjectionMatrix();
@@ -72,8 +72,9 @@ function fitToView(scene, camera, animations) {
   return (visibleHeight - 1) / 2;
 }
 
-function Robot({ waveSignal, reduced }) {
+function Robot({ waveSignal, reduced, pointerRef, speaking, onReady, zoom = 1 }) {
   const group = useRef();
+  const readyFired = useRef(false);
   const { camera } = useThree();
   const { scene, animations } = useGLTF('/models/robot.glb');
   const { actions } = useAnimations(animations, group);
@@ -90,8 +91,8 @@ function Robot({ waveSignal, reduced }) {
 
   const floatAmp = useRef(0);
   useEffect(() => {
-    floatAmp.current = fitToView(scene, camera, animations) * 0.5;
-  }, [scene, camera, animations]);
+    floatAmp.current = fitToView(scene, camera, animations, zoom) * 0.5;
+  }, [scene, camera, animations, zoom]);
 
   useEffect(() => {
     const idle = actions['Idle'];
@@ -128,11 +129,17 @@ function Robot({ waveSignal, reduced }) {
 
   useFrame((state) => {
     if (!group.current) return;
+    if (!readyFired.current) {
+      readyFired.current = true;
+      if (onReady) onReady();
+    }
     if (!reduced) {
       const t = state.clock.elapsedTime;
-      group.current.position.y = Math.sin(t * 1.6) * floatAmp.current;
-      const targetY = state.pointer.x * 0.5;
-      const targetX = -state.pointer.y * 0.25;
+      const p = pointerRef ? pointerRef.current : state.pointer;
+      const talk = speaking ? Math.sin(t * 14) * 0.02 : 0;
+      group.current.position.y = Math.sin(t * 1.6) * floatAmp.current + talk;
+      const targetY = p.x * 0.5;
+      const targetX = -p.y * 0.25;
       group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, targetY, 0.08);
       group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, targetX, 0.08);
     }
@@ -145,7 +152,7 @@ function Robot({ waveSignal, reduced }) {
   );
 }
 
-export default function MazRobot3D({ waveSignal, reduced }) {
+export default function MazRobot3D({ waveSignal, reduced, pointerRef, speaking, onReady, zoom = 1 }) {
   return (
     <Canvas
       dpr={[1, 1.5]}
@@ -156,7 +163,7 @@ export default function MazRobot3D({ waveSignal, reduced }) {
     >
       <hemisphereLight args={['#ffffff', '#334455', 1.1]} />
       <directionalLight position={[2, 3, 3]} intensity={1.2} />
-      <Robot waveSignal={waveSignal} reduced={reduced} />
+      <Robot waveSignal={waveSignal} reduced={reduced} pointerRef={pointerRef} speaking={speaking} onReady={onReady} zoom={zoom} />
     </Canvas>
   );
 }

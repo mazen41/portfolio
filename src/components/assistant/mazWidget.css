@@ -404,3 +404,8 @@
   border-color: rgba(0, 0, 0, 0.12);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
+
+/* Mobile hero: the chat button stays out of the first screen; the robot opens the chat. */
+.maz-fab.hero-on.at-hero {
+  display: none;
+}

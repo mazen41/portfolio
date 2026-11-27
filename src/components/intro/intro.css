@@ -1,0 +1,333 @@
+/* ── Intro gate ─────────────────────────────────────────────── */
+.maz-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.maz-intro-bg {
+  position: absolute;
+  inset: 0;
+  background: #071018;
+}
+
+.maz-intro-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(120vmin, 760px);
+  height: min(120vmin, 760px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42, 246, 255, 0.28) 0%, rgba(42, 246, 255, 0.08) 38%, transparent 70%);
+  animation: maz-intro-pulse 4.5s ease-in-out infinite;
+}
+
+.maz-intro-dots {
+  position: absolute;
+  inset: -40px;
+  background-image: radial-gradient(rgba(42, 246, 255, 0.32) 1px, transparent 1.6px);
+  background-size: 26px 26px;
+  opacity: 0.55;
+  animation: maz-intro-drift 24s linear infinite;
+}
+
+.maz-intro-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.maz-intro-btn {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 246, 255, 0.7);
+  background: radial-gradient(circle at 35% 30%, #7ff9ff 0%, #2af6ff 40%, #0586a7 100%);
+  box-shadow: 0 0 36px rgba(42, 246, 255, 0.55), 0 0 90px rgba(42, 246, 255, 0.25);
+  color: #04131a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  animation: maz-intro-breathe 3s ease-in-out infinite;
+}
+
+.maz-intro-btn:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 4px;
+}
+
+/* App.css sets border-radius on :focus-visible; keep the button round when it is focused. */
+button.maz-intro-btn,
+button.maz-intro-btn:focus-visible {
+  border-radius: 50%;
+}
+
+.maz-intro-icon {
+  width: 56px;
+  height: 56px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.maz-intro-label {
+  margin: 0;
+  color: #eef6fb;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: opacity 0.3s ease;
+}
+
+.maz-intro-skip {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  color: rgba(238, 246, 251, 0.72);
+  font-size: 0.92rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.maz-intro-skip:focus-visible {
+  outline: 2px solid #2af6ff;
+  outline-offset: 2px;
+}
+
+.maz-intro.is-wiping .maz-intro-btn {
+  transform: scale(1.6);
+  opacity: 0;
+}
+
+.maz-intro.is-wiping .maz-intro-label,
+.maz-intro.is-wiping .maz-intro-skip {
+  opacity: 0;
+}
+
+@keyframes maz-intro-pulse {
+  0%, 100% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+}
+
+@keyframes maz-intro-breathe {
+  0%, 100% { box-shadow: 0 0 36px rgba(42, 246, 255, 0.5), 0 0 90px rgba(42, 246, 255, 0.2); }
+  50% { box-shadow: 0 0 52px rgba(42, 246, 255, 0.75), 0 0 120px rgba(42, 246, 255, 0.35); }
+}
+
+@keyframes maz-intro-drift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(26px, 26px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maz-intro-glow,
+  .maz-intro-dots,
+  .maz-intro-btn {
+    animation: none;
+  }
+}
+
+/* ── Hero robot ─────────────────────────────────────────────── */
+.hero-visual-col {
+  position: relative;
+}
+
+.hero-text-col {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-robot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 520px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-robot-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 400px;
+  height: 400px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42, 246, 255, 0.3) 0%, rgba(42, 246, 255, 0.08) 45%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-robot-stage {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.hero-robot-stage:focus-visible {
+  outline: 2px solid #2af6ff;
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+.hero-robot-stage canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.hero-robot-bubble {
+  position: absolute;
+  top: 4%;
+  inset-inline-start: 0;
+  max-width: 250px;
+  z-index: 3;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(42, 246, 255, 0.45);
+  background: #0b1622;
+  color: #eef6fb;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.hero-robot-mute {
+  position: absolute;
+  bottom: 4%;
+  inset-inline-end: 0;
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 246, 255, 0.5);
+  background: rgba(7, 16, 24, 0.85);
+  color: #eef6fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+@media (min-width: 901px) {
+  .hero-visual-col.has-robot .hero-mockup-frame {
+    opacity: 0.18;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-robot {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 420px;
+    height: 220px;
+    margin: 0 auto;
+    order: -1;
+  }
+
+  .hero-robot-glow {
+    display: none;
+  }
+
+  .hero-robot-stage {
+    position: relative;
+    inset: auto;
+    width: 240px;
+    height: 220px;
+  }
+
+  .hero-robot-bubble {
+    top: 8px;
+    inset-inline-start: 190px;
+    inset-inline-end: 0;
+    max-width: none;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 10px 12px;
+  }
+}
+
+/* ── Mobile chat button (replaces the corner launcher) ──────── */
+.maz-fab {
+  width: 52px;
+  height: 52px;
+}
+
+.maz-fab.hero-on {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .maz-fab.hero-on {
+    display: flex;
+  }
+}
+
+/* Narrow phones (360-400px): keep the CTA row inside the first screen. */
+@media (max-width: 400px) {
+  .hero-robot,
+  .hero-robot-stage {
+    height: clamp(200px, calc(100vh - 482px), 400px);
+  }
+}
+
+/* Loading placeholder: a soft teal orb in the robot's spot until the first 3D frame renders. */
+.hero-robot-placeholder {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 62%;
+  height: 72%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42, 246, 255, 0.42) 0%, rgba(42, 246, 255, 0.12) 45%, transparent 70%);
+  filter: blur(4px);
+  pointer-events: none;
+  animation: maz-placeholder-pulse 2.4s ease-in-out infinite;
+  transition: opacity 0.6s ease;
+}
+
+.hero-robot-placeholder.is-done {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes maz-placeholder-pulse {
+  0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.96); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-robot-placeholder {
+    animation: none;
+  }
+}
