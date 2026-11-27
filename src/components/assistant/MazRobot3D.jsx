@@ -1,14 +1,45 @@
 // src/components/assistant/MazRobot3D.jsx
 // RobotExpressive.glb — Tomas Laulhe, modified by Don McCurdy — CC0 (public domain).
 import { useEffect, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import * as THREE from 'three';
 
 const ACCENT_COLOR = '#2af6ff';
+const FOV = 35;
+// Share of the view height the robot's bounding box should occupy.
+const FILL = 0.85;
+
+// Fits the model from its own bounding box, nothing hard-coded:
+// centre the box on the origin, scale it so the box height is 1 unit, then
+// move the camera back far enough that a 1-unit height covers FILL of the
+// view height, and also far enough that the box width fits the aspect ratio.
+function fitToView(scene, camera) {
+  scene.position.set(0, 0, 0);
+  scene.scale.set(1, 1, 1);
+  scene.updateMatrixWorld(true);
+
+  const box = new THREE.Box3().setFromObject(scene);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+
+  const s = 1 / size.y;
+  scene.scale.setScalar(s);
+  scene.position.copy(center).multiplyScalar(-s);
+  scene.updateMatrixWorld(true);
+
+  const tanHalf = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const widthNorm = size.x * s;
+  const distByHeight = 1 / FILL / (2 * tanHalf);
+  const distByWidth = widthNorm / FILL / (2 * tanHalf * camera.aspect);
+  camera.position.set(0, 0, Math.max(distByHeight, distByWidth));
+  camera.lookAt(0, 0, 0);
+  camera.updateProjectionMatrix();
+}
 
 function Robot({ waveSignal, reduced }) {
   const group = useRef();
+  const { camera } = useThree();
   const { scene, animations } = useGLTF('/models/robot.glb');
   const { actions } = useAnimations(animations, group);
 
@@ -23,12 +54,16 @@ function Robot({ waveSignal, reduced }) {
   }, [scene]);
 
   useEffect(() => {
+    fitToView(scene, camera);
+  }, [scene, camera]);
+
+  useEffect(() => {
     const idle = actions['Idle'];
     if (idle) idle.reset().fadeIn(0.3).play();
     return () => idle && idle.fadeOut(0.2);
   }, [actions]);
 
-  // wave once whenever waveSignal changes (skip the initial mount value of 0)
+  // wave once whenever waveSignal changes (skip the initial mount value)
   const firstRun = useRef(true);
   useEffect(() => {
     if (firstRun.current) {
@@ -57,13 +92,11 @@ function Robot({ waveSignal, reduced }) {
 
   useFrame((state) => {
     if (!group.current) return;
-    const t = state.clock.elapsedTime;
     if (!reduced) {
+      const t = state.clock.elapsedTime;
       group.current.position.y = Math.sin(t * 1.6) * 0.08;
-      const px = state.pointer.x;
-      const py = state.pointer.y;
-      const targetY = px * 0.5;
-      const targetX = -py * 0.25;
+      const targetY = state.pointer.x * 0.5;
+      const targetX = -state.pointer.y * 0.25;
       group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, targetY, 0.08);
       group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, targetX, 0.08);
     }
@@ -71,7 +104,7 @@ function Robot({ waveSignal, reduced }) {
 
   return (
     <group ref={group} dispose={null}>
-      <primitive object={scene} scale={1.55} position={[0, -1.15, 0]} />
+      <primitive object={scene} />
     </group>
   );
 }
@@ -80,14 +113,13 @@ export default function MazRobot3D({ waveSignal, reduced }) {
   return (
     <Canvas
       dpr={[1, 1.5]}
-      camera={{ position: [0, 0.15, 3.1], fov: 28 }}
+      camera={{ fov: FOV, position: [0, 0, 3], near: 0.05, far: 100 }}
       gl={{ antialias: true, alpha: true, powerPreference: 'low-power' }}
       frameloop={reduced ? 'demand' : 'always'}
       style={{ background: 'transparent' }}
     >
-      <ambientLight intensity={0.9} />
-      <directionalLight position={[2, 3, 3]} intensity={1.3} />
-      <directionalLight position={[-2, -1, -2]} intensity={0.35} />
+      <hemisphereLight args={['#ffffff', '#334455', 1.1]} />
+      <directionalLight position={[2, 3, 3]} intensity={1.2} />
       <Robot waveSignal={waveSignal} reduced={reduced} />
     </Canvas>
   );
