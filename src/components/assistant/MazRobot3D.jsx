@@ -10,16 +10,46 @@ const FOV = 35;
 // Share of the view height the robot's bounding box should occupy.
 const FILL = 0.85;
 
-// Fits the model from its own bounding box, nothing hard-coded:
+// Union of the model's boxes over every animation clip: static meshes use
+// Box3.setFromObject, skinned meshes are re-skinned at sampled times so poses
+// like the wave (arm raised) are inside the box too.
+function animatedBox(scene, animations) {
+  const box = new THREE.Box3().setFromObject(scene);
+  const meshes = [];
+  scene.traverse((o) => {
+    if (o.isSkinnedMesh) meshes.push(o);
+  });
+  const mixer = new THREE.AnimationMixer(scene);
+  const samples = 8;
+  animations.forEach((clip) => {
+    const action = mixer.clipAction(clip).play();
+    for (let i = 0; i <= samples; i++) {
+      action.time = (clip.duration * i) / samples;
+      mixer.update(0);
+      scene.updateMatrixWorld(true);
+      meshes.forEach((m) => {
+        m.skeleton.update();
+        m.computeBoundingBox();
+        box.union(m.boundingBox.clone().applyMatrix4(m.matrixWorld));
+      });
+    }
+    action.stop();
+  });
+  mixer.stopAllAction();
+  mixer.uncacheRoot(scene);
+  return box;
+}
+
+// Fits the model from its bounding box, nothing hard-coded:
 // centre the box on the origin, scale it so the box height is 1 unit, then
 // move the camera back far enough that a 1-unit height covers FILL of the
 // view height, and also far enough that the box width fits the aspect ratio.
-function fitToView(scene, camera) {
+function fitToView(scene, camera, animations) {
   scene.position.set(0, 0, 0);
   scene.scale.set(1, 1, 1);
   scene.updateMatrixWorld(true);
 
-  const box = new THREE.Box3().setFromObject(scene);
+  const box = animatedBox(scene, animations);
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
 
@@ -60,8 +90,8 @@ function Robot({ waveSignal, reduced }) {
 
   const floatAmp = useRef(0);
   useEffect(() => {
-    floatAmp.current = fitToView(scene, camera) * 0.5;
-  }, [scene, camera]);
+    floatAmp.current = fitToView(scene, camera, animations) * 0.5;
+  }, [scene, camera, animations]);
 
   useEffect(() => {
     const idle = actions['Idle'];
