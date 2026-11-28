@@ -53,7 +53,7 @@ const ProjectCard = ({ project, index, t }) => (
           {project.credibility && (
             <span className="card-credibility-pill" title={project.credibility}>
               <VerifiedIcon style={{ fontSize: 13, marginInlineEnd: 4 }} />
-              {project.credibility.includes('Nahdet Misr') ? 'Nahdet Misr' : t('pEnterprise')}
+              {t('pEnterprise')}
             </span>
           )}
         </div>

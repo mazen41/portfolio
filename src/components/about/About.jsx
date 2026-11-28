@@ -16,7 +16,7 @@ const SKILL_CATEGORIES = [
   { key: 'aSkillCatDevops',   items: ['Git', 'Docker', 'Linux', 'Nginx', 'Vercel', 'Postman'] },
 ];
 
-// Accurately reflects CV: 2024–Now (Vertex / Full-Stack & Freelance), 2020–2024 (Freelance Full-Stack)
+// Current freelance work first, then previous employment (Vertex), then earlier freelance work.
 const TIMELINE = [
   {
     yearKey: 'aTime1Year',
@@ -24,6 +24,13 @@ const TIMELINE = [
     companyKey: 'aTime1Company',
     badgeKey: 'aTime1Badge',
     descKey: 'aTime1Desc',
+  },
+  {
+    yearKey: 'aTimeVertexYear',
+    roleKey: 'aTimeVertexRole',
+    companyKey: 'aTimeVertexCompany',
+    badgeKey: 'aTimeVertexBadge',
+    descKey: null,
   },
   {
     yearKey: 'aTime2Year',
@@ -121,7 +128,7 @@ export default function About() {
         >
           <div className="profile-photo-frame">
             <div className="profile-image-container">
-              {/* Photo placeholder designed with initials avatar and fallback styling */}
+              {/* Initials avatar, shown until a portrait is added */}
               <div className="profile-avatar-placeholder">
                 <span className="avatar-initials">MH</span>
                 <span className="avatar-caption">{t('aAvatarName')}</span>
@@ -184,7 +191,7 @@ export default function About() {
               <div className="timeline-content">
                 <h3 className="timeline-role">{t(item.roleKey)}</h3>
                 <span className="timeline-company">{t(item.companyKey)}</span>
-                <p className="timeline-desc">{t(item.descKey)}</p>
+                {item.descKey && <p className="timeline-desc">{t(item.descKey)}</p>}
               </div>
             </motion.div>
           ))}

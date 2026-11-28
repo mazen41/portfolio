@@ -16,14 +16,14 @@
 - **50K+ app downloads** across published mobile apps.
 - Products live in **Egypt, Saudi Arabia, and the UAE**.
 - Core stack: **Laravel / PHP, Next.js, React, Flutter / Dart, Node.js, TypeScript, MySQL, PostgreSQL, Redis, Salla Apps, REST APIs**.
-- Credibility: Built solutions for **Nahdet Misr** and the **Ministry of Immigration**; published apps live on Google Play and the App Store.
+- Published apps live on Google Play and the App Store.
 - Email: `mazen.hossny.121@gmail.com`
 - WhatsApp: `https://wa.me/201152879755` (`+20 115 287 9755`)
 - GitHub: `https://github.com/mazen41`
 - LinkedIn: `https://www.linkedin.com/in/mazen-hossny-54a8a02b7/`
 
 ## Services & Starting Prices
-Final price depends on project scope; free quote within 24 hours.
+Final price depends on project scope.
 1. **Landing Page** — Starting at **$250**: Focused one-page site for a product, service, or campaign, built with Next.js or React, with a clear WhatsApp or contact CTA.
 2. **Business Website or E-commerce Store** — Starting at **$500**: Company websites and online stores, including Salla stores, built with Laravel, Next.js, or React.
 3. **Web App or SaaS MVP** — Starting at **$1,500**: High-performance SaaS platforms, client portals, and web products engineered with Next.js, React, and Laravel.

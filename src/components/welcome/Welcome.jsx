@@ -18,10 +18,9 @@ import { useMazIntro } from '../intro/MazIntro';
 import HeroRobot from '../intro/HeroRobot';
 import './welcome.css';
 
-// Stats accurate to actual codebase & CV (12 shipped featured projects displayed on the site)
+// Stats are limited to claims the CV supports.
 const STATS = [
   { value: '6+',  key: 'hStatYears' },
-  { value: '12+', key: 'hStatProjects' },
   { value: '50K+', key: 'hStatDownloads' },
   { value: '3',   key: 'hStatCountries' },
 ];
@@ -202,8 +201,6 @@ export default function Welcome() {
         {/* ── Credibility Highlight Ribbon ─────────────────── */}
         <div className="credibility-ribbon">
           <span className="ribbon-label">{t('hCredLabel')}</span>
-          <span className="ribbon-text">{t('hCredText1')} <strong>{t('hCredNahdet')}</strong> {t('hCredAnd')} <strong>{t('hCredMinistry')}</strong></span>
-          <span className="ribbon-divider">•</span>
           <span className="ribbon-text">{t('hCredText2')} <strong>{t('hCredStores')}</strong></span>
         </div>
 

@@ -9,7 +9,6 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
 import SendIcon from '@mui/icons-material/Send';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { pageVariants, easeOutExpo, fadeUp, staggerParent } from '../../motionSystem';
 import './contact.css';
 import { EMAIL, whatsappLink } from '../../contactConfig';
@@ -141,16 +140,6 @@ export default function Contact() {
         >
           {t('cSub')}
         </motion.p>
-
-        {/* ── 24-Hour Response Guarantee Banner ─────────────── */}
-        <motion.div
-          className="response-guarantee-banner"
-          variants={fadeUp}
-          transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.12 }}
-        >
-          <AccessTimeIcon className="guarantee-icon" />
-          <span>{t('cGuarantee')}</span>
-        </motion.div>
 
         {/* ── Contact Methods Row (Email + WhatsApp) ───────── */}
         <motion.div

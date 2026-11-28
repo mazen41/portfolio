@@ -72,8 +72,7 @@ export const projectsData = [
       'Live order creation, product sync, and shipping status tracking directly inside customer chats',
       'Real-time idempotent webhook processing for order, payment, and cart lifecycle events',
       'Customizable Arabic and English message templates with dynamic order variables',
-      'Automated bot sequences, marketing campaigns, and human agent handoff',
-      'Full compliance with Saudi e-commerce standards and Salla developer guidelines'
+      'Automated bot sequences, marketing campaigns, and human agent handoff'
     ]
   },
   {
@@ -86,12 +85,12 @@ export const projectsData = [
     screenshots: [
       { src: '/etkalm-arabi.webp', title: 'Interactive Learning Interface' }
     ],
-    smallDescription: 'Children\'s Arabic-learning app associated with Egypt\'s Speak Arabic initiative, featuring Arabic letters, 500+ vocabulary words, stories, and games.',
-    overview: 'Built for Nahdet Misr Publishing Group in partnership with Egypt\'s Ministry of Immigration and Expatriates Affairs, Etkalem Arabi is a production Flutter app designed to teach Arabic to Egyptian children living abroad. The app blends interactive exercises, animated stories, and songs to build reading, writing, listening, and speaking skills.',
+    smallDescription: 'Children\'s Arabic-learning app featuring Arabic letters, 500+ vocabulary words, stories, and games.',
+    overview: 'Etkalem Arabi is a production Flutter app designed to teach Arabic to Egyptian children living abroad. The app blends interactive exercises, animated stories, and songs to build reading, writing, listening, and speaking skills.',
     problem: 'Second and third-generation Egyptian and Arab children living abroad often lose touch with their native language due to the absence of engaging, culturally resonant, interactive learning tools designed specifically for their age group.',
     role: 'Full-Stack & Mobile Developer (Flutter & Laravel) — Implemented the Flutter mobile application, learning activity engine, RTL gamification screens, and API endpoints.',
     stack: ['Flutter', 'Dart', 'Laravel', 'Firebase', 'REST API', 'Android', 'iOS'],
-    credibility: 'Built for Nahdet Misr and the Ministry of Immigration',
+    credibility: 'Over 50,000 downloads across Google Play and the App Store.',
     result: 'Over 50,000+ downloads across Google Play and the Apple App Store, actively used in multiple diaspora countries.',
     resultNumber: '50K+ Downloads',
     liveLink: 'https://play.google.com/store/apps/details?id=com.nahdetmisr.flutter_ems',
@@ -121,7 +120,7 @@ export const projectsData = [
     problem: 'Learners, Egyptologists, and cultural researchers had no unified, modern mobile platform to study Egyptian languages systematically with audio pronunciation and interactive drills.',
     role: 'Full-Stack Mobile Engineer — Designed the mobile UX, lesson hierarchy engine, custom Hieroglyph rendering components, audio playback system, and offline lesson caching.',
     stack: ['Flutter', 'Dart', 'Node.js', 'Firebase', 'In-App Purchases'],
-    credibility: 'Over 5,000+ learners with a 4.3-star rating on Google Play.',
+    credibility: 'Rated 4.3 stars on Google Play.',
     result: 'Maintains a 4.3-star rating on Google Play with 5,000+ active downloads worldwide.',
     resultNumber: '4.3★ rating & 5,000+ downloads',
     liveLink: 'https://play.google.com/store/apps/details?id=com.elkammah.nilelangu',
@@ -147,11 +146,11 @@ export const projectsData = [
       { src: '/reliant.png', title: 'Reliant Enterprise Platform' }
     ],
     smallDescription: 'Saudi enterprise platform focused on bug-bounty and penetration-testing management.',
-    overview: 'Reliant (reliant.sa) is a specialized Security Operations Platform engineered for Saudi enterprise clients. It unifies the governance of bug bounty programs, scoped penetration testing engagements, vulnerability disclosure lifecycles, and security researcher payouts into one compliant portal.',
-    problem: 'Organizations managing security research programs suffer from chaotic email threads, unorganized vulnerability reports, lack of SLA enforcement, and compliance gaps with national cybersecurity regulations.',
+    overview: 'Reliant (reliant.sa) is a specialized Security Operations Platform engineered for Saudi enterprise clients. It unifies the governance of bug bounty programs, scoped penetration testing engagements, vulnerability disclosure lifecycles, and security researcher payouts into one portal.',
+    problem: 'Organizations managing security research programs suffer from chaotic email threads, unorganized vulnerability reports, lack of SLA enforcement.',
     role: 'Full-Stack Developer — Developed responsive Next.js frontends, Laravel API endpoints, role-based access control, vulnerability severity workflows, and audit reporting modules.',
     stack: ['Next.js', 'Laravel', 'React', 'PHP', 'MySQL', 'REST API'],
-    credibility: 'Saudi enterprise platform aligned with Saudi NCA compliance standards.',
+    credibility: 'Saudi enterprise security operations platform.',
     result: 'Centralized bug bounty and penetration testing management for enterprise security teams across Saudi Arabia.',
     resultNumber: 'Enterprise-grade vulnerability tracking & audit-ready reporting',
     liveLink: 'https://reliant.sa',
@@ -162,7 +161,7 @@ export const projectsData = [
       'Scoped penetration testing engagement tracker with milestone verification',
       'Standardized vulnerability disclosure pipeline with CVSS severity scoring',
       'Granular role-based access for enterprises, security auditors, and researchers',
-      'Detailed audit trails aligned with Saudi NCA cybersecurity frameworks',
+      'Detailed audit trails for security activity',
       'Real-time activity analytics and security posture dashboards'
     ]
   },
@@ -330,7 +329,7 @@ export const projectsData = [
     ],
     smallDescription: 'Production-ready Arabic/English payment processing platform with full RTL support.',
     overview: 'MeedaPay is a bilingual payment gateway integration platform offering Arabic and English checkout experiences, merchant transaction reconciliation, and secure communication with upstream financial providers.',
-    problem: 'Merchants needed an intuitive checkout flow that effortlessly switches between Arabic RTL and English LTR while maintaining PCI compliance and responsive card capture.',
+    problem: 'Merchants needed an intuitive checkout flow that effortlessly switches between Arabic RTL and English LTR while keeping card capture responsive.',
     role: 'Full-Stack Engineer — Implemented bilingual UI, secure payment API handlers, webhook status verification, and merchant payment logs.',
     stack: ['React', 'Node.js', 'REST API', 'MySQL', 'Payment Gateways'],
     credibility: 'Bilingual payment gateway infrastructure with complete RTL and LTR support.',
@@ -360,7 +359,7 @@ export const projectsData = [
     smallDescription: 'Full-stack social platform with authentication, feeds, posts, comments & profile management.',
     overview: 'A complete full-stack social networking application featuring secure user authentication, media posts, personalized feed generation, comment threads, and user profile management.',
     problem: 'Designed and built to showcase clean full-stack decoupled architecture between a modern React single-page frontend and a robust Laravel REST API backend.',
-    role: 'Full-Stack Developer — Built both the React frontend client and the Laravel backend REST API with full test coverage.',
+    role: 'Full-Stack Developer — Built both the React frontend client and the Laravel backend REST API.',
     stack: ['React', 'Laravel', 'PHP', 'MySQL', 'REST API'],
     credibility: 'Open source frontend and backend repositories on GitHub.',
     result: 'Complete decoupled social platform with clean REST API architecture and responsive UI.',
