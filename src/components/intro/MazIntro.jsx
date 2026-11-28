@@ -62,28 +62,46 @@ export function MazIntroProvider({ children }) {
 
   const finish = useCallback(() => setPhase('done'), []);
 
-  const speak = useCallback(
-    (text) => {
-      if (muted || !('speechSynthesis' in window)) return;
+  // Speaks text. Called straight from a click: the click is the user gesture that
+  // lets the browser play speech. Cancel only when something is already queued,
+  // because cancel() right before speak() can drop the new utterance on Chrome.
+  const speakText = useCallback(
+    (text, isMuted) => {
+      if (isMuted) return;
+      if (!('speechSynthesis' in window)) {
+        console.warn('[MazSpeech] speechSynthesis not available on this device');
+        return;
+      }
       const synth = window.speechSynthesis;
-      synth.cancel();
+      if (synth.speaking || synth.pending) synth.cancel();
+      synth.resume();
       const utterance = new SpeechSynthesisUtterance(text);
+      const wantPrefix = lang === 'ar' ? 'ar' : 'en';
+      const voices = synth.getVoices();
+      if (!voices || voices.length === 0) {
+        console.warn('[MazSpeech] getVoices() returned no voices; speech may be silent');
+      }
+      const voice = voices.find((v) => v.lang && v.lang.toLowerCase().startsWith(wantPrefix));
       utterance.lang = lang === 'ar' ? 'ar-EG' : 'en-US';
+      if (voice) utterance.voice = voice;
       utterance.onstart = () => setSpeaking(true);
       utterance.onend = () => setSpeaking(false);
-      utterance.onerror = () => setSpeaking(false);
+      utterance.onerror = (e) => {
+        console.warn('[MazSpeech] utterance error:', e && e.error ? e.error : e);
+        setSpeaking(false);
+      };
       synth.speak(utterance);
     },
-    [muted, lang]
+    [lang]
   );
 
-  // Tap: the click is the user gesture that allows speech. Wave, greet, wipe.
+  // Tap: wave, greet, wipe. The greeting is spoken synchronously inside this click.
   const tap = useCallback(() => {
     writeFlag(window.sessionStorage, SEEN_KEY, true);
     setPhase('wiping');
     setGreetToken((n) => n + 1);
-    speak(t('heroGreet'));
-  }, [speak, t]);
+    speakText(t('heroGreet'), muted);
+  }, [speakText, t, muted]);
 
   // Skip: no voice, no wave, no wipe. Just the site with the robot idle.
   const skip = useCallback(() => {
